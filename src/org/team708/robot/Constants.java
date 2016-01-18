@@ -16,11 +16,11 @@ public final class Constants {
 	public static final Relay.Value SPIKE_FORWARD = Relay.Value.kForward;
 	public static final Relay.Value SPIKE_REVERSE = Relay.Value.kReverse;
 	public static final Relay.Value SPIKE_OFF = Relay.Value.kOff;
-	public static final double MOTOR_FORWARD = 1.0;
-	public static final double MOTOR_REVERSE = -1.0;
+	public static final double MOTOR_FORWARD = .3;
+	public static final double MOTOR_REVERSE = .3;
 	public static final double MOTOR_OFF = 0.0;
-	public static final double DRIVE_MOTOR_MAX_SPEED = 0.7;
-	public static final double ROTATE_MOTOR_MAX_SPEED = 0.7;
+	public static final double DRIVE_MOTOR_MAX_SPEED = 0.3;
+	public static final double ROTATE_MOTOR_MAX_SPEED = 0.3;
 	
 	/*
 	 * Double Solenoids
