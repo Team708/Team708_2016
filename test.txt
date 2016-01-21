@@ -1,2 +1,7 @@
 this is a test
+<<<<<<< HEAD
 This is victors file
+=======
+This is victors file
+changed victors file
+>>>>>>> origin/master
