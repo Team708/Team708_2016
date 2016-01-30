@@ -1,6 +1,6 @@
 package org.team708.robot.subsystems;
 
-import org.team708.robot.commands.visionProcessor.ProcessData;
+//import org.team708.robot.commands.visionProcessor.ProcessData;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -141,7 +141,7 @@ public class VisionProcessor extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new ProcessData());
+//        setDefaultCommand(new ProcessData());
     }
 }
 

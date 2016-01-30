@@ -36,7 +36,7 @@ import org.team708.robot.commands.autonomous.optical.ToteToAutozoneByOptical;
 import org.team708.robot.commands.autonomous.steps.DriveOpticalAndEncoder;
 import org.team708.robot.commands.clawElevator.ClawElevatorByEncoder;
 //import org.team708.robot.commands.drivetrain.DriveToIRDistance;
-import org.team708.robot.commands.visionProcessor.FollowYellowTote;
+//import org.team708.robot.commands.visionProcessor.FollowYellowTote;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
 import org.team708.robot.subsystems.Claw;
