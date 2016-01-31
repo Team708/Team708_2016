@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.team708.robot.commands.DoNothing;
 import org.team708.robot.commands.autonomous.ShoveAll;
+import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.encoder.CanGrabMoveBack;
 import org.team708.robot.commands.autonomous.encoder.CanGrabMoveToNext;
 import org.team708.robot.commands.autonomous.encoder.CanGrabNoMove;
@@ -37,7 +38,7 @@ import org.team708.robot.commands.clawElevator.ClawElevatorByEncoder;
 //import org.team708.robot.commands.drivetrain.DriveToIRDistance;
 //import org.team708.robot.commands.visionProcessor.FollowYellowTote;
 import org.team708.robot.subsystems.Drivetrain;
-//import org.team708.robot.subsystems.VisionProcessor;
+import org.team708.robot.subsystems.VisionProcessor;
 import org.team708.robot.subsystems.Claw;
 import org.team708.robot.subsystems.ClawElevator;
 import org.team708.robot.subsystems.GucciGrabber;
@@ -57,7 +58,7 @@ public class Robot extends IterativeRobot {
     Timer statsTimer;										// Timer used for Smart Dash statistics
     
     public static Drivetrain drivetrain;
-//	public static VisionProcessor visionProcessor;
+	public static VisionProcessor visionProcessor;
 	public static Indexer indexer;
 	public static Claw claw;
 	public static ClawElevator clawElevator;
@@ -72,11 +73,11 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
-        statsTimer = new Timer();	// Initialises the timer for sending Smart Dashboard data
+        statsTimer = new Timer();	// Initializes the timer for sending Smart Dashboard data
         statsTimer.start();			// Starts the timer for the Smart Dashboard
-        // Subsystem Initialisation
+// Subsystem Initialization
         drivetrain = new Drivetrain();
-//		visionProcessor = new VisionProcessor();
+		visionProcessor = new VisionProcessor();
 		indexer = new Indexer();
 		claw = new Claw();
 		clawElevator = new ClawElevator();
@@ -160,11 +161,11 @@ public class Robot extends IterativeRobot {
 
             // Various debug information
             drivetrain.sendToDashboard();
-//          visionProcessor.sendToDashboard();
-            clawElevator.sendToDashboard();
-            indexer.sendToDashboard();
-            claw.sendToDashboard();
-            gucciGrabber.sendToDashboard();
+//            visionProcessor.sendToDashboard();
+//            clawElevator.sendToDashboard();
+//            indexer.sendToDashboard();
+//            claw.sendToDashboard();
+//            gucciGrabber.sendToDashboard();
         }
     }
     
@@ -172,19 +173,21 @@ public class Robot extends IterativeRobot {
      * Adds every autonomous mode to the selection box and adds the box to the Smart Dashboard
      */
     private void queueAutonomousModes() {
-    	autonomousMode.addObject("1) Do Nothing", new DoNothing());
-		autonomousMode.addObject("2) Move to Autozone", new RobotToAutozone());
+		autonomousMode.addObject("1) Follow Target", new DriveInSquare());
+		autonomousMode.addObject("2) Drive in Square", new DriveInSquare());
+		autonomousMode.addObject("3) Move to Autozone", new RobotToAutozone());
+		autonomousMode.addObject("4) Do Nothing", new DoNothing());
 //		autonomousMode.addDefault("3) One Tote", new ToteToAutozoneByOptical());
 //    	autonomousMode.addObject("4) One Container", new ContainerToAutoZoneByOptical());
 //    	autonomousMode.addObject("5) One Container One Tote", new ContainerSpinToteByOptical());
 //    	autonomousMode.addObject("6) Container Tote Tote", new ContainerToteSpinToteByOptical());
-		autonomousMode.addDefault("3) One Tote", new ToteToAutozone());
-    	autonomousMode.addObject("4) One Container", new ContainerToAutoZone());
-    	autonomousMode.addObject("5) One Container One Tote", new ContainerSpinTote());
-    	autonomousMode.addObject("6) Container Tote Tote", new ContainerToteSpinTote());
-    	autonomousMode.addObject("7) Grab Can No Move", new CanGrabNoMove());
-    	autonomousMode.addObject("8) Grab Can Move Back", new CanGrabMoveBack());
-    	autonomousMode.addObject("9) Grab Can Go To Next", new CanGrabMoveToNext());
+//		autonomousMode.addDefault("3) One Tote", new ToteToAutozone());
+//   	autonomousMode.addObject("4) One Container", new ContainerToAutoZone());
+//    	autonomousMode.addObject("5) One Container One Tote", new ContainerSpinTote());
+//   	autonomousMode.addObject("6) Container Tote Tote", new ContainerToteSpinTote());
+//    	autonomousMode.addObject("7) Grab Can No Move", new CanGrabNoMove());
+//    	autonomousMode.addObject("8) Grab Can Move Back", new CanGrabMoveBack());
+//    	autonomousMode.addObject("9) Grab Can Go To Next", new CanGrabMoveToNext());
 //    	autonomousMode.addObject("Platform forward", new DriveOpticalAndEncoder(AutoConstants.CLAW_LENGTH, true));
 //    	autonomousMode.addObject("Platform backward", new DriveOpticalAndEncoder(AutoConstants.ROBOT_LENGTH, false));
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);
@@ -195,10 +198,10 @@ public class Robot extends IterativeRobot {
      */
     private void sendDashboardSubsystems() {
     	SmartDashboard.putData(drivetrain);
-		SmartDashboard.putData(clawElevator);
-		SmartDashboard.putData(claw);
-		SmartDashboard.putData(indexer);
-		SmartDashboard.putData(gucciGrabber);
+//		SmartDashboard.putData(clawElevator);
+//		SmartDashboard.putData(claw);
+//		SmartDashboard.putData(indexer);
+//		SmartDashboard.putData(gucciGrabber);
 //		SmartDashboard.putData(visionProcessor);
     }
 }
