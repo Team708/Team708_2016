@@ -3,73 +3,73 @@ package org.team708.robot;
 
 import edu.wpi.first.wpilibj.buttons.*;
 
-import org.team708.robot.commands.claw.*;
-import org.team708.robot.commands.clawElevator.*;
 import org.team708.robot.commands.drivetrain.*;
-import org.team708.robot.commands.gucciGrabber.ToggleGucciGrabber;
-import org.team708.robot.commands.indexer.*;
+import org.team708.robot.commands.intake.*;
+import org.team708.robot.commands.shooter.*;
+import org.team708.robot.commands.loader.*;
+import org.team708.robot.commands.arm.*;
+import org.team708.robot.commands.grappler;
+
 import org.team708.robot.util.*;
 import org.team708.robot.util.triggers.*;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
- * @author omn0mn0m
- * @author kazekitteh
- * @author jlwang
- * @author frakerman1
  */
+
 public class OI {
 	
 	// Gamepads
-	public final static Gamepad driverGamepad = new Gamepad(RobotMap.driverGamepad);			// Driver gamepad
-	public final static Gamepad operatorGamepad = new Gamepad(RobotMap.operatorGamepad);		// Operator gamepad
+	public final static Gamepad driverGamepad 	= new Gamepad(RobotMap.driverGamepad);	// Driver 	gamepad
+	public final static Gamepad operatorGamepad = new Gamepad(RobotMap.operatorGamepad);// Operator gamepad
+	
+	// look in Gamepad.java for button constants
 	
 	/*
 	 * Driver Button Assignment
 	 */
+	
 	// Drivetrain Buttons
-	private static final int ADJUST_DOWN_BUTTON = Gamepad.button_B;
-	private static final int ADJUST_UP_BUTTON = Gamepad.button_A;
-//	private static final int HOLD_FOR_NO_PID_BUTTON = Gamepad.button_R_Shoulder;
+	private static final int INTAKE_OUT_HOLD	 	= Gamepad.button_L_Shoulder;
+	private static final int INTAKE_IN_HOLD	 		= Gamepad.button_R_Shoulder;
+	
 	
 	/*
 	 * Operator Button Assignment
 	 */
-	// Indexer Buttons
-	private static final int TOTE_AXIS = Gamepad.leftStick_Y;
+	// Shooter
+	private static final int SHOOT			 	= Gamepad.button_R_Shoulder;
 	
-	// Claw Buttons
-	public static final int TOGGLE_CLAW_OPEN_BUTTON = Gamepad.button_R_Shoulder;
-//	public static final int INTERRUPT_CLAW_BUTTON = Gamepad.button_L_Shoulder;
-//	public static final int ANTI_SWAG_CLAW_BUTTON = Gamepad.button_L_Shoulder;
-	public static final int INDEXER_MANUAL_OVERRIDE_BUTTON = Gamepad.button_L_Shoulder;
+	// ARM
+	private static final int OPERATE_ARM		= Gamepad.leftStick_Y;
+	private static final int OPERATE_GRAPPLER	= Gamepad.rightStick_Y;
 	
-	// Claw Elevator Buttons
-	public static final int clawHeightIncrementButton = Gamepad.button_B;
-	public static final int clawHeightDecrementButton = Gamepad.button_A;
 	
-	// Gucci Grabber Buttons
-	public static final int GUCCI_GRABBER_TOGGLE_BUTTON = Gamepad.button_Y;
+	// LOADER Buttons
+	public static final int LOAD_IN 	= Gamepad.button_X;
+	public static final int LOAD_OUT 	= Gamepad.button_B;
+	
 	
 	/*
 	 * Driver Button Commands
 	 */
-	private static final Button adjustDown = new JoystickButton(driverGamepad, ADJUST_DOWN_BUTTON);						// Toggles whether the drive is in all brake or all coast
-//	public static final Button holdForNoPID = new JoystickButton(driverGamepad, HOLD_FOR_NO_PID_BUTTON);
-	public static final Button adjustUp = new JoystickButton(driverGamepad, ADJUST_UP_BUTTON);                          // Raises Totes up to place on step and/or plateform
+	private static final Button intakeout 	= new JoystickButton(driverGamepad, INTAKE_OUT_HOLD);
+	private static final Button intakein 	= new JoystickButton(driverGamepad, INTAKE_IN_HOLD);
+
 	/*
 	 * Operator Button Commands
 	 */
-	private static final AxisUp toteUp = new AxisUp(operatorGamepad, TOTE_AXIS);										// Increments one tote height up, picking up a tote along the way
-	private static final AxisDown toteDown = new AxisDown(operatorGamepad, TOTE_AXIS);									// Moves the indexer down to release the tote stack
-	public static final Button toggleClawOpen = new JoystickButton(operatorGamepad, TOGGLE_CLAW_OPEN_BUTTON);			// Opens and closes the claw on a toggle
-//	public static final Button interruptClaw = new JoystickButton(operatorGamepad, INTERRUPT_CLAW_BUTTON);				// Toggles the wrist position (horizontal/vertical)
-//	public static final Button antiSwagClaw = new JoystickButton(operatorGamepad, ANTI_SWAG_CLAW_BUTTON);
-	public static final Button indexerManualOverride = new JoystickButton(operatorGamepad, INDEXER_MANUAL_OVERRIDE_BUTTON);
-	public static final Button clawHeightIncrement = new JoystickButton(operatorGamepad, clawHeightIncrementButton);	// Increases the claw height by the height of a tote
-	public static final Button clawHeightDecrement = new JoystickButton(operatorGamepad, clawHeightDecrementButton);	// Decreases the claw height by the height of a tote
-	public static final Button gucciGrabberToggle = new JoystickButton(operatorGamepad, GUCCI_GRABBER_TOGGLE_BUTTON);	// Toggles the position of the gucci grabber
+	public static final Button shoot				= new JoystickButton(operatorGamepad, SHOOT);
+	public static final Button clawHeightIncrement	= new JoystickButton(operatorGamepad, clawHeightIncrementButton);
+	public static final Button clawHeightDecrement	= new JoystickButton(operatorGamepad, clawHeightDecrementButton);
+
+	private static final AxisUp armup 			= new AxisUp(operatorGamepad, 	OPERATE_ARM);		
+	private static final AxisDown armDown		= new AxisDown(operatorGamepad, OPERATE_ARM);
+	private static final AxisUp grapplerin 		= new AxisUp(operatorGamepad, 	OPERATE_GRAPPLER);		
+	private static final AxisDown grapplerout	= new AxisDown(operatorGamepad, OPERATE_GRAPPLER);
+
+	
 	
 	/**
 	 * Constructor

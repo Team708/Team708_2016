@@ -14,7 +14,16 @@ public class RobotMap {
 	public static final int operatorGamepad = 2;
 	
 	// PWM Ports
-	public static final int hockeyStickMotor = 0;
+	public static final int INTAKE_SPIKE 	= 0;
+	public static final int LOADER_SPIKE 	= 1;
+//	public static final int  			 	= 2;
+//	public static final int  				= 3;
+//	public static final int  				= 4;
+//	public static final int  				= 5;
+//	public static final int  				= 6;
+//	public static final int  				= 7;
+//	public static final int  				= 8;
+//	public static final int  				= 9;
 	
 	// Drivetrain CAN Device IDs
 	public static final int drivetrainLeftMotorMaster  = 11;
@@ -22,39 +31,43 @@ public class RobotMap {
 	public static final int drivetrainRightMotorMaster = 13;
 	public static final int drivetrainRightMotorSlave  = 14;
 	
-	// Indexer CAN Device IDs
-	public static final int indexerMotor  = 21;
+	// Shooter CAN Device IDs
+	public static final int shooterMotorMaster	= 21;
+	public static final int shooterMotorSlave	= 22;
 	
-	// Claw System CAN Talon Device ID
-	public static final int clawElevatorMotor = 31;
+	// Pivot Arm CAN Device ID
+	public static final int clawElevatorMotor 	= 31;
 	
-	//Gucci Grabber CAN Device IDs
-	public static final int gucciGrabberMotor  = 41;
-//	public static final int gucciGrabberRightMotor = 42;	
+	// Grapler Grabber CAN Device IDs
+	public static final int gucciGrabberMotor  	= 41;
+	
 	
 	// Digital IO
 	public static final int drivetrainEncoderA		= 0;
 	public static final int drivetrainEncoderB		= 1;
-	public static final int indexerEncoderA			= 2;
-	public static final int indexerEncoderB			= 3;
-	public static final int clawElevatorEncoderA	= 4;
-	public static final int clawElevatorEncoderB	= 5;
-	public static final int clawElevatorUpperSwitch	= 6;
-	public static final int clawElevatorLowerSwitch	= 7;
-	public static final int drivetrainOpticalSensor	= 8;
-
+//	public static final int 						= 2;
+//	public static final int      					= 3;
+	public static final int shooterEncoderA			= 4;
+	public static final int shooterEncoderB			= 5;
+	public static final int pivotArmUpperSwitch		= 6;
+	public static final int pivotArmLowerSwitch		= 7;
+//	public static final int 						= 8;
+//	public static final int 						= 9;
+	
 	// Analog sensor IDs
 	public static final int gyro				= 0;
-	public static final int indexerIRSensor		= 1;
-	public static final int drivetrainIRSensor	= 2;
+	public static final int DTSonar				= 1;
+	public static final int ballInIRSensor		= 2;
+//	public static final int 					= 3;
 	
-	// Claw PCM Ports
-	public static final int clawDoubleSolenoidA      = 0;
-	public static final int clawDoubleSolenoidB      = 1;
-	public static final int clawWristDoubleSolenoidA = 2;
-	public static final int clawWristDoubleSolenoidB = 3;
+	// PCM Ports
+	public static final int DoubleSolenoidA     = 0;
+	public static final int DoubleSolenoidB     = 1;
+//	public static final int  					= 2;
+//	public static final int 					= 3;
+//	public static final int 					= 4;
+//	public static final int 					= 5;
+//	public static final int						= 6;
+//	public static final int 					= 7;
 	
-	//Hockey stick PCM Ports
-	public static final int gucciGrabberSolenoidA = 4;
-	public static final int gucciGrabberSolenoidB = 5;
 }
