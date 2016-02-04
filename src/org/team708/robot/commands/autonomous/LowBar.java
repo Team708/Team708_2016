@@ -1,33 +1,24 @@
-package org.team708.robot.commands.autonomous.encoder;
+package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.AutoConstants;
+import org.team708.robot.commands.autonomous.steps.DriveOpticalAndEncoder;
 import org.team708.robot.commands.claw.CloseClaw;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.team708.robot.commands.drivetrain.TurnToDegrees;
-import org.team708.robot.commands.indexer.IndexerUp;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class ThreeTotes extends CommandGroup {
-    
-    public  ThreeTotes() {
-    	addParallel(new CloseClaw());
-    	//pick up first tote and move to second
-    	addSequential(new IndexerUp());
-    	
-    	//pick up second tote and move to third
-    	addSequential(new IndexerUp());
-    	
-    	//pick up third tote and move to auto
-    	addSequential(new IndexerUp());
+public class LowBar extends CommandGroup {
+	
+	public  LowBar() {
+		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_TARGET_DISTANCE));
     	addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.NINETY_DEGREE_TURN));
-    	addSequential(new DriveStraightToEncoderDistance(AutoConstants.TOTE_TO_AUTOZONE_DISTANCE, AutoConstants.ENCODER_SPEED));
-    	
-    	//turn 90 degrees counterclockwise
-    	addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, -AutoConstants.NINETY_DEGREE_TURN));
+
+    	//look for target
+    	//shoot 
     	
     	
         // Add Commands here:

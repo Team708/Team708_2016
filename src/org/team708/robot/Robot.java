@@ -10,39 +10,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.team708.robot.commands.DoNothing;
-import org.team708.robot.commands.autonomous.ShoveAll;
 import org.team708.robot.commands.autonomous.DriveInSquare;
-import org.team708.robot.commands.autonomous.encoder.CanGrabMoveBack;
-import org.team708.robot.commands.autonomous.encoder.CanGrabMoveToNext;
-import org.team708.robot.commands.autonomous.encoder.CanGrabNoMove;
-//import org.team708.robot.commands.autonomous.ClearStep;
-//import org.team708.robot.commands.autonomous.HockeyStickClearToAutoZone;
-//import org.team708.robot.commands.autonomous.ThreeContainersToAuto;
-//import org.team708.robot.commands.autonomous.ThreeTotes;
-import org.team708.robot.commands.autonomous.encoder.ContainerToAutoZone;
-import org.team708.robot.commands.autonomous.encoder.ContainerSpinTote;
-import org.team708.robot.commands.autonomous.encoder.ContainerToteSpinTote;
-import org.team708.robot.commands.autonomous.encoder.ContainerToteTote;
-import org.team708.robot.commands.autonomous.encoder.RobotToAutozone;
-import org.team708.robot.commands.autonomous.encoder.ThreeTotes;
-import org.team708.robot.commands.autonomous.encoder.ToteToAutozone;
-import org.team708.robot.commands.autonomous.optical.ContainerToAutoZoneByOptical;
-import org.team708.robot.commands.autonomous.optical.ContainerSpinToteByOptical;
-import org.team708.robot.commands.autonomous.optical.ContainerToteByOptical;
-import org.team708.robot.commands.autonomous.optical.ContainerToteSpinToteByOptical;
-import org.team708.robot.commands.autonomous.optical.ContainerToteToteByOptical;
-import org.team708.robot.commands.autonomous.optical.RobotToAutozoneByOptical;
-import org.team708.robot.commands.autonomous.optical.ToteToAutozoneByOptical;
-import org.team708.robot.commands.autonomous.steps.DriveOpticalAndEncoder;
-import org.team708.robot.commands.clawElevator.ClawElevatorByEncoder;
-//import org.team708.robot.commands.drivetrain.DriveToIRDistance;
-//import org.team708.robot.commands.visionProcessor.FollowYellowTote;
+import org.team708.robot.commands.autonomous.LowBar;
+import org.team708.robot.commands.autonomous.LowBarShootHigh;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
-import org.team708.robot.subsystems.Claw;
-import org.team708.robot.subsystems.ClawElevator;
-import org.team708.robot.subsystems.GucciGrabber;
-import org.team708.robot.subsystems.Indexer;
+import org.team708.robot.subsystems.Intake;
+import org.team708.robot.subsystems.Loader;
+import org.team708.robot.subsystems.Shooter;
+import org.team708.robot.subsystems.Grappler;
+import org.team708.robot.subsystems.Arm;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -59,10 +36,11 @@ public class Robot extends IterativeRobot {
     
     public static Drivetrain drivetrain;
 	public static VisionProcessor visionProcessor;
-	public static Indexer indexer;
-	public static Claw claw;
-	public static ClawElevator clawElevator;
-	public static GucciGrabber gucciGrabber;
+	public static Intake intake;
+	public static Loader loader;
+	public static Shooter shooter;
+	public static Grappler grappler;
+	public static Arm arm;
 	public static OI oi;
 
     Command autonomousCommand;
@@ -78,10 +56,11 @@ public class Robot extends IterativeRobot {
 // Subsystem Initialization
         drivetrain = new Drivetrain();
 		visionProcessor = new VisionProcessor();
-		indexer = new Indexer();
-		claw = new Claw();
-		clawElevator = new ClawElevator();
-		gucciGrabber = new GucciGrabber();
+		intake = new Intake();
+		loader = new Loader();
+		shooter = new Shoter();
+		grappler = new Grappler();
+		arm = new Arm();
 		
 		oi = new OI();	// Initializes the OI. This MUST BE LAST or a NullPointerException will be thrown
 		
@@ -105,7 +84,6 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
     	autonomousCommand = (Command)autonomousMode.getSelected();
-    	indexer.toteCount = 0;
         if (autonomousCommand != null) autonomousCommand.start();
     }
 
@@ -161,11 +139,12 @@ public class Robot extends IterativeRobot {
 
             // Various debug information
             drivetrain.sendToDashboard();
-//            visionProcessor.sendToDashboard();
-//            clawElevator.sendToDashboard();
-//            indexer.sendToDashboard();
-//            claw.sendToDashboard();
-//            gucciGrabber.sendToDashboard();
+            visionProcessor.sendToDashboard();
+            intake.sendToDashboard();
+            loader.sendToDashboard();
+            shooter.sendToDashboard();
+            grappler.sendToDashboard();
+            arm.sendToDashboard();
         }
     }
     
@@ -173,23 +152,11 @@ public class Robot extends IterativeRobot {
      * Adds every autonomous mode to the selection box and adds the box to the Smart Dashboard
      */
     private void queueAutonomousModes() {
-		autonomousMode.addObject("1) Follow Target", new DriveInSquare());
-		autonomousMode.addObject("2) Drive in Square", new DriveInSquare());
-		autonomousMode.addObject("3) Move to Autozone", new RobotToAutozone());
+		autonomousMode.addObject("1) Drive in Square", new DriveInSquare());
+		autonomousMode.addObject("2) Low Bar", new LowBar());
+		autonomousMode.addObject("3) Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("4) Do Nothing", new DoNothing());
-//		autonomousMode.addDefault("3) One Tote", new ToteToAutozoneByOptical());
-//    	autonomousMode.addObject("4) One Container", new ContainerToAutoZoneByOptical());
-//    	autonomousMode.addObject("5) One Container One Tote", new ContainerSpinToteByOptical());
-//    	autonomousMode.addObject("6) Container Tote Tote", new ContainerToteSpinToteByOptical());
-//		autonomousMode.addDefault("3) One Tote", new ToteToAutozone());
-//   	autonomousMode.addObject("4) One Container", new ContainerToAutoZone());
-//    	autonomousMode.addObject("5) One Container One Tote", new ContainerSpinTote());
-//   	autonomousMode.addObject("6) Container Tote Tote", new ContainerToteSpinTote());
-//    	autonomousMode.addObject("7) Grab Can No Move", new CanGrabNoMove());
-//    	autonomousMode.addObject("8) Grab Can Move Back", new CanGrabMoveBack());
-//    	autonomousMode.addObject("9) Grab Can Go To Next", new CanGrabMoveToNext());
-//    	autonomousMode.addObject("Platform forward", new DriveOpticalAndEncoder(AutoConstants.CLAW_LENGTH, true));
-//    	autonomousMode.addObject("Platform backward", new DriveOpticalAndEncoder(AutoConstants.ROBOT_LENGTH, false));
+
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }
     
@@ -198,10 +165,11 @@ public class Robot extends IterativeRobot {
      */
     private void sendDashboardSubsystems() {
     	SmartDashboard.putData(drivetrain);
-//		SmartDashboard.putData(clawElevator);
-//		SmartDashboard.putData(claw);
-//		SmartDashboard.putData(indexer);
-//		SmartDashboard.putData(gucciGrabber);
-//		SmartDashboard.putData(visionProcessor);
+		SmartDashboard.putData(intake);
+		SmartDashboard.putData(loader);
+		SmartDashboard.putData(shooter);
+		SmartDashboard.putData(grappler);
+		SmartDashboard.putData(arm);
+		SmartDashboard.putData(visionProcessor);
     }
 }
