@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.team708.robot.commands.DoNothing;
+import org.team708.robot.commands.autonomous.DoNothing;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.LowBar;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
@@ -157,6 +157,24 @@ public class Robot extends IterativeRobot {
 		autonomousMode.addObject("3) Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("4) Do Nothing", new DoNothing());
 
+		// make a selection table to select partial auto routines
+		//
+		//		0) lower arm
+		//		1) select drive to defense 1, 2, none
+		//		2) turn 90, -90, none
+		//
+		//		3) 	a) go to defense
+		//			b) go over defense
+		//
+		//		4) shoot
+		//			a) turn 
+		//				1) clockwise
+		//				2) counter clockwise
+		//
+		//			b) aim (drive to shooting distance)
+		//			c) fire
+
+		
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);
     }
     

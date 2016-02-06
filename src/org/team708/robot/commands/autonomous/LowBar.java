@@ -1,10 +1,9 @@
 package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.AutoConstants;
-import org.team708.robot.commands.autonomous.steps.DriveOpticalAndEncoder;
-import org.team708.robot.commands.claw.CloseClaw;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.team708.robot.commands.drivetrain.TurnToDegrees;
+
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -17,10 +16,7 @@ public class LowBar extends CommandGroup {
 		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_TARGET_DISTANCE));
     	addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.NINETY_DEGREE_TURN));
 
-    	//look for target
-    	//shoot 
-    	
-    	
+   
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
