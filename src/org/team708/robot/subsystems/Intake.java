@@ -89,8 +89,8 @@ public class Intake extends Subsystem {
     		SmartDashboard.putNumber("indexer Encoder Count", getEncoderCount());
     	}
     	
-    	SmartDashboard.putNumber("indexer Encoder Distance", getEncoderDistance());
-    	SmartDashboard.putNumber("indexer IR Distance", getIRDistance());
+    	SmartDashboard.putNumber("indexer Encoder Distance", 	getEncoderDistance());
+    	SmartDashboard.putNumber("indexer IR Distance", 	getIRDistance());
     }
 }
 

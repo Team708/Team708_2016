@@ -16,26 +16,27 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Gamepad extends Joystick{
 
     //floating-point values:
-    public static final int leftStick_X 		= 0;
-    public static final int leftStick_Y 		= 1;
+    public static final int leftStick_X 	= 0;
+    public static final int leftStick_Y 	= 1;
     public static final int shoulderAxisLeft 	= 2;
     public static final int shoulderAxisRight 	= 3;
-    public static final int rightStick_X 		= 4;
-    public static final int rightStick_Y 		= 5;
-    public static final int dpadAxis 			= 6;
+    public static final int rightStick_X 	= 4;
+    public static final int rightStick_Y 	= 5;
+    public static final int dpadAxis 		= 6;
     
     //boolean buttons:
-    public static final int button_A 			= 1;
-    public static final int button_B 			= 2;
-    public static final int button_X 			= 3;
-    public static final int button_Y 			= 4;
+    public static final int button_A 		= 1;
+    public static final int button_B 		= 2;
+    public static final int button_X 		= 3;
+    public static final int button_Y 		= 4;
     public static final int button_L_Shoulder 	= 5;
     public static final int button_R_Shoulder 	= 6;
-    public static final int button_Back 		= 7;
-    public static final int button_Start 		= 8;
+    public static final int button_Back 	= 7;
+    public static final int button_Start 	= 8;
     public static final int button_LeftStick 	= 9;
     public static final int button_RightStick 	= 10;	//only 12 buttons allowed - must find out which can be read    
     
+
     private static final double axis_deadband 	= .15;
     
     private int port;
@@ -115,9 +116,9 @@ public class Gamepad extends Joystick{
     public void sendAxesToDashboard()
     {
         SmartDashboard.putNumber("Gamepad " + port + "Right Stick X:",
-        									Math708.round(getAxis(Gamepad.rightStick_X),2));
+        								Math708.round(getAxis(Gamepad.rightStick_X),2));
         SmartDashboard.putNumber("Gamepad " + port + "Right Stick Y:",
-        									Math708.round(getAxis(Gamepad.rightStick_Y),2));
+        								Math708.round(getAxis(Gamepad.rightStick_Y),2));
         SmartDashboard.putNumber("Gamepad " + port + "Left Stick X:",
                 							Math708.round(getAxis(Gamepad.leftStick_X),2));
         SmartDashboard.putNumber("Gamepad " + port + "Left Stick Y:",

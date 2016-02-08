@@ -35,16 +35,17 @@ public class Robot extends IterativeRobot {
     Timer statsTimer;										// Timer used for Smart Dash statistics
     
     public static Drivetrain drivetrain;
-	public static VisionProcessor visionProcessor;
-	public static Intake intake;
-	public static Loader loader;
-	public static Shooter shooter;
-	public static Grappler grappler;
-	public static Arm arm;
-	public static OI oi;
+	public static VisionProcessor 	visionProcessor;
+	public static Intake 		intake;
+	public static Loader 		loader;
+	public static Shooter 		shooter;
+	public static Grappler 		grappler;
+	public static Arm 		arm;
+	public static OI 		oi;
 
-    Command autonomousCommand;
-    SendableChooser autonomousMode;
+
+    Command 		autonomousCommand;
+    SendableChooser 	autonomousMode;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -52,22 +53,23 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
         statsTimer = new Timer();	// Initializes the timer for sending Smart Dashboard data
-        statsTimer.start();			// Starts the timer for the Smart Dashboard
+        statsTimer.start();		// Starts the timer for the Smart Dashboard
+
 // Subsystem Initialization
-        drivetrain = new Drivetrain();
-		visionProcessor = new VisionProcessor();
-		intake = new Intake();
-		loader = new Loader();
-		shooter = new Shooter();
-		grappler = new Grappler();
-		arm = new Arm();
+        drivetrain 	= new Drivetrain();
+	visionProcessor = new VisionProcessor();
+	intake 		= new Intake();
+	loader 		= new Loader();
+	shooter 	= new Shooter();
+	grappler 	= new Grappler();
+	arm 		= new Arm();
+	oi 		= new OI();		// Initializes the OI. 
+						// This MUST BE LAST or a NullPointerException will be thrown
 		
-		oi = new OI();	// Initializes the OI. This MUST BE LAST or a NullPointerException will be thrown
+	sendDashboardSubsystems();		// Sends each subsystem's currently running command to the Smart Dashboard
 		
-		sendDashboardSubsystems();	// Sends each subsystem's currently running command to the Smart Dashboard
-		
-		autonomousMode = new SendableChooser();		// Initializes the Autonomous selection box
-		queueAutonomousModes();						// Adds autonomous modes to the selection box
+	autonomousMode = new SendableChooser();	// Initializes the Autonomous selection box
+	queueAutonomousModes();			// Adds autonomous modes to the selection box
     }
 	
     /**
@@ -81,7 +83,7 @@ public class Robot extends IterativeRobot {
 	/**
 	 * Runs at the start of autonomous mode
 	 */
-    public void autonomousInit() {
+    	public void autonomousInit() {
         // schedule the autonomous command (example)
     	autonomousCommand = (Command)autonomousMode.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
@@ -99,7 +101,7 @@ public class Robot extends IterativeRobot {
      * Runs when teleop mode initialises
      */
     public void teleopInit() {
-		// This makes sure that the autonomous stops running when
+	// This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.

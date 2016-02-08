@@ -5,7 +5,7 @@ public final class AutoConstants {
 	/*
 	 * Shared Constants
 	 */
-	public static final double NINETY_DEGREE_TURN 	= 85.0;
+	public static final double NINETY_DEGREE_TURN 		= 85.0;
 	public static final double TURN_SPEED     		= 0.6;
 	
 	public static final double ROBOT_LENGTH 		= 31.0;

@@ -69,8 +69,8 @@ public class Shooter extends Subsystem {
 
 		
 //		if (Constants.DEBUG) {
-			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
-
+//			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
+//
 //		}
 	}
 }

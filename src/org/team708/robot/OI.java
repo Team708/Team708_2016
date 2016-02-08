@@ -20,8 +20,8 @@ import org.team708.robot.util.triggers.*;
 public class OI {
 	
 	// Gamepads
-	public final static Gamepad driverGamepad 	= new Gamepad(RobotMap.driverGamepad);	// Driver 	gamepad
-	public final static Gamepad operatorGamepad = new Gamepad(RobotMap.operatorGamepad);// Operator gamepad
+	public final static Gamepad driverGamepad 	= new Gamepad(RobotMap.driverGamepad);	// Driver gamepad
+	public final static Gamepad operatorGamepad 	= new Gamepad(RobotMap.operatorGamepad);// Operator gamepad
 	
 	// look in Gamepad.java for button constants
 	
@@ -39,12 +39,11 @@ public class OI {
 	 */
 	// Shooter
 	private static final int SPIN_LOADER_BUTTON		= Gamepad.button_R_Shoulder;
-	private static final int SPIN_SHOOTER_BUTTON	= Gamepad.button_L_Shoulder;
+	private static final int SPIN_SHOOTER_BUTTON		= Gamepad.button_L_Shoulder;
 	
 	// ARM
-	private static final int OPERATE_ARM_BUTTON			= Gamepad.leftStick_Y;
+	private static final int OPERATE_ARM_BUTTON		= Gamepad.leftStick_Y;
 	private static final int OPERATE_GRAPPLER_BUTTON	= Gamepad.rightStick_Y;
-	
 	
 	// LOADER Buttons
 	public static final int LOADER_IN_BUTTON 	= Gamepad.button_X;
@@ -61,14 +60,14 @@ public class OI {
 	 * Operator Button Commands
 	 */
 	public static final Button spinShooter		= new JoystickButton(operatorGamepad, SPIN_SHOOTER_BUTTON);
-	public static final Button fire				= new JoystickButton(operatorGamepad, SPIN_LOADER_BUTTON);
+	public static final Button fire			= new JoystickButton(operatorGamepad, SPIN_LOADER_BUTTON);
 	public static final Button loaderSpinIn		= new JoystickButton(operatorGamepad, LOADER_IN_BUTTON);
 	public static final Button loaderSpinOut	= new JoystickButton(operatorGamepad, LOADER_OUT_BUTTON);
 
-	private static final AxisUp armUp 			= new AxisUp(operatorGamepad, 	OPERATE_ARM_BUTTON);		
-	private static final AxisDown armDown		= new AxisDown(operatorGamepad, OPERATE_ARM_BUTTON);
-	private static final AxisUp grapplerIn 		= new AxisUp(operatorGamepad, 	OPERATE_GRAPPLER_BUTTON);		
-	private static final AxisDown grapplerOut	= new AxisDown(operatorGamepad, OPERATE_GRAPPLER_BUTTON);
+	private static final AxisUp 	armUp 		= new AxisUp(operatorGamepad, 	OPERATE_ARM_BUTTON);		
+	private static final AxisDown 	armDown		= new AxisDown(operatorGamepad, OPERATE_ARM_BUTTON);
+	private static final AxisUp 	grapplerIn 	= new AxisUp(operatorGamepad, 	OPERATE_GRAPPLER_BUTTON);		
+	private static final AxisDown 	grapplerOut	= new AxisDown(operatorGamepad, OPERATE_GRAPPLER_BUTTON);
 
 	
 	/**

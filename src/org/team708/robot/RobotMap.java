@@ -50,23 +50,23 @@ public class RobotMap {
 	public static final int shooterEncoderB			= 5;
 	public static final int pivotArmUpperSwitch		= 6;
 	public static final int pivotArmLowerSwitch		= 7;
-	public static final int grapplerUpperSwitch 	= 8;
+	public static final int grapplerUpperSwitch 		= 8;
 	public static final int grapplerLowerSwitch		= 9;
 	
 	// Analog sensor IDs
 	public static final int gyro				= 0;
 	public static final int DTSonar				= 1;
-	public static final int ballInIRSensor		= 2;
-	public static final int armPotentiometer	= 3;
+	public static final int ballInIRSensor			= 2;
+	public static final int armPotentiometer		= 3;
 	
 	// PCM Ports
-//	public static final int 				    = 0;
-//	public static final int   				    = 1;
-//	public static final int  					= 2;
-//	public static final int 					= 3;
-//	public static final int 					= 4;
-//	public static final int 					= 5;
-//	public static final int						= 6;
-//	public static final int 					= 7;
+//	public static final int 				= 0;
+//	public static final int   				= 1;
+//	public static final int  				= 2;
+//	public static final int 				= 3;
+//	public static final int 				= 4;
+//	public static final int 				= 5;
+//	public static final int					= 6;
+//	public static final int 				= 7;
 	
 }
