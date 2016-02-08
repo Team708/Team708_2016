@@ -65,7 +65,7 @@ public class Drivetrain extends PIDSubsystem {
 		accelerometer = new BuiltInAccelerometer();		// Initializes the accelerometer from the roboRIO
 		gyro = new AnalogGyro(RobotMap.gyro);			// Initializes the gyro
 		gyro.reset();									// Resets the gyro so that it starts with a 0.0 value
-		encoder = new Encoder(RobotMap.drivetrainEncoderA, RobotMap.drivetrainEncoderB, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+		encoder = new Encoder(RobotMap.drivetrainEncoderARt, RobotMap.drivetrainEncoderBRt, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
 														// Initializes the encoder
 		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
 			(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV);
@@ -74,7 +74,7 @@ public class Drivetrain extends PIDSubsystem {
 		encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
 		
 //		drivetrainIRSensor = new IRSensor(RobotMap.drivetrainIRSensor, IRSensor.GP2Y0A21YK0F);
-		opticalSensor = new DigitalInput(RobotMap.drivetrainOpticalSensor);
+//SMP		opticalSensor = new DigitalInput(RobotMap.drivetrainOpticalSensor);
 		
 		setInputRange(-25.0, 25.0);
 		setAbsoluteTolerance(Constants.pid_tolerance);

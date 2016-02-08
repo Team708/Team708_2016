@@ -14,7 +14,7 @@ public class JoystickMoveArm extends Command {
 
     public JoystickMoveArm() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.clawElevator);
+        requires(Robot.arm);
     }
 
     // Called just before this Command runs the first time
@@ -23,25 +23,21 @@ public class JoystickMoveArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double moveSpeed = OI.operatorGamepad.getAxis(Gamepad.rightStick_Y);
+//    	double moveSpeed = OI.operatorGamepad.getAxis(Gamepad.rightStick_Y);
     	
-    	if (Robot.clawElevator.getUpperSwitch()) {
-    		if (moveSpeed > 0.0) {
-    			moveSpeed = 0.0;
-    		}
-    		Robot.clawElevator.resetEncoder();
-    	} else if (Robot.clawElevator.getLowerSwitch()) {
-    		if (moveSpeed < 0.0) {
-    			moveSpeed = 0.0;
-    		}
-    		Robot.clawElevator.resetEncoder();
-    	} else {}
+//SMP    	if (Robot.clawElevator.getUpperSwitch()) {
+//SMP    		if (moveSpeed > 0.0) {
+//SMP   			moveSpeed = 0.0;
+//SMP    		}
+//SMP    		Robot.clawElevator.resetEncoder();
+//SMP    	} else if (Robot.clawElevator.getLowerSwitch()) {
+//SMP    		if (moveSpeed < 0.0) {
+//SMP    			moveSpeed = 0.0;
+//SMP    		}
+//SMP    		Robot.clawElevator.resetEncoder();
+//SMP    	} else {}
     	
-//    	if (OI.antiSwagClaw.get()) {
-//    		Robot.clawElevator.manualMove(moveSpeed * Constants.ANTISWAG);
-//    	} else {
-    		Robot.clawElevator.manualMove(moveSpeed);
-//    	}
+
     	
     }
 

@@ -2,9 +2,7 @@ package org.team708.robot.subsystems;
 
 import org.team708.robot.Constants;
 import org.team708.robot.RobotMap;
-import org.team708.robot.commands.intake.JoystickIndexerControl;
 import org.team708.robot.util.IRSensor;
-
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -35,18 +33,18 @@ public class Intake extends Subsystem {
 	
 	public Intake() {
 		//Creates motors that run elevator
-		indexerMotorLeft = new CANTalon(RobotMap.indexerMotor);
+//SMP		indexerMotorLeft = new CANTalon(RobotMap.indexerMotor);
 //		indexerMotorRight = new CANTalon(RobotMap.indexerMotorRight);
 		
 		//Creates encoders for elevator motors
-		indexerEncoder = new Encoder(RobotMap.indexerEncoderA, RobotMap.indexerEncoderB);
+//SMP		indexerEncoder = new Encoder(RobotMap.indexerEncoderA, RobotMap.indexerEncoderB);
 
-		distancePerPulse = (Constants.INDEXER_SPROCKET_DIAMETER * Math.PI) / (Constants.GRAYHILL_ENCODER_PULSES_PER_REVOLUTION);
+//SMP		distancePerPulse = (Constants.INDEXER_SPROCKET_DIAMETER * Math.PI) / (Constants.GRAYHILL_ENCODER_PULSES_PER_REVOLUTION);
 
 		indexerEncoder.setDistancePerPulse(distancePerPulse);
 		indexerEncoder.setReverseDirection(true);
 		
-		indexerIR = new IRSensor(RobotMap.indexerIRSensor, IRSensor.GP2Y0A21YK0F);
+//SMP		indexerIR = new IRSensor(RobotMap.indexerIRSensor, IRSensor.GP2Y0A21YK0F);
 	}
 	
 	/*
@@ -77,55 +75,10 @@ public class Intake extends Subsystem {
 	public double getIRDistance() {
 		return indexerIR.getClippedAverageDistance();
 	}
-	
-	/**
-	 * Raises the tote
-	 */
-	public void raiseIndexer() {
-		// NOTE: The motors on the indexer's gearbox run reverse of each other
-		indexerMotorLeft.set(Constants.MOTOR_REVERSE);
-//		indexerMotorRight.set(Constants.MOTOR_FORWARD);
-	}
-	
-	/**
-	 * Lowers the tote
-	 */
-	public void lowerIndexer() {
-		// NOTE: The motors on the indexer's gearbox run reverse of each other
-		indexerMotorLeft.set(Constants.MOTOR_FORWARD);
-//		indexerMotorRight.set(Constants.MOTOR_REVERSE);
-	}
-	
-	public void move(double speed) {
-		indexerMotorLeft.set(-speed);
-	}
-	
-	/**
-	 * Turns off the indexer so it does not move
-	 */
-	public void stopIndexer() {
-		indexerMotorLeft.set(Constants.MOTOR_OFF);
-//		indexerMotorRight.set(Constants.MOTOR_OFF);
-	}
-	
-	/**
-	 * Gets the number of tote increments that have been raised
-	 */
-	public int getToteCount() {
-		return toteCount;
-	}
-	
-	/**
-	 * Sets the number of totes collected
-	 * @param toteCount
-	 */
-	public void setToteCount(int toteCount) {
-		this.toteCount = toteCount;
-	}
+
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new JoystickIndexerControl());
     }
     
     /**
@@ -137,7 +90,6 @@ public class Intake extends Subsystem {
     	}
     	
     	SmartDashboard.putNumber("indexer Encoder Distance", getEncoderDistance());
-    	SmartDashboard.putNumber("indexer Tote Count", getToteCount());
     	SmartDashboard.putNumber("indexer IR Distance", getIRDistance());
     }
 }

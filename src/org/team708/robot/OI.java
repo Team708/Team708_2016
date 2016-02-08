@@ -9,7 +9,6 @@ import org.team708.robot.commands.shooter.*;
 import org.team708.robot.commands.loader.*;
 import org.team708.robot.commands.arm.*;
 import org.team708.robot.commands.grappler.*;
-
 import org.team708.robot.util.*;
 import org.team708.robot.util.triggers.*;
 
@@ -87,7 +86,7 @@ public class OI {
 		 * Operator Commands to be called by button
 		 */
 		loaderSpinIn.whileHeld(new LoaderSpinIn());
-		loaderSpinOut.whenHeld(new LoaderSpinOut());
+		loaderSpinOut.whileHeld(new LoaderSpinOut());
 		fire.whenPressed(new Fire());
 		spinShooter.whenActive(new SpinShooter());
 	}

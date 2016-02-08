@@ -1,5 +1,6 @@
 package org.team708.robot.subsystems;
 
+
 import org.team708.robot.Constants;
 import org.team708.robot.RobotMap;
 import org.team708.robot.commands.arm.JoystickMoveArm;
@@ -12,66 +13,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Description:
+ * Description
  * @author 
  * @author 
  */
-public class Shooter extends Subsystem {
-	
-	
-	
-	private Encoder shooterEncoder;			// Encoder for intermediate travel
-
+public class Loader extends Subsystem {
 	
 	/**
 	 * Constructor
 	 */
-	public Shooter() {
-		// Initializes the encoder
-
-
-		
-		// Initializes the motor
-
-
-		
+	public Loader() {
 	}
-
+	
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-
+        //setDefaultCommand(new JoystickMoveArm());
     }
 	
-	
-	/**
-	 * Resets the encoder on the claw elevator
-	 */
-	public void resetEncoder() {
-		shooterEncoder.reset();
-	}
-	
-
-	
-	/**
-	 * Returns the raw encoder count
-	 * @return
-	 */
-	public double getEncoderCount() {
-		return shooterEncoder.get();
-	}
-	
-
-	
-	/**
-	 * Sends data to the Smart Dashboard
-	 */
 	public void sendToDashboard() {
-
 		
-//		if (Constants.DEBUG) {
-			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
-
-//		}
 	}
 }
-

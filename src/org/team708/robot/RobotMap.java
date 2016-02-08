@@ -33,36 +33,35 @@ public class RobotMap {
 	
 	// Shooter CAN Device IDs
 	public static final int shooterMotorMaster	= 21;
-	public static final int shooterMotorSlave	= 22;
 	
 	// Pivot Arm CAN Device ID
-	public static final int clawElevatorMotor 	= 31;
+	public static final int pivetArmMotor 	= 31;
 	
 	// Grapler Grabber CAN Device IDs
-	public static final int gucciGrabberMotor  	= 41;
+	public static final int grapplerMoter  	= 41;
 	
 	
 	// Digital IO
-	public static final int drivetrainEncoderA		= 0;
-	public static final int drivetrainEncoderB		= 1;
-//	public static final int 						= 2;
-//	public static final int      					= 3;
+	public static final int drivetrainEncoderARt		= 0;
+	public static final int drivetrainEncoderBRt		= 1;
+	public static final int drivetrainEncoderALeft		= 2;
+	public static final int drivetrainEncoderBLeft		= 3;
 	public static final int shooterEncoderA			= 4;
 	public static final int shooterEncoderB			= 5;
 	public static final int pivotArmUpperSwitch		= 6;
 	public static final int pivotArmLowerSwitch		= 7;
-//	public static final int 						= 8;
-//	public static final int 						= 9;
+	public static final int grapplerUpperSwitch 	= 8;
+	public static final int grapplerLowerSwitch		= 9;
 	
 	// Analog sensor IDs
 	public static final int gyro				= 0;
 	public static final int DTSonar				= 1;
 	public static final int ballInIRSensor		= 2;
-//	public static final int 					= 3;
+	public static final int armPotentiometer	= 3;
 	
 	// PCM Ports
-	public static final int DoubleSolenoidA     = 0;
-	public static final int DoubleSolenoidB     = 1;
+//	public static final int 				    = 0;
+//	public static final int   				    = 1;
 //	public static final int  					= 2;
 //	public static final int 					= 3;
 //	public static final int 					= 4;

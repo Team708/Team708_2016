@@ -74,6 +74,7 @@ public final class Constants {
 	public static final double 	DRIVETRAIN_WHEEL_DIAMETER 			= 4.0;
 	public static final double 	DRIVETRAIN_ENCODER_PULSES_PER_REV 	= 128.0;
 	public static final boolean DRIVE_USE_SQUARED_INPUT 			= false;
+	public static final boolean DRIVETRAIN_USE_LEFT_ENCODER			= true; // variable to determine which side encoder is on
 	
 	
 	// PID Tuning parameters

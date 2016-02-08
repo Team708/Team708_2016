@@ -58,7 +58,7 @@ public class Robot extends IterativeRobot {
 		visionProcessor = new VisionProcessor();
 		intake = new Intake();
 		loader = new Loader();
-		shooter = new Shoter();
+		shooter = new Shooter();
 		grappler = new Grappler();
 		arm = new Arm();
 		
