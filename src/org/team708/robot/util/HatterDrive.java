@@ -5,10 +5,10 @@ import edu.wpi.first.wpilibj.SpeedController;
 
 public class HatterDrive extends RobotDrive {
 
-	private double turnSensitivity = 1.5; // How sensitive turning is for the
-											// drivetrain
-	private double driveStall = 0.1; // What percent power before the drivetrain
-										// can move
+	private double turnSensitivity 	= 1.5; 	// How sensitive turning is for the
+						// drivetrain
+	private double driveStall	= 0.1; 	// What percent power before the drivetrain
+						// can move
 	private boolean squaredInputs;
 	
 	private final boolean USE_SAFETY = false;
@@ -33,16 +33,16 @@ public class HatterDrive extends RobotDrive {
 	 * @param quickTurn
 	 */
 	public void cheesyDrive(double move, double rotate, boolean quickTurn) {
-		double angular_power = 0.0;
-		double overPower = 0.0;
-		double sensitivity = turnSensitivity;
-		double rPower = 0.0;
-		double lPower = 0.0;
+		double angular_power 	= 0.0;
+		double overPower 	= 0.0;
+		double sensitivity 	= turnSensitivity;
+		double rPower 		= 0.0;
+		double lPower 		= 0.0;
 
 		if (quickTurn) {
-			overPower = 1.0;
-			sensitivity = 1.0;
-			angular_power = rotate;
+			overPower 	= 1.0;
+			sensitivity 	= 1.0;
+			angular_power 	= rotate;
 		} else {
 			overPower = 0.0;
 			angular_power = Math.abs(move) * rotate * sensitivity;
