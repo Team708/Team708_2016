@@ -1,12 +1,11 @@
 package org.team708.robot.subsystems;
 
 
-
+import org.team708.robot.util.Potentiometer;
 import org.team708.robot.Constants;
 import org.team708.robot.RobotMap;
 import org.team708.robot.commands.arm.JoystickMoveArm;
 
-//import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -21,7 +20,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Arm extends Subsystem {
 	
-	//private AnalogChannel potentiometer;
+	private Potentiometer pot;
 	
 	private DigitalInput upperSwitch, lowerSwitch;	// Limit switches for the top and bottom of the travel
 	
@@ -33,6 +32,7 @@ public class Arm extends Subsystem {
 	 */
 	public Arm() {
 		
+		pot = new Potentiometer(RobotMap.armPotentiometer, 1);
 		
 		// Initializes the switches
 		upperSwitch = new DigitalInput(RobotMap.pivotArmUpperSwitch);
@@ -71,6 +71,10 @@ public class Arm extends Subsystem {
 		pivotArmMotor.set(Constants.MOTOR_OFF);
 	}
 	
+	public double getPot(){
+		return pot.getAngle();
+	}
+	
 	
 	/**
 	 * Sends data to the Smart Dashboard
@@ -79,7 +83,7 @@ public class Arm extends Subsystem {
 		SmartDashboard.putBoolean("Lower Switch", getLowerSwitch());
 		SmartDashboard.putBoolean("Upper Switch", getUpperSwitch());
 
-		
+		SmartDashboard.putNumber("Arm Angle", pot.getAngle());
 //		if (Constants.DEBUG) {
 
 //		}

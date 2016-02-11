@@ -29,10 +29,11 @@ public class JoystickMoveArm extends Command {
     	
     	if(Robot.arm.getUpperSwitch()){
     		if(moveSpeed > 0.0){
-    			moveSpeed = 0.0;
-    		} else if (Robot.arm.getLowerSwitch()){
+    			moveSpeed = Constants.MOTOR_OFF;
+    		} 
+    		else if (Robot.arm.getLowerSwitch()){
     			if (moveSpeed < 0.0){
-    				moveSpeed = 0.0;
+    				moveSpeed = Constants.MOTOR_OFF;
     			}
     		}
     	}
