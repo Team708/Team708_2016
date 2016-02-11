@@ -1,5 +1,7 @@
 package org.team708.robot.commands.arm;
 
+
+
 import org.team708.robot.Constants;
 import org.team708.robot.OI;
 import org.team708.robot.Robot;
@@ -23,20 +25,19 @@ public class JoystickMoveArm extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	double moveSpeed = OI.operatorGamepad.getAxis(Gamepad.rightStick_Y);
+    	double moveSpeed = OI.operatorGamepad.getAxis(Gamepad.rightStick_Y);
     	
-//SMP    	if (Robot.clawElevator.getUpperSwitch()) {
-//SMP    		if (moveSpeed > 0.0) {
-//SMP   			moveSpeed = 0.0;
-//SMP    		}
-//SMP    		Robot.clawElevator.resetEncoder();
-//SMP    	} else if (Robot.clawElevator.getLowerSwitch()) {
-//SMP    		if (moveSpeed < 0.0) {
-//SMP    			moveSpeed = 0.0;
-//SMP    		}
-//SMP    		Robot.clawElevator.resetEncoder();
-//SMP    	} else {}
+    	if(Robot.arm.getUpperSwitch()){
+    		if(moveSpeed > 0.0){
+    			moveSpeed = 0.0;
+    		} else if (Robot.arm.getLowerSwitch()){
+    			if (moveSpeed < 0.0){
+    				moveSpeed = 0.0;
+    			}
+    		}
+    	}
     	
+//    	Robot.arm.manualMove(moveSpeed);
 
     	
     }

@@ -28,14 +28,19 @@ public class ArmDown extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	isAtLimit = Robot.arm.getUpperSwitch();
+    	isAtLimit = Robot.arm.getLowerSwitch();
     	
+    	if(isAtLimit){
+    		cancel();
+    	}
 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-
+    	double moveValue = -1.0;
+    	
+    //	Robot.arm.manualMove(moveValue);
     
     }
 
@@ -47,8 +52,9 @@ public class ArmDown extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	if (Robot.arm.getLowerSwitch()) {
-
+    		
     	}
+    //	Robot.arm.Stop();
 
     }
 
