@@ -14,6 +14,8 @@ public class ArmUp extends Command {
 	private boolean isAtLimit;
 	
 	private boolean useSmoothing;
+	
+	private double moveSpeed = Constants.MOTOR_FORWARD;
 
     public ArmUp() {
         this(false);
@@ -39,7 +41,7 @@ public class ArmUp extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		//Robot.arm.manualMove(moveSpeed);
+    		Robot.arm.manualMove(moveSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -51,7 +53,7 @@ public class ArmUp extends Command {
     protected void end() {
     	if (Robot.arm.getUpperSwitch()) {
     	}
-    //	Robot.arm.Stop();
+    	Robot.arm.stop();
     }
 
     // Called when another command which requires one or more of the same

@@ -14,6 +14,8 @@ public class ArmDown extends Command {
 	private boolean isAtLimit;
 	
 	private boolean useSmoothing;
+	
+	private double moveSpeed = Constants.MOTOR_REVERSE;
 
     public ArmDown() {
         this(false);
@@ -38,9 +40,8 @@ public class ArmDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double moveValue = -1.0;
     	
-    //	Robot.arm.manualMove(moveValue);
+    	Robot.arm.manualMove(moveSpeed);
     
     }
 
@@ -54,7 +55,7 @@ public class ArmDown extends Command {
     	if (Robot.arm.getLowerSwitch()) {
     		
     	}
-    //	Robot.arm.Stop();
+    	Robot.arm.stop();
 
     }
 

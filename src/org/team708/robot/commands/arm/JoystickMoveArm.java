@@ -37,7 +37,7 @@ public class JoystickMoveArm extends Command {
     		}
     	}
     	
-//    	Robot.arm.manualMove(moveSpeed);
+    	Robot.arm.manualMove(moveSpeed);
 
     	
     }
