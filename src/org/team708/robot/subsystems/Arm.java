@@ -1,9 +1,12 @@
 package org.team708.robot.subsystems;
 
+
+
 import org.team708.robot.Constants;
 import org.team708.robot.RobotMap;
 import org.team708.robot.commands.arm.JoystickMoveArm;
 
+//import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
@@ -18,7 +21,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Arm extends Subsystem {
 	
+	//private AnalogChannel potentiometer;
+	
 	private DigitalInput upperSwitch, lowerSwitch;	// Limit switches for the top and bottom of the travel
+	
+	private static CANTalon pivotArmMotor; //Motor to pivot the arm
 	
 	
 	/**
@@ -26,10 +33,12 @@ public class Arm extends Subsystem {
 	 */
 	public Arm() {
 		
+		
 		// Initializes the switches
-		
+		upperSwitch = new DigitalInput(RobotMap.pivotArmUpperSwitch);
+		lowerSwitch = new DigitalInput(RobotMap.pivotArmLowerSwitch);
 		// Initializes the motor
-		
+		pivotArmMotor = new CANTalon(RobotMap.pivotArmMotor);
 	}
 
 	public void initDefaultCommand() {
@@ -52,10 +61,17 @@ public class Arm extends Subsystem {
 	public boolean getLowerSwitch() {
 		return !lowerSwitch.get(); // not because default is closed, stops if circuit is broken
 	}
+		
+	//Sets the motor speed to whatever the variable speed is
+	public void manualMove(double speed) {
+		pivotArmMotor.set(speed);
+	}
+	
+	public void stop(){
+		pivotArmMotor.set(Constants.MOTOR_OFF);
+	}
 	
 	
-	
-
 	/**
 	 * Sends data to the Smart Dashboard
 	 */
