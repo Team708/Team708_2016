@@ -5,8 +5,8 @@
 
 package org.team708.robot.util;
 
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 /**
  * Wrapper class for the gyro allowing interchanging of
  * encoders gyro for measuring rotation.
@@ -14,9 +14,9 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
  */
 public class GyroRotationSensor extends RotationSensor{
 
-    private Gyro gyro;
+    private ADXRS450_Gyro gyro;
 
-    public GyroRotationSensor(Gyro gyro){
+    public GyroRotationSensor(ADXRS450_Gyro gyro){
         this.gyro = gyro;
     }
 
