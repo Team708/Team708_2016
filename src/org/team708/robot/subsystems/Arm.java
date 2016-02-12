@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Description
- * @author 
+ * @author wutnut
  * @author 
  */
 public class Arm extends Subsystem {
