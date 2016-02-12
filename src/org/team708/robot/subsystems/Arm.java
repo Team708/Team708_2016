@@ -34,7 +34,7 @@ public class Arm extends Subsystem {
 	 */
 	public Arm() {
 		
-		pot = new Potentiometer(RobotMap.armPotentiometer, 1);
+		pot = new Potentiometer(RobotMap.armPotentiometer, 0.75);
 		
 		// Initializes the switches
 		upperSwitch = new DigitalInput(RobotMap.pivotArmUpperSwitch);
