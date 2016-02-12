@@ -10,7 +10,8 @@ import org.team708.robot.util.Gamepad;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * @Alex Tysak
+ * @Thomas Zhao
  */
 public class JoystickMoveArm extends Command {
 

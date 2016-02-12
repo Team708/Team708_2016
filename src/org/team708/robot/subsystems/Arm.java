@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Description
- * @author 
- * @author 
+ * @Thomas Zhao 
+ * @Alex Tysak
  */
 public class Arm extends Subsystem {
 	
@@ -24,7 +24,9 @@ public class Arm extends Subsystem {
 	
 	private DigitalInput upperSwitch, lowerSwitch;	// Limit switches for the top and bottom of the travel
 	
-	private static CANTalon pivotArmMotor; //Motor to pivot the arm
+	private static CANTalon pivotArmMotorMaster; //Motor to pivot the arm
+	
+	private static CANTalon pivotArmMotorSlave;
 	
 	
 	/**
@@ -38,7 +40,10 @@ public class Arm extends Subsystem {
 		upperSwitch = new DigitalInput(RobotMap.pivotArmUpperSwitch);
 		lowerSwitch = new DigitalInput(RobotMap.pivotArmLowerSwitch);
 		// Initializes the motor
-		pivotArmMotor = new CANTalon(RobotMap.pivotArmMotor);
+		pivotArmMotorMaster = new CANTalon(RobotMap.pivotArmMotorMaster);
+		pivotArmMotorSlave = new CANTalon (RobotMap.pivotArmMotorSlave);
+		
+		setupMasterSlave();
 	}
 
 	public void initDefaultCommand() {
@@ -64,11 +69,19 @@ public class Arm extends Subsystem {
 		
 	//Sets the motor speed to whatever the variable speed is
 	public void manualMove(double speed) {
-		pivotArmMotor.set(speed);
+		pivotArmMotorMaster.set(speed);
 	}
 	
 	public void stop(){
-		pivotArmMotor.set(Constants.MOTOR_OFF);
+		pivotArmMotorMaster.set(Constants.MOTOR_OFF);
+		pivotArmMotorSlave.set(Constants.MOTOR_OFF);
+	}
+	
+	//Makes slave motor follow master motor
+	public void setupMasterSlave(){
+		pivotArmMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
+		
+		pivotArmMotorSlave.set(pivotArmMotorMaster.getDeviceID());
 	}
 	
 	public double getPot(){
