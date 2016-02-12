@@ -28,15 +28,22 @@ public class JoystickMoveArm extends Command {
     protected void execute() {
     	double moveSpeed = OI.operatorGamepad.getAxis(Gamepad.rightStick_Y);
     	
+    	//check if joystick axis is in deadzone. Change movespeed to 0 if it is
+    	if(moveSpeed <= .25 && moveSpeed >= -.25){
+    		moveSpeed = 0.0;
+    	}
+    	
+    	//check limit switches
     	if(Robot.arm.getUpperSwitch()){
-    		if(moveSpeed > 0.0){
+    		if(moveSpeed >= 0.0){
     			moveSpeed = Constants.MOTOR_OFF;
     		} 
-    		else if (Robot.arm.getLowerSwitch()){
-    			if (moveSpeed < 0.0){
+    	}	
+    	
+    	else if (Robot.arm.getLowerSwitch()){
+    			if (moveSpeed <= 0.0){
     				moveSpeed = Constants.MOTOR_OFF;
     			}
-    		}
     	}
     	
     	Robot.arm.manualMove(moveSpeed * Constants.ARMPIVOT_MOTOR_MAX_SPEED);
