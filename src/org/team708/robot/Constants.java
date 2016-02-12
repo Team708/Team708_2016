@@ -25,6 +25,8 @@ public final class Constants {
 	public static final double MOTOR_OFF 			= 0.0;
 	public static final double DRIVE_MOTOR_MAX_SPEED 	= 1.0;
 	public static final double ROTATE_MOTOR_MAX_SPEED 	= 1.0;
+	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 0.6;
+	
 	
 
 	/*
