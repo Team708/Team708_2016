@@ -31,19 +31,20 @@ public class Drivetrain extends PIDSubsystem {
 	private double moveSpeed = 0.0;
 	private double pidOutput = 0.0;
 	
-	private CANTalon leftMaster, leftSlave, rightMaster, rightSlave;		// Motor Controllers
+	private CANTalon leftMaster, leftSlave, rightMaster, rightSlave;	// Motor Controllers
+
+	private HatterDrive drivetrain;						// FRC provided drivetrain class
 	
-	private HatterDrive drivetrain;											// FRC provided drivetrain class
-	
-	private Encoder encoder;												// Encoder for the drivetrain
+	private Encoder encoder;						// Encoder for the drivetrain
 	private double distancePerPulse;
-	private BuiltInAccelerometer accelerometer;								// Accelerometer that is built into the roboRIO
-	private Gyro gyro;														// Gyro that is used for drift correction
+	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
+	private Gyro gyro;							// Gyro that is used for drift correction
 	
-//	private IRSensor drivetrainIRSensor;									// IR Sensor that is used for short distancing
+//	private IRSensor drivetrainIRSensor;					// IR Sensor that is used for short distancing
 	private DigitalInput opticalSensor;
 	
-	private boolean brake = true;		// Whether the talons should be in coast or brake mode (this could be important if a jerky robot causes things to topple
+	private boolean brake = true;		// Whether the talons should be in coast or brake mode
+						// (this could be important if a jerky robot causes things to topple
 	
     /**
      * Constructor
@@ -53,36 +54,37 @@ public class Drivetrain extends PIDSubsystem {
     	super("Drivetrain", Constants.Kp, Constants.Ki, Constants.Kd);
     	
     	// Initializes motor controllers with device IDs from RobotMap
-		leftMaster  = new CANTalon(RobotMap.drivetrainLeftMotorMaster);
-		leftSlave   = new CANTalon(RobotMap.drivetrainLeftMotorSlave);
-		rightMaster = new CANTalon(RobotMap.drivetrainRightMotorMaster);
-		rightSlave  = new CANTalon(RobotMap.drivetrainRightMotorSlave);
+	leftMaster  = new CANTalon(RobotMap.drivetrainLeftMotorMaster);
+	leftSlave   = new CANTalon(RobotMap.drivetrainLeftMotorSlave);
+	rightMaster = new CANTalon(RobotMap.drivetrainRightMotorMaster);
+	rightSlave  = new CANTalon(RobotMap.drivetrainRightMotorSlave);
 		
-		drivetrain = new HatterDrive(leftMaster, rightMaster, Constants.DRIVE_USE_SQUARED_INPUT);		// Initializes drivetrain class
+	drivetrain = new HatterDrive(leftMaster, rightMaster, Constants.DRIVE_USE_SQUARED_INPUT);		// Initializes drivetrain class
+	
+	setupMasterSlave();								// Sets up master and slave
 		
-		setupMasterSlave();								// Sets up master and slave
-		
-		accelerometer = new BuiltInAccelerometer();		// Initializes the accelerometer from the roboRIO
-		gyro = new AnalogGyro(RobotMap.gyro);			// Initializes the gyro
-		gyro.reset();									// Resets the gyro so that it starts with a 0.0 value
-		encoder = new Encoder(RobotMap.drivetrainEncoderA, RobotMap.drivetrainEncoderB, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+	accelerometer = new BuiltInAccelerometer();		// Initializes the accelerometer from the roboRIO
+	gyro = new AnalogGyro(RobotMap.gyro);			// Initializes the gyro
+	gyro.reset();						// Resets the gyro so that it starts with a 0.0 value
+	encoder = new Encoder(RobotMap.drivetrainEncoderARt, RobotMap.drivetrainEncoderBRt, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
 														// Initializes the encoder
-		distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
-			(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV);
-														// Sets the distance per pulse of the encoder to read distance properly
-		encoder.setDistancePerPulse(distancePerPulse);
-		encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
+	distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
+					(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV);
+											// Sets the distance per pulse of the encoder to read distance properly
+	encoder.setDistancePerPulse(distancePerPulse);
+	encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
 		
-//		drivetrainIRSensor = new IRSensor(RobotMap.drivetrainIRSensor, IRSensor.GP2Y0A21YK0F);
-		opticalSensor = new DigitalInput(RobotMap.drivetrainOpticalSensor);
+//	drivetrainIRSensor 	= new IRSensor(RobotMap.drivetrainIRSensor, IRSensor.GP2Y0A21YK0F);
+//SMP	opticalSensor 		= new DigitalInput(RobotMap.drivetrainOpticalSensor);
 		
-		setInputRange(-25.0, 25.0);
-		setAbsoluteTolerance(Constants.pid_tolerance);
+	setInputRange(-25.0, 25.0);
+	setAbsoluteTolerance(Constants.pid_tolerance);
         setSetpoint(0.0);
 //		enable();
         disable();
     }
     
+
     /**
      * Initializes the default command for this subsystem
      */
@@ -91,7 +93,8 @@ public class Drivetrain extends PIDSubsystem {
         // Set the default command for a subsystem here.
         setDefaultCommand(new JoystickDrive());
     }
-    
+   
+ 
     /**
      * Drives the drivetrain using a forward-backward value and a rotation value
      * @param move
@@ -311,14 +314,14 @@ public class Drivetrain extends PIDSubsystem {
 	    	SmartDashboard.putNumber("Accelerometer Z", accelerometer.getZ());
 	    	
 	    	SmartDashboard.putNumber("Gyro Rate", gyro.getRate());			// Gyro rate
-	    	SmartDashboard.putNumber("PID Output", pidOutput);				// PID Info
+	    	SmartDashboard.putNumber("PID Output", pidOutput);			// PID Info
 	    	SmartDashboard.putNumber("DT Encoder Raw", encoder.get());		// Encoder raw count
     	}
     	
-    	SmartDashboard.putNumber("Gyro angle", gyro.getAngle());				// Gyro angle
-    	SmartDashboard.putBoolean("Brake", brake);								// Brake or Coast
+    	SmartDashboard.putNumber("Gyro angle", gyro.getAngle());			// Gyro angle
+    	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
 //    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
-    	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());	// Encoder reading
+    	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());		// Encoder reading
 //    	SmartDashboard.putBoolean("Over Scoring Platform", isOpticalSensorWhite());
     	
 //    	SmartDashboard.putNumber("Move By IR Value", moveByIR(6.0,
