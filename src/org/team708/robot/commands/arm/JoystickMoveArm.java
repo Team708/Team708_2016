@@ -11,8 +11,13 @@ import org.team708.robot.util.Gamepad;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+<<<<<<< Updated upstream
  * @Alex Tysak
  * @Thomas Zhao
+=======
+ *@author Alex Tysak
+ *@author Thomas Zhao
+>>>>>>> Stashed changes
  */
 public class JoystickMoveArm extends Command {
 

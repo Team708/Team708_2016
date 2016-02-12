@@ -35,8 +35,6 @@ public class ArmUp extends Command {
     	
     	if (isAtLimit) {
     		cancel();
-    	} else {
-
     	}
     }
 
