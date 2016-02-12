@@ -20,11 +20,11 @@ public final class Constants {
 	public static final Relay.Value LOADER_REVERSE 		= Relay.Value.kReverse;
 	public static final Relay.Value LOADER_OFF 		= Relay.Value.kOff;
 
-	public static final double MOTOR_FORWARD 		= 1.0;
-	public static final double MOTOR_REVERSE 		= 1.0;
+	public static final double MOTOR_FORWARD 		= .3;
+	public static final double MOTOR_REVERSE 		= .3;
 	public static final double MOTOR_OFF 			= 0.0;
-	public static final double DRIVE_MOTOR_MAX_SPEED 	= 1.0;
-	public static final double ROTATE_MOTOR_MAX_SPEED 	= 1.0;
+	public static final double DRIVE_MOTOR_MAX_SPEED 	= .3;
+	public static final double ROTATE_MOTOR_MAX_SPEED 	= .3;
 	
 
 	/*
@@ -72,7 +72,7 @@ public final class Constants {
 	/*
 	 * Drivetrain
 	 */
-	public static final double 	TANK_STICK_TOLERANCE 			= .25;
+	public static final double 	TANK_STICK_TOLERANCE 			= .30;
 	public static final double 	DRIVETRAIN_WHEEL_DIAMETER 		= 4.0;
 	public static final double 	DRIVETRAIN_ENCODER_PULSES_PER_REV 	= 128.0;
 	public static final boolean 	DRIVE_USE_SQUARED_INPUT 		= false;

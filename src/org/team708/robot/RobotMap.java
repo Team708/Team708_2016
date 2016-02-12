@@ -1,4 +1,7 @@
 package org.team708.robot;
+
+import edu.wpi.first.wpilibj.SPI.Port;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -53,11 +56,11 @@ public class RobotMap {
 	public static final int grapplerUpperSwitch 		= 8;
 	public static final int grapplerLowerSwitch		= 9;
 	
-	// Analog sensor IDs
-	public static final int gyro				= 0;
+	
+	//Analog sesnor IDs
 	public static final int DTSonar				= 1;
-	public static final int ballInIRSensor			= 2;
-	public static final int armPotentiometer		= 3;
+	public static final int ballInIRSensor		= 2;
+	public static final int armPotentiometer	= 3;
 	
 	// PCM Ports
 //	public static final int 				= 0;
