@@ -85,7 +85,7 @@ public class Arm extends Subsystem {
 	}
 	
 	public double getPot(){
-		return pot.getAngle();
+		return pot.getAngle(); //gets arm angle hopefully
 	}
 	
 	
