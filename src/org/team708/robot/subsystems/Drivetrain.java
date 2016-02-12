@@ -12,8 +12,9 @@ import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.interfaces.Gyro;
-import edu.wpi.first.wpilibj.GyroBase;
-import edu.wpi.first.wpilibj.AnalogGyro;
+//import edu.wpi.first.wpilibj.GyroBase;
+//import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -38,7 +39,7 @@ public class Drivetrain extends PIDSubsystem {
 	private Encoder encoder;						// Encoder for the drivetrain
 	private double distancePerPulse;
 	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
-	private Gyro gyro;							// Gyro that is used for drift correction
+	private ADXRS450_Gyro gyro;							// Gyro that is used for drift correction
 	
 //	private IRSensor drivetrainIRSensor;					// IR Sensor that is used for short distancing
 	private DigitalInput opticalSensor;
@@ -63,9 +64,9 @@ public class Drivetrain extends PIDSubsystem {
 	
 	setupMasterSlave();								// Sets up master and slave
 		
-	accelerometer = new BuiltInAccelerometer();		// Initializes the accelerometer from the roboRIO
-	gyro = new AnalogGyro(RobotMap.gyro);			// Initializes the gyro
-	gyro.reset();						// Resets the gyro so that it starts with a 0.0 value
+	accelerometer 	= new BuiltInAccelerometer();	// Initializes the accelerometer from the roboRIO
+	gyro 			= new ADXRS450_Gyro();			// Initializes the gyro
+	gyro.reset();									// Resets the gyro so that it starts with a 0.0 value
 	encoder = new Encoder(RobotMap.drivetrainEncoderARt, RobotMap.drivetrainEncoderBRt, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
 														// Initializes the encoder
 	distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
