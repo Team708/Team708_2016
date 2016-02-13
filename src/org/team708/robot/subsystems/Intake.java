@@ -21,8 +21,9 @@ public class Intake extends Subsystem {
 	public Intake() {
 		
 		intakeMotor = new Relay(RobotMap.INTAKE_SPIKE);
-		final Relay.Value INTAKE_FORWARD;
-		final Relay.Value INTAKE_REVERSE;
+		  final Relay.Value INTAKE_FORWARD;
+		 final Relay.Value INTAKE_REVERSE;
+		final Relay.Value INTAKE_OFF;
 		
 	}
 	
