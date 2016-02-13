@@ -23,8 +23,15 @@ public final class Constants {
 	public static final double MOTOR_FORWARD 		= .3;
 	public static final double MOTOR_REVERSE 		= .3;
 	public static final double MOTOR_OFF 			= 0.0;
+<<<<<<< HEAD
+	public static final double DRIVE_MOTOR_MAX_SPEED 	= 1.0;
+	public static final double ROTATE_MOTOR_MAX_SPEED 	= 1.0;
+	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 0.6;
+	
+=======
 	public static final double DRIVE_MOTOR_MAX_SPEED 	= .3;
 	public static final double ROTATE_MOTOR_MAX_SPEED 	= .3;
+>>>>>>> refs/remotes/origin/master
 	
 
 	/*
