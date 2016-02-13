@@ -7,24 +7,23 @@ import org.team708.robot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ *@author James_Makovics
  */
 public class IntakeOut extends Command {
 
 
     public IntakeOut() {
-return;
+    	
     }
     
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	return;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	return;
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
