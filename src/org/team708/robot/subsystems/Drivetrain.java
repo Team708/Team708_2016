@@ -5,13 +5,14 @@ import org.team708.robot.RobotMap;
 import org.team708.robot.commands.drivetrain.JoystickDrive;
 import org.team708.robot.util.HatterDrive;
 import org.team708.robot.util.IRSensor;
+import org.team708.robot.util.UltrasonicSensor;
 import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+//import edu.wpi.first.wpilibj.interfaces.Gyro;
 //import edu.wpi.first.wpilibj.GyroBase;
 //import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
@@ -41,7 +42,8 @@ public class Drivetrain extends PIDSubsystem {
 	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
 	private ADXRS450_Gyro gyro;							// Gyro that is used for drift correction
 	
-//	private IRSensor drivetrainIRSensor;					// IR Sensor that is used for short distancing
+	private IRSensor drivetrainIRSensor;					// IR Sensor for <=25inches
+	private UltrasonicSensor drivetrainUltrasonicSensor;	// Sonar used for <=21feet
 	private DigitalInput opticalSensor;
 	
 	private boolean brake = true;		// Whether the talons should be in coast or brake mode
@@ -75,14 +77,14 @@ public class Drivetrain extends PIDSubsystem {
 	encoder.setDistancePerPulse(distancePerPulse);
 	encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
 		
-//	drivetrainIRSensor 	= new IRSensor(RobotMap.drivetrainIRSensor, IRSensor.GP2Y0A21YK0F);
-//SMP	opticalSensor 		= new DigitalInput(RobotMap.drivetrainOpticalSensor);
-		
-	setInputRange(-25.0, 25.0);
-	setAbsoluteTolerance(Constants.pid_tolerance);
-        setSetpoint(0.0);
+	drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
+	drivetrainUltrasonicSensor = new UltrasonicSensor(RobotMap.DTSonar, UltrasonicSensor.MB1010);
+
+//	setInputRange(-25.0, 25.0);
+//	setAbsoluteTolerance(Constants.pid_tolerance);
+//      setSetpoint(0.0);
 //		enable();
-        disable();
+//      disable();
     }
     
 
@@ -156,26 +158,26 @@ public class Drivetrain extends PIDSubsystem {
      * @param left
      * @param right
      */
-    public void tankDrive(double left, double right) {
-    	// Checks whether drift correction is needed
-    	if (Math.abs(left - right) < Constants.TANK_STICK_TOLERANCE && left != 0.0 && right != 0.0) {
-    		// Enables the PID controller if it is not already
-    		if (!getPIDController().isEnable()) {
-    			gyro.reset();
-    			getPIDController().reset();
-    			enable();
-    		}
-    		// Sets the forward move speed to the average of the two sticks
-    		moveSpeed = ((left + right) / 2);
-    	} else {
-    		// Disables the PID controller if it enabled so the drivetrain can move freely
-    		if (getPIDController().isEnable()) {
-    			disable();
-    		}
-    		drivetrain.tankDrive(left, right);
-    	}
-    }
-	
+//    public void tankDrive(double left, double right) {
+//    	// Checks whether drift correction is needed
+//    	if (Math.abs(left - right) < Constants.TANK_STICK_TOLERANCE && left != 0.0 && right != 0.0) {
+//    		// Enables the PID controller if it is not already
+//    		if (!getPIDController().isEnable()) {
+//    			gyro.reset();
+//    			getPIDController().reset();
+//    			enable();
+//    		}
+//    		// Sets the forward move speed to the average of the two sticks
+//    		moveSpeed = ((left + right) / 2);
+//    	} else {
+//    		// Disables the PID controller if it enabled so the drivetrain can move freely
+//    		if (getPIDController().isEnable()) {
+//    			disable();
+//    		}
+//    		drivetrain.tankDrive(left, right);
+//    	}
+//    }
+
 	public boolean getUsePID() {
 		return usePID;
 	}
@@ -214,9 +216,14 @@ public class Drivetrain extends PIDSubsystem {
 //    	return difference / targetAngle;
 //    }
     
-//    public double getIRDistance() {
+    public double getIRDistance() {
 //    	return drivetrainIRSensor.getClippedAverageDistance();
-//    }
+    	return drivetrainIRSensor.getClippedAverageDistance();
+    }
+    
+    public double getSonarDistance() {
+    	return drivetrainUltrasonicSensor.getAverageDistance();
+    }
     
 //    /**
 //     * Returns the move speed of the robot needed to get to a certain IR distance reading.
@@ -280,7 +287,7 @@ public class Drivetrain extends PIDSubsystem {
     }
     
     /**
-     * Returns if the optical sensor detects the colour white
+     * Returns if the optical sensor detects the color white
      * @return
      */
     public boolean isOpticalSensorWhite() {
@@ -321,7 +328,8 @@ public class Drivetrain extends PIDSubsystem {
     	
     	SmartDashboard.putNumber("Gyro angle", gyro.getAngle());			// Gyro angle
     	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
-//    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
+    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
+    	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());			// Sonar distance reading
     	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());		// Encoder reading
 //    	SmartDashboard.putBoolean("Over Scoring Platform", isOpticalSensorWhite());
     	

@@ -42,25 +42,25 @@ public class RobotMap {
 	public static final int pivotArmMotorSlave  = 32;
 	
 	// Grappler Grabber CAN Device IDs
-	public static final int grapplerMoter  	= 41;
-	
+	public static final int grapplerMoterMaster	= 41;
+	public static final int grapplerMoterSlave 	= 42;
 	
 	// Digital IO
 	public static final int drivetrainEncoderARt		= 0;
 	public static final int drivetrainEncoderBRt		= 1;
 	public static final int drivetrainEncoderALeft		= 2;
 	public static final int drivetrainEncoderBLeft		= 3;
-	public static final int shooterEncoderA			= 4;
-	public static final int shooterEncoderB			= 5;
-	public static final int pivotArmUpperSwitch		= 6;
-	public static final int pivotArmLowerSwitch		= 7;
+	public static final int shooterEncoderA				= 4;
+	public static final int shooterEncoderB				= 5;
+	public static final int pivotArmUpperSwitch			= 6;
+	public static final int pivotArmLowerSwitch			= 7;
 	public static final int grapplerUpperSwitch 		= 8;
-	public static final int grapplerLowerSwitch		= 9;
+	public static final int grapplerLowerSwitch			= 9;
 	
 	
 	//Analog sesnor IDs
 	public static final int DTSonar				= 1;
-	public static final int ballInIRSensor		= 2;
+	public static final int DTIRSensor			= 2;
 	public static final int armPotentiometer	= 3;
 	
 	// PCM Ports
