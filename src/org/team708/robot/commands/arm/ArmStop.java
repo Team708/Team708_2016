@@ -4,7 +4,7 @@ import org.team708.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
+/*
  *
  */
 public class ArmStop extends Command {

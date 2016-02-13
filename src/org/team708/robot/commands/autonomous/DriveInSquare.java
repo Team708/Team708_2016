@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class DriveInSquare extends CommandGroup {
 
-	private static final double driveStraightSpeed = 0.1;
+	private static final double driveStraightSpeed = 0.4;
 	private static final double driveStraightTime = 5;
 	
-	private static final double turnSpeed = 0.1;
-	private static final double turnDegrees = 80;
-    
+	private static final double turnSpeed = 0.4;
+	private static final double turnDegrees = 90;
+   
+	
     public  DriveInSquare() {
+    	addSequential(new WaitCommand(4.0));
     	addSequential(new DriveStraightForTime(driveStraightSpeed, driveStraightTime));
     	addSequential(new WaitCommand(0.1));
     	addSequential(new TurnToDegrees(turnSpeed, turnDegrees));

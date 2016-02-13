@@ -6,7 +6,7 @@ import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
+/*
  *
  */
 public class ArmDown extends Command {
@@ -65,3 +65,4 @@ public class ArmDown extends Command {
     	end();
     }
 }
+

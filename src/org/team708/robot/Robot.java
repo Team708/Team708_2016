@@ -16,8 +16,13 @@ import org.team708.robot.commands.autonomous.LowBarShootHigh;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
 //import org.team708.robot.subsystems.Intake;
+<<<<<<< HEAD
 import org.team708.robot.subsystems.Loader;
 import org.team708.robot.subsystems.Shooter;
+=======
+//import org.team708.robot.subsystems.Loader;
+//import org.team708.robot.subsystems.Shooter;
+>>>>>>> refs/remotes/origin/master
 //import org.team708.robot.subsystems.Grappler;
 //import org.team708.robot.subsystems.Arm;
 
@@ -34,17 +39,26 @@ public class Robot extends IterativeRobot {
     
     Timer statsTimer;										// Timer used for Smart Dash statistics
     
-    public static Drivetrain drivetrain;
+    public static Drivetrain 		drivetrain;
 	public static VisionProcessor 	visionProcessor;
+<<<<<<< HEAD
 //	public static Intake 		intake;
 	public static Loader 		loader;
 	public static Shooter 		shooter;
 //	public static Grappler 		grappler;
 //	public static Arm 		arm;
 	public static OI 		oi;
+=======
+//	public static Intake 			intake;
+//	public static Loader 			loader;
+//	public static Shooter 			shooter;
+//	public static Grappler 			grappler;
+//	public static Arm 				arm;
+	public static OI 				oi;
+>>>>>>> refs/remotes/origin/master
 
 
-    Command 		autonomousCommand;
+    Command 			autonomousCommand;
     SendableChooser 	autonomousMode;
 
     /**
@@ -56,8 +70,9 @@ public class Robot extends IterativeRobot {
         statsTimer.start();		// Starts the timer for the Smart Dashboard
 
 // Subsystem Initialization
-        drivetrain 	= new Drivetrain();
+    drivetrain 		= new Drivetrain();
 	visionProcessor = new VisionProcessor();
+<<<<<<< HEAD
 //	intake 		= new Intake();
 	loader 		= new Loader();
 	shooter 	= new Shooter();
@@ -65,6 +80,15 @@ public class Robot extends IterativeRobot {
 //	arm 		= new Arm();
 	oi 		= new OI();		// Initializes the OI. 
 						// This MUST BE LAST or a NullPointerException will be thrown
+=======
+//	intake 			= new Intake();
+//	loader 			= new Loader();
+//	shooter 		= new Shooter();
+//	grappler 		= new Grappler();
+//	arm 			= new Arm();
+	oi 				= new OI();		// Initializes the OI. 
+									// This MUST BE LAST or a NullPointerException will be thrown
+>>>>>>> refs/remotes/origin/master
 		
 	sendDashboardSubsystems();		// Sends each subsystem's currently running command to the Smart Dashboard
 		
@@ -101,7 +125,7 @@ public class Robot extends IterativeRobot {
      * Runs when teleop mode initialises
      */
     public void teleopInit() {
-	// This makes sure that the autonomous stops running when
+	    // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
@@ -143,8 +167,13 @@ public class Robot extends IterativeRobot {
             drivetrain.sendToDashboard();
             visionProcessor.sendToDashboard();
 //            intake.sendToDashboard();
+<<<<<<< HEAD
             loader.sendToDashboard();
             shooter.sendToDashboard();
+=======
+//            loader.sendToDashboard();
+//            shooter.sendToDashboard();
+>>>>>>> refs/remotes/origin/master
 //            grappler.sendToDashboard();
 //            arm.sendToDashboard();
         }
@@ -186,8 +215,13 @@ public class Robot extends IterativeRobot {
     private void sendDashboardSubsystems() {
     	SmartDashboard.putData(drivetrain);
 //		SmartDashboard.putData(intake);
+<<<<<<< HEAD
 		SmartDashboard.putData(loader);
 		SmartDashboard.putData(shooter);
+=======
+//		SmartDashboard.putData(loader);
+//		SmartDashboard.putData(shooter);
+>>>>>>> refs/remotes/origin/master
 //		SmartDashboard.putData(grappler);
 //		SmartDashboard.putData(arm);
 		SmartDashboard.putData(visionProcessor);
