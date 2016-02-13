@@ -15,10 +15,10 @@ public final class Constants {
 	 */
 	public static final Relay.Value INTAKE_FORWARD 		= Relay.Value.kForward;
 	public static final Relay.Value INTAKE_REVERSE 		= Relay.Value.kReverse;
-	public static final Relay.Value INTAKE_OFF 		= Relay.Value.kOff;
+	public static final Relay.Value INTAKE_OFF 			= Relay.Value.kOff;
 	public static final Relay.Value LOADER_FORWARD 		= Relay.Value.kForward;
 	public static final Relay.Value LOADER_REVERSE 		= Relay.Value.kReverse;
-	public static final Relay.Value LOADER_OFF 		= Relay.Value.kOff;
+	public static final Relay.Value LOADER_OFF 			= Relay.Value.kOff;
 
 	public static final double MOTOR_FORWARD 		= .3;
 	public static final double MOTOR_REVERSE 		= .3;
