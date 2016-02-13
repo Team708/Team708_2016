@@ -15,11 +15,8 @@ import org.team708.robot.commands.autonomous.LowBar;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
-import org.team708.robot.subsystems.Intake;
 import org.team708.robot.subsystems.Loader;
 import org.team708.robot.subsystems.Shooter;
-import org.team708.robot.subsystems.Grappler;
-import org.team708.robot.subsystems.Arm;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,11 +33,8 @@ public class Robot extends IterativeRobot {
     
     public static Drivetrain drivetrain;
 	public static VisionProcessor 	visionProcessor;
-	public static Intake 		intake;
 	public static Loader 		loader;
 	public static Shooter 		shooter;
-	public static Grappler 		grappler;
-	public static Arm 		arm;
 	public static OI 		oi;
 
 
@@ -58,11 +52,8 @@ public class Robot extends IterativeRobot {
 // Subsystem Initialization
         drivetrain 	= new Drivetrain();
 	visionProcessor = new VisionProcessor();
-	intake 		= new Intake();
 	loader 		= new Loader();
 	shooter 	= new Shooter();
-	grappler 	= new Grappler();
-	arm 		= new Arm();
 	oi 		= new OI();		// Initializes the OI. 
 						// This MUST BE LAST or a NullPointerException will be thrown
 		
@@ -142,11 +133,8 @@ public class Robot extends IterativeRobot {
             // Various debug information
             drivetrain.sendToDashboard();
             visionProcessor.sendToDashboard();
-            intake.sendToDashboard();
             loader.sendToDashboard();
             shooter.sendToDashboard();
-            grappler.sendToDashboard();
-            arm.sendToDashboard();
         }
     }
     
@@ -185,11 +173,8 @@ public class Robot extends IterativeRobot {
      */
     private void sendDashboardSubsystems() {
     	SmartDashboard.putData(drivetrain);
-		SmartDashboard.putData(intake);
 		SmartDashboard.putData(loader);
 		SmartDashboard.putData(shooter);
-		SmartDashboard.putData(grappler);
-		SmartDashboard.putData(arm);
 		SmartDashboard.putData(visionProcessor);
     }
 }
