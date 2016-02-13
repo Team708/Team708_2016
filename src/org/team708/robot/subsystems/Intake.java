@@ -10,9 +10,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Subsystem that carries up totes on a chain system.
- * @author jlwang
- * @author omn0mn0m
+ * Subsystem that intakes balls
+ * @author James_Makovics
  */
 public class Intake extends Subsystem {
 
@@ -22,7 +21,7 @@ public class Intake extends Subsystem {
 	public Intake() {
 		
 		intakeMotor = new Relay(RobotMap.INTAKE_SPIKE);
-		
+		intakeMotor.set(Relay.Value.kForward);
 	}
 	
 	
@@ -31,6 +30,8 @@ public class Intake extends Subsystem {
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
+    	
+    	
     }
     
     /**
