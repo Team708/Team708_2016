@@ -185,8 +185,11 @@ public class Robot extends IterativeRobot {
      */
     private void sendDashboardSubsystems() {
     	SmartDashboard.putData(drivetrain);
+//		SmartDashboard.putData(intake);
 		SmartDashboard.putData(loader);
 		SmartDashboard.putData(shooter);
+//		SmartDashboard.putData(grappler);
+//		SmartDashboard.putData(arm);
 		SmartDashboard.putData(visionProcessor);
     }
 }
