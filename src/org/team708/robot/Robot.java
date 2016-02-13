@@ -15,7 +15,7 @@ import org.team708.robot.commands.autonomous.LowBar;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
-//import org.team708.robot.subsystems.Intake;
+import org.team708.robot.subsystems.Intake;
 //import org.team708.robot.subsystems.Loader;
 //import org.team708.robot.subsystems.Shooter;
 //import org.team708.robot.subsystems.Grappler;
@@ -36,7 +36,7 @@ public class Robot extends IterativeRobot {
     
     public static Drivetrain 		drivetrain;
 	public static VisionProcessor 	visionProcessor;
-//	public static Intake 			intake;
+	public static Intake 			intake;
 //	public static Loader 			loader;
 //	public static Shooter 			shooter;
 //	public static Grappler 			grappler;
@@ -58,7 +58,7 @@ public class Robot extends IterativeRobot {
 // Subsystem Initialization
     drivetrain 		= new Drivetrain();
 	visionProcessor = new VisionProcessor();
-//	intake 			= new Intake();
+	intake 			= new Intake();
 //	loader 			= new Loader();
 //	shooter 		= new Shooter();
 //	grappler 		= new Grappler();
@@ -142,7 +142,7 @@ public class Robot extends IterativeRobot {
             // Various debug information
             drivetrain.sendToDashboard();
             visionProcessor.sendToDashboard();
-//            intake.sendToDashboard();
+            intake.sendToDashboard();
 //            loader.sendToDashboard();
 //            shooter.sendToDashboard();
 //            grappler.sendToDashboard();
