@@ -16,15 +16,10 @@ import org.team708.robot.commands.autonomous.LowBarShootHigh;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
 //import org.team708.robot.subsystems.Intake;
-<<<<<<< HEAD
-import org.team708.robot.subsystems.Loader;
-import org.team708.robot.subsystems.Shooter;
-=======
 //import org.team708.robot.subsystems.Loader;
 //import org.team708.robot.subsystems.Shooter;
->>>>>>> refs/remotes/origin/master
 //import org.team708.robot.subsystems.Grappler;
-//import org.team708.robot.subsystems.Arm;
+import org.team708.robot.subsystems.Arm;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -41,21 +36,13 @@ public class Robot extends IterativeRobot {
     
     public static Drivetrain 		drivetrain;
 	public static VisionProcessor 	visionProcessor;
-<<<<<<< HEAD
-//	public static Intake 		intake;
-	public static Loader 		loader;
-	public static Shooter 		shooter;
-//	public static Grappler 		grappler;
-//	public static Arm 		arm;
-	public static OI 		oi;
-=======
+
 //	public static Intake 			intake;
 //	public static Loader 			loader;
 //	public static Shooter 			shooter;
 //	public static Grappler 			grappler;
-//	public static Arm 				arm;
+	public static Arm 				arm;
 	public static OI 				oi;
->>>>>>> refs/remotes/origin/master
 
 
     Command 			autonomousCommand;
@@ -72,24 +59,14 @@ public class Robot extends IterativeRobot {
 // Subsystem Initialization
     drivetrain 		= new Drivetrain();
 	visionProcessor = new VisionProcessor();
-<<<<<<< HEAD
-//	intake 		= new Intake();
-	loader 		= new Loader();
-	shooter 	= new Shooter();
-//	grappler 	= new Grappler();
-//	arm 		= new Arm();
-	oi 		= new OI();		// Initializes the OI. 
-						// This MUST BE LAST or a NullPointerException will be thrown
-=======
+
 //	intake 			= new Intake();
 //	loader 			= new Loader();
 //	shooter 		= new Shooter();
 //	grappler 		= new Grappler();
-//	arm 			= new Arm();
+	arm 			= new Arm();
 	oi 				= new OI();		// Initializes the OI. 
 									// This MUST BE LAST or a NullPointerException will be thrown
->>>>>>> refs/remotes/origin/master
-		
 	sendDashboardSubsystems();		// Sends each subsystem's currently running command to the Smart Dashboard
 		
 	autonomousMode = new SendableChooser();	// Initializes the Autonomous selection box
@@ -167,15 +144,10 @@ public class Robot extends IterativeRobot {
             drivetrain.sendToDashboard();
             visionProcessor.sendToDashboard();
 //            intake.sendToDashboard();
-<<<<<<< HEAD
-            loader.sendToDashboard();
-            shooter.sendToDashboard();
-=======
 //            loader.sendToDashboard();
 //            shooter.sendToDashboard();
->>>>>>> refs/remotes/origin/master
 //            grappler.sendToDashboard();
-//            arm.sendToDashboard();
+            arm.sendToDashboard();
         }
     }
     
@@ -215,15 +187,10 @@ public class Robot extends IterativeRobot {
     private void sendDashboardSubsystems() {
     	SmartDashboard.putData(drivetrain);
 //		SmartDashboard.putData(intake);
-<<<<<<< HEAD
-		SmartDashboard.putData(loader);
-		SmartDashboard.putData(shooter);
-=======
 //		SmartDashboard.putData(loader);
 //		SmartDashboard.putData(shooter);
->>>>>>> refs/remotes/origin/master
 //		SmartDashboard.putData(grappler);
-//		SmartDashboard.putData(arm);
+		SmartDashboard.putData(arm);
 		SmartDashboard.putData(visionProcessor);
     }
 }
