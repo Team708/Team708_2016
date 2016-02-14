@@ -3,7 +3,9 @@ package org.team708.robot.commands.intake;
 import org.team708.robot.Constants;
 import org.team708.robot.OI;
 import org.team708.robot.Robot;
+import org.team708.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,8 +13,12 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class IntakeOut extends Command {
 
-
+	public static final Relay.Value INTAKE_REVERSE 		= Constants.INTAKE_REVERSE;
+	
     public IntakeOut() {
+    	
+    	Relay intakeMotor = new Relay(RobotMap.INTAKE_SPIKE); // Spike for the intake motor
+    	intakeMotor.set(INTAKE_REVERSE);
     	
     }
     
