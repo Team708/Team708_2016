@@ -17,9 +17,9 @@ public class RobotMap {
 	public static final int operatorGamepad = 2;
 	
 	// PWM Ports
-	public static final int INTAKE_SPIKE 	= 0;
-	public static final int LOADER_SPIKE 	= 1;
-//	public static final int  			 	= 2;
+	public static final int INTAKE_PWM	 	= 0;
+	public static final int LOADER_PWM	 	= 1;
+	public static final int SHOOTER_PWM	 	= 2;
 //	public static final int  				= 3;
 //	public static final int  				= 4;
 //	public static final int  				= 5;
@@ -33,9 +33,6 @@ public class RobotMap {
 	public static final int drivetrainLeftMotorSlave   = 12;
 	public static final int drivetrainRightMotorMaster = 13;
 	public static final int drivetrainRightMotorSlave  = 14;
-	
-	// Shooter CAN Device IDs
-	public static final int shooterMotorMaster	= 21;
 	
 	// Pivot Arm CAN Device ID
 	public static final int pivotArmMotorMaster	 = 31;
