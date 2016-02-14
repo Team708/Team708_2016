@@ -4,7 +4,7 @@ package org.team708.robot.subsystems;
 import org.team708.robot.util.Potentiometer;
 import org.team708.robot.Constants;
 import org.team708.robot.RobotMap;
-import org.team708.robot.commands.arm.JoystickMoveArm;
+import org.team708.robot.commands.grappler.JoystickMoveGrappler;
 
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -47,7 +47,7 @@ public class Grappler extends Subsystem {
 
 	public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new JoystickMoveArm());
+        setDefaultCommand(new JoystickMoveGrappler());
     }
 	
 	/**
