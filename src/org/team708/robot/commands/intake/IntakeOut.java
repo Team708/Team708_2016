@@ -10,16 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *@author James_Makovics
+ *@author Alex Tysak
+ *@author Thomas Zhao
  */
 public class IntakeOut extends Command {
 
-	public static final Relay.Value INTAKE_REVERSE 		= Constants.INTAKE_REVERSE;
 	
     public IntakeOut() {
-    	
-    	Relay intakeMotor = new Relay(RobotMap.INTAKE_SPIKE); // Spike for the intake motor
-    	intakeMotor.set(INTAKE_REVERSE);
-    	
+    	requires(Robot.intake);
     }
     
 
@@ -30,6 +28,7 @@ public class IntakeOut extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	
+    	Robot.intake.moveMotor(Constants.INTAKE_REVERSE);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,6 +40,7 @@ public class IntakeOut extends Command {
     // Called once after isFinished returns true
     protected void end() {
 
+    	Robot.intake.moveMotor(Constants.INTAKE_OFF);
     }
 
     // Called when another command which requires one or more of the same

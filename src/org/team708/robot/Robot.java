@@ -36,12 +36,12 @@ public class Robot extends IterativeRobot {
     
     public static Drivetrain 		drivetrain;
 	public static VisionProcessor 	visionProcessor;
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	public static Intake 			intake;
-=======
+//=======
 
 //	public static Intake 			intake;
->>>>>>> master
+//>>>>>>> master
 //	public static Loader 			loader;
 //	public static Shooter 			shooter;
 //	public static Grappler 			grappler;
@@ -63,12 +63,12 @@ public class Robot extends IterativeRobot {
 // Subsystem Initialization
     drivetrain 		= new Drivetrain();
 	visionProcessor = new VisionProcessor();
-<<<<<<< HEAD
+//<<<<<<< HEAD
 	intake 			= new Intake();
-=======
+//=======
 
 //	intake 			= new Intake();
->>>>>>> master
+//>>>>>>> master
 //	loader 			= new Loader();
 //	shooter 		= new Shooter();
 //	grappler 		= new Grappler();
