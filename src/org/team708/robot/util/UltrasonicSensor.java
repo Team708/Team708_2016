@@ -12,7 +12,7 @@ package org.team708.robot.util;
 public class UltrasonicSensor extends DistanceSensor{
 
     //ultrasonics
-    public static final Model MB1010 = new Model(.009766);
+    public static final Model MB1010 = new Model(.009766); //LV-MaxSonar-EZ
     public static final Model MB1340 = new Model(.012446);
 
     public UltrasonicSensor(int channel, Model m) {

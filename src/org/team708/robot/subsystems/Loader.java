@@ -1,36 +1,59 @@
-//package org.team708.robot.subsystems;
-//
-//
-//import org.team708.robot.Constants;
-//import org.team708.robot.RobotMap;
+package org.team708.robot.subsystems;
+
+
+import org.team708.robot.Constants;
+import org.team708.robot.RobotMap;
 //import org.team708.robot.commands.arm.JoystickMoveArm;
-//
-//import edu.wpi.first.wpilibj.CANTalon;
-//import edu.wpi.first.wpilibj.DigitalInput;
-//import edu.wpi.first.wpilibj.Encoder;
-//import edu.wpi.first.wpilibj.Talon;
-//import edu.wpi.first.wpilibj.command.Subsystem;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//
-///**
-// * Description
-// * @author 
-// * @author 
-// */
-//public class Loader extends Subsystem {
-//	
-//	/**
-//	 * Constructor
-//	 */
-//	public Loader() {
+import org.team708.robot.commands.loader.ManualLoader;
+import org.team708.robot.util.IRSensor;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+/**
+ * Description
+ * @Jialin Wang 
+ * @Nick Iannarone
+ * @Thomas Zhao
+ */
+public class Loader extends Subsystem {
+	
+	private static IRSensor irSensor;
+	
+	private Talon loadMotor;
+	/**
+	 * Constructor
+	 */
+	public Loader() {
+		
+//		irSensor = new IRSensor(RobotMap.ballInIRSensor, IRSensor.GP2Y0A02YK0F); //Two models of infrared sensors in the IRSensor class
+		
+		loadMotor = new Talon(RobotMap.LOADER_PWM); //initializes the loading motor
+		
+	}
+	
+	public void initDefaultCommand() {
+        setDefaultCommand(new ManualLoader());
+    }
+	
+	public void manualMove(double speed){
+		loadMotor.set(speed);
+	}
+	
+//	public static double irGetDistance() {
+//		return irSensor.getDistance();
 //	}
-//	
-//	public void initDefaultCommand() {
-//        // Set the default command for a subsystem here.
-//        //setDefaultCommand(new JoystickMoveArm());
-//    }
-//	
-//	public void sendToDashboard() {
-//		
-//	}
-//}
+	
+	public void stop(){
+		loadMotor.set(Constants.MOTOR_OFF);
+	}
+	
+	public void sendToDashboard() {
+
+//		SmartDashboard.putNumber("IR Distance", irGetDistance());
+	}
+}

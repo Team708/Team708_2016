@@ -1,57 +1,40 @@
-package org.team708.robot.commands.loader;
+package org.team708.robot.commands.visionProcessor;
 
-import org.team708.robot.Constants;
-import org.team708.robot.OI;
 import org.team708.robot.Robot;
-import org.team708.robot.subsystems.Loader;
-import org.team708.robot.util.Gamepad;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class LoaderSpinOut extends Command {
-
-
-    public LoaderSpinOut() {
-    	
-    	requires(Robot.loader);
-
+public class FindTarget extends Command {
+	
+    public FindTarget() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.visionProcessor);
     }
-    
 
     // Called just before this Command runs the first time
     protected void initialize() {
-
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.loader.manualMove(Constants.LOADER_MOTOR_REVERSE);
-
-    	
+    	Robot.visionProcessor.processData();
+    	Robot.drivetrain.haloDrive(Robot.visionProcessor.getMove(0.3), Robot.visionProcessor.getRotate());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	
-    	//if the loader spin out button is no longer pressed, stop loop
-    	if (!OI.loaderSpinOut.get()){
-    		return true;
-    	}
-    	
-    	return(false);
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.loader.stop();
     }
 
     // Called when another command which requires one or more of the same
-    // subsystems are scheduled to run
+    // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }

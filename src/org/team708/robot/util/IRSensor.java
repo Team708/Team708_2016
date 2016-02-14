@@ -13,7 +13,7 @@ public class IRSensor extends DistanceSensor{
 
     //infrareds
     public static final Model GP2Y0A02YK0F = new Model(0.4,2.55,0.00667,.05);
-    public static final Model GP2Y0A21YK0F = new Model(0.4,3.0,.0125,0.143);
+    public static final Model GP2Y0A21YK0F = new Model(0.4,3.0,.0125,0.143); // range good to 32inches
 
     public IRSensor(int channel,Model m){
         super(channel,m);

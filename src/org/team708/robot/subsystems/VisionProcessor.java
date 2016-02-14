@@ -2,6 +2,8 @@ package org.team708.robot.subsystems;
 
 //import org.team708.robot.commands.visionProcessor.ProcessData;
 
+import org.team708.robot.Constants;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.networktables2.type.NumberArray;
@@ -14,48 +16,88 @@ import edu.wpi.first.wpilibj.tables.TableKeyNotDefinedException;
 public class VisionProcessor extends Subsystem {
     
 	private NetworkTable roboRealmInfo;
-	private NumberArray toteBoundaries;
-	private NumberArray containerCrosshair;
-	private boolean hasTote;
-	public boolean hasContainer;
+	private NumberArray targetCrosshair;
+	private boolean hasTarget;
 	
-	private final double imageWidth = 320;
-	private double centerX;
-	
+	private final double 	imageWidth = 320;
+	private final double 	targetWidth = 18; //width of target in inches
+
+	private double 			centerX = 0.0;
+	private double 			targetX = 0.0;
+
 	private double thresholdX = 20.0;
 	private double thresholdY = 0.1;
 	
-//	private double containerX;
-	private double[] toteX = new double[2];
-	private double toteWidth;
-	
+    // High goal aspect ratio (11ft6in/3ft1in) in inches (3.729 repeating)
+    private final double targetAspectRatio = 3.73; 
+    
+    // Distance related measurements from the network table
+    private double 			distanceToTarget 	= 0.0;
+    private int 			differencePx 		= 0;
+    private final double 	targetDiameterIn 	= 24;
+    
+    // Data sent from the network table
+    private double currentAspectRatio = 0.0;
+    private double upper_left_x = 0;
+    private double upper_left_y = 0;
+    private double upper_right_x = 0;
+    private double upper_right_y = 0;
+    private double lower_left_x = 0;
+    private double lower_left_y = 0;
+    private double radius = 0;
+    private double blob_count = 0;
+    	
+    //daisy says to set this to 43.5 deg
+    private final double cameraFOVRads = Math.toRadians(47);
+//    private double cameraFOVRads = Math.toRadians(43.5);
+    
 	public VisionProcessor() {
 		super("Vision Processor");
 		roboRealmInfo = NetworkTable.getTable("vision");
-		toteBoundaries = new NumberArray();
-		containerCrosshair = new NumberArray();
+
+		targetCrosshair = new NumberArray();
 		centerX = imageWidth / 2;
 	}
 	
 	public void processData() {
 		try {
-//			roboRealmInfo.retrieveValue("CROSSHAIR_COORDINATES", containerCrosshair);
-//			if (containerCrosshair.size() > 0) {
-//				containerX = containerCrosshair.get(0);
-//				hasContainer = true;
-//			} else {
-//				hasContainer = false;
-//			}
-			
-			roboRealmInfo.retrieveValue("MEQ_COORDINATES", toteBoundaries);
-			if (toteBoundaries.size() > 0) {
-				toteX[0] = toteBoundaries.get(0);
-				toteX[1] = toteBoundaries.get(2);
-				hasTote = true;
+			targetX= roboRealmInfo.getNumber("hcx", 0);
+			if (targetX > 0) {
+				hasTarget = true;
 			} else {
-				hasTote = false;
+				hasTarget = false;
 			}
-			toteWidth = toteX[0] - toteX[1];
+			
+//            NetworkTable table = NetworkTable.getTable("vision");
+//            upper_left_x = (double) table.getNumber("p1x");
+//            upper_left_y = (double) table.getNumber("p1y");
+//            upper_right_x = (double)table.getNumber("p2x");
+//            upper_right_y = (double)table.getNumber("p2y");
+//            lower_left_x = (double) table.getNumber("p3x");
+//            lower_left_y = (double) table.getNumber("p3y");
+//            center_x = (double) table.getNumber("cx");
+//            radius = (double) table.getNumber("r");
+//            hasBall = table.getNumber("ball") > 0;
+//            blob_count = (double) table.getNumber("count");
+//            
+//            
+//            //calculate aspect ratio of observed target
+//            currentAspectRatio = (upper_right_x - upper_left_x) / (upper_left_y - lower_left_y);
+//            
+//            //make sure that target aspect ratio is within tolerance
+//            //if it isn't, we really don't have a target
+//            if(Math.abs(currentAspectRatio - highGoalAspectRatio) > aspectRatioTolerance || blob_count < 1) {
+//                isHighGoal = false;
+//            } else {
+//                isHighGoal = true;
+//            }
+//            
+//            distanceToTarget = (ballDiameterIn * imageWidthPx)/
+//                                    ((2* radius) * Math.tan(cameraFOVRads/2) * 2);
+//            
+//            //calculate difference between center of target and center of screen
+//            differencePx = (int)(center_x - (imageWidthPx / 2.0));
+            
 		} catch (TableKeyNotDefinedException e) {
 			e.printStackTrace();
 		}
@@ -64,8 +106,8 @@ public class VisionProcessor extends Subsystem {
 	public double getRotate() {
 		double rotate;
 		
-		if (hasTote) {
-			double difference = centerX - ((toteX[0] + toteX[1]) / 2);
+		if (hasTarget) {
+			double difference = centerX - (targetX);
 			
 			if (Math.abs(difference) <= thresholdX) {
 				difference = 0.0;
@@ -73,11 +115,11 @@ public class VisionProcessor extends Subsystem {
 			
 			rotate = difference / centerX;
 			
-			if (Math.abs(rotate) < 0.65 && Math.abs(rotate) != 0.0) {
+			if (Math.abs(rotate) < Constants.VISION_ROTATE_MOTOR_SPEED && Math.abs(rotate) != 0.0) {
 				if (rotate >= 0.0) {
-					rotate = 0.65;
+					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
 				} else {
-					rotate = -0.65;
+					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
 				}
 			}
 		} else {
@@ -90,8 +132,8 @@ public class VisionProcessor extends Subsystem {
 	public double getMove(double targetAmount) {
 		double move;
 		
-		if (hasTote) {
-			double ratio = toteWidth / imageWidth;
+		if (hasTarget) {
+			double ratio = targetWidth / imageWidth;
 			
 			double difference = ratio - targetAmount;
 			
@@ -119,24 +161,14 @@ public class VisionProcessor extends Subsystem {
 	 * Returns if the robot sees a container
 	 * @return
 	 */
-	public boolean isHasContainer() {
-		return hasContainer;
+	public boolean isHasTarget() {
+		return hasTarget;
 	}
 	
-	/**
-	 * Returns if the robot sees a tote
-	 * @return
-	 */
-	public boolean isHasTote() {
-		return hasTote;
-	}
-	
+
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Has Tote", isHasTote());
-		SmartDashboard.putBoolean("Has Container", isHasContainer());
-		SmartDashboard.putNumber("Target Width", toteWidth);
-		SmartDashboard.putNumber("Crosshair Size", containerCrosshair.size());
-		SmartDashboard.putNumber("Tote Coordinates", toteBoundaries.size());
+		SmartDashboard.putBoolean("See Target", isHasTarget());
+		SmartDashboard.putNumber("Center of Target", targetX);
 	}
 
     public void initDefaultCommand() {

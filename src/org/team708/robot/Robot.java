@@ -13,11 +13,12 @@ import org.team708.robot.commands.autonomous.DoNothing;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.LowBar;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
+import org.team708.robot.commands.autonomous.DriveToTarget;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
 //import org.team708.robot.subsystems.Intake;
-//import org.team708.robot.subsystems.Loader;
-//import org.team708.robot.subsystems.Shooter;
+import org.team708.robot.subsystems.Loader;
+import org.team708.robot.subsystems.Shooter;
 //import org.team708.robot.subsystems.Grappler;
 import org.team708.robot.subsystems.Arm;
 
@@ -38,8 +39,8 @@ public class Robot extends IterativeRobot {
 	public static VisionProcessor 	visionProcessor;
 
 //	public static Intake 			intake;
-//	public static Loader 			loader;
-//	public static Shooter 			shooter;
+	public static Loader 			loader;
+	public static Shooter 			shooter;
 //	public static Grappler 			grappler;
 	public static Arm 				arm;
 	public static OI 				oi;
@@ -61,8 +62,8 @@ public class Robot extends IterativeRobot {
 	visionProcessor = new VisionProcessor();
 
 //	intake 			= new Intake();
-//	loader 			= new Loader();
-//	shooter 		= new Shooter();
+	loader 			= new Loader();
+	shooter 		= new Shooter();
 //	grappler 		= new Grappler();
 	arm 			= new Arm();
 	oi 				= new OI();		// Initializes the OI. 
@@ -99,7 +100,7 @@ public class Robot extends IterativeRobot {
     }
 
     /**
-     * Runs when teleop mode initialises
+     * Runs when teleop mode initializes
      */
     public void teleopInit() {
 	    // This makes sure that the autonomous stops running when
@@ -144,8 +145,8 @@ public class Robot extends IterativeRobot {
             drivetrain.sendToDashboard();
             visionProcessor.sendToDashboard();
 //            intake.sendToDashboard();
-//            loader.sendToDashboard();
-//            shooter.sendToDashboard();
+            loader.sendToDashboard();
+            shooter.sendToDashboard();
 //            grappler.sendToDashboard();
             arm.sendToDashboard();
         }
@@ -155,10 +156,11 @@ public class Robot extends IterativeRobot {
      * Adds every autonomous mode to the selection box and adds the box to the Smart Dashboard
      */
     private void queueAutonomousModes() {
-		autonomousMode.addObject("1) Drive in Square", new DriveInSquare());
-		autonomousMode.addObject("2) Low Bar", new LowBar());
-		autonomousMode.addObject("3) Low Bar Shoot High", new LowBarShootHigh());
-		autonomousMode.addObject("4) Do Nothing", new DoNothing());
+		autonomousMode.addObject("Find Target", new DriveToTarget());
+		autonomousMode.addObject("Drive in Square", new DriveInSquare());
+		autonomousMode.addObject("Low Bar", new LowBar());
+		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
+		autonomousMode.addObject("Do Nothing", new DoNothing());
 
 		// make a selection table to select partial auto routines
 		//
@@ -169,12 +171,14 @@ public class Robot extends IterativeRobot {
 		//		3) 	a) go to defense
 		//			b) go over defense
 		//
-		//		4) shoot
+		//		4) shoot (on|off)
 		//			a) turn 
 		//				1) clockwise
 		//				2) counter clockwise
 		//
-		//			b) aim (drive to shooting distance)
+		//			b) aim
+		//				1) find target
+		//				2) drive to shooting distance
 		//			c) fire
 
 		
