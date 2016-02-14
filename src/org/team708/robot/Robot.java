@@ -171,12 +171,14 @@ public class Robot extends IterativeRobot {
 		//		3) 	a) go to defense
 		//			b) go over defense
 		//
-		//		4) shoot
+		//		4) shoot (on|off)
 		//			a) turn 
 		//				1) clockwise
 		//				2) counter clockwise
 		//
-		//			b) aim (drive to shooting distance)
+		//			b) aim
+		//				1) find target
+		//				2) drive to shooting distance
 		//			c) fire
 
 		

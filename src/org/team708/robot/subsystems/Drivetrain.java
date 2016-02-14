@@ -221,7 +221,8 @@ public class Drivetrain extends PIDSubsystem {
     }
     
     public double getSonarDistance() {
-    	return drivetrainUltrasonicSensor.getAverageDistance();
+    	return drivetrainUltrasonicSensor.getClippedAverageDistance();
+//    	return drivetrainUltrasonicSensor.getAverageDistance();
     }
     
     /**
@@ -231,9 +232,12 @@ public class Drivetrain extends PIDSubsystem {
      * @return
      */
     public double moveByIR(double targetDistance, double minSpeed, double maxSpeed, double tolerance) {
-    	double value = Math708.getClippedPercentError(getIRDistance(), targetDistance, minSpeed, maxSpeed);
+    	double current_location = getIRDistance();
     	
-    	if (value <= 0.0) {
+    	double value = Math708.getClippedPercentError(current_location, targetDistance, minSpeed, maxSpeed);
+    	
+    	if (value <= 0.0 || ((Math.abs(current_location - targetDistance)) <= tolerance)) {
+    		
     		return 0.0;
     	}
     	return value;
@@ -248,7 +252,7 @@ public class Drivetrain extends PIDSubsystem {
     public double moveByUltrasonic(double targetDistance, double minSpeed, double maxSpeed, double tolerance) {
     	double value = Math708.getClippedPercentError(getSonarDistance(), targetDistance, minSpeed, maxSpeed);
     	
-    	if (value <= 0.0) {
+    	if (value <= 0.0 || ((Math.abs(getSonarDistance() - targetDistance)) <= tolerance)) {
     		return 0.0;
     	}
     	return value;
