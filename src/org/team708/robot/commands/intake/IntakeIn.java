@@ -4,6 +4,7 @@ import org.team708.robot.Constants;
 import org.team708.robot.OI;
 import org.team708.robot.Robot;
 
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -13,7 +14,10 @@ public class IntakeIn extends Command {
 
 
     public IntakeIn() {
-return;
+
+    	 = Relay.Value.kForward;
+    	
+    	return;
     }
     
 
