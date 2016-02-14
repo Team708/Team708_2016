@@ -16,7 +16,6 @@ public class IntakeIn extends Command {
 
 	public static final Relay.Value INTAKE_Forward = Constants.INTAKE_FORWARD;
 	
-	
 	Relay intakeMotor = new Relay(RobotMap.INTAKE_SPIKE); // Spike for the intake motor
 
     public IntakeIn() {

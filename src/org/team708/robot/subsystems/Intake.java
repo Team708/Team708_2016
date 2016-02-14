@@ -15,17 +15,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends Subsystem {
 	
-	public static final Relay.Value INTAKE_Forward = Relay.Value.kForward; 	
-	public static final Relay.Value INTAKE_REVERSE 		= Relay.Value.kReverse;
+	public static final Relay.Value INTAKE_Forward = Constants.INTAKE_FORWARD; 	
+	public static final Relay.Value INTAKE_REVERSE 		= Constants.INTAKE_REVERSE;
 	
-	private Relay intakeMotor;		// Spike for the intake motor
+	
 	
     /**
       * Constructor
       */
 	public Intake() {
 		
-		intakeMotor = new Relay(RobotMap.INTAKE_SPIKE);
+		
 		
 		  
 		
@@ -42,5 +42,7 @@ public class Intake extends Subsystem {
     public void sendToDashboard() {
     	
     }
+    
+    
 }
 
