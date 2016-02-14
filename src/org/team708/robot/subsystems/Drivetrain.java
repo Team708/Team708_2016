@@ -158,25 +158,25 @@ public class Drivetrain extends PIDSubsystem {
      * @param left
      * @param right
      */
-//    public void tankDrive(double left, double right) {
-//    	// Checks whether drift correction is needed
-//    	if (Math.abs(left - right) < Constants.TANK_STICK_TOLERANCE && left != 0.0 && right != 0.0) {
-//    		// Enables the PID controller if it is not already
-//    		if (!getPIDController().isEnable()) {
-//    			gyro.reset();
-//    			getPIDController().reset();
-//    			enable();
-//    		}
-//    		// Sets the forward move speed to the average of the two sticks
-//    		moveSpeed = ((left + right) / 2);
-//    	} else {
-//    		// Disables the PID controller if it enabled so the drivetrain can move freely
-//    		if (getPIDController().isEnable()) {
-//    			disable();
-//    		}
-//    		drivetrain.tankDrive(left, right);
-//    	}
-//    }
+    public void tankDrive(double left, double right) {
+    	// Checks whether drift correction is needed
+    	if (Math.abs(left - right) < Constants.TANK_STICK_TOLERANCE && left != 0.0 && right != 0.0) {
+    		// Enables the PID controller if it is not already
+    		if (!getPIDController().isEnable()) {
+    			gyro.reset();
+    			getPIDController().reset();
+    			enable();
+    		}
+    		// Sets the forward move speed to the average of the two sticks
+    		moveSpeed = ((left + right) / 2);
+    	} else {
+    		// Disables the PID controller if it enabled so the drivetrain can move freely
+    		if (getPIDController().isEnable()) {
+    			disable();
+    		}
+    		drivetrain.tankDrive(left, right);
+    	}
+    }
 
 	public boolean getUsePID() {
 		return usePID;
@@ -206,39 +206,54 @@ public class Drivetrain extends PIDSubsystem {
     	gyro.reset();
     }
     
-//    public double rotateByGyro(double targetAngle, double tolerance) {
-//    	double difference = getAngle() - targetAngle;
-//    	
-//    	if (Math708.isWithinThreshold(getIRDistance(), targetAngle, tolerance)) {
-//    		difference = 0.0;
-//    	}
-//    	
-//    	return difference / targetAngle;
-//    }
+    public double rotateByGyro(double targetAngle, double tolerance) {
+    	double difference = getAngle() - targetAngle;
+ 
+    	if (Math708.isWithinThreshold(gyro.getAngle(), targetAngle, tolerance)) {
+    		difference = 0.0;
+    	}
+    	
+    	return difference / targetAngle;
+    }
     
     public double getIRDistance() {
-//    	return drivetrainIRSensor.getClippedAverageDistance();
-    	return drivetrainIRSensor.getClippedAverageDistance();
+    	return drivetrainIRSensor.getAverageDistance();
     }
     
     public double getSonarDistance() {
     	return drivetrainUltrasonicSensor.getAverageDistance();
     }
     
-//    /**
-//     * Returns the move speed of the robot needed to get to a certain IR distance reading.
-//     * This assumes that the IR sensor is in the front of the robot.
-//     * @param targetDistance
-//     * @return
-//     */
-//    public double moveByIR(double targetDistance, double minSpeed, double maxSpeed, double tolerance) {
-//    	double value = Math708.getClippedPercentError(getIRDistance(), targetDistance, minSpeed, maxSpeed);
-//    	
-//    	if (value <= 0.0) {
-//    		return 0.0;
-//    	}
-//    	return value;
-//    }
+    /**
+     * Returns the move speed of the robot needed to get to a certain IR distance reading.
+     * This assumes that the IR sensor is in the front of the robot.
+     * @param targetDistance
+     * @return
+     */
+    public double moveByIR(double targetDistance, double minSpeed, double maxSpeed, double tolerance) {
+    	double value = Math708.getClippedPercentError(getIRDistance(), targetDistance, minSpeed, maxSpeed);
+    	
+    	if (value <= 0.0) {
+    		return 0.0;
+    	}
+    	return value;
+    }
+
+    /**
+     * Returns the move speed of the robot needed to get to a certain Sonar distance reading.
+     * This assumes that the Sonar sensor is in the front of the robot.
+     * @param targetDistance
+     * @return
+     */
+    public double moveByUltrasonic(double targetDistance, double minSpeed, double maxSpeed, double tolerance) {
+    	double value = Math708.getClippedPercentError(getSonarDistance(), targetDistance, minSpeed, maxSpeed);
+    	
+    	if (value <= 0.0) {
+    		return 0.0;
+    	}
+    	return value;
+    }
+        
     
     /**
      * Sets up the drivetrain motors to have a master that is controlled by the 
@@ -331,9 +346,5 @@ public class Drivetrain extends PIDSubsystem {
     	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
     	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());			// Sonar distance reading
     	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());		// Encoder reading
-//    	SmartDashboard.putBoolean("Over Scoring Platform", isOpticalSensorWhite());
-    	
-//    	SmartDashboard.putNumber("Move By IR Value", moveByIR(6.0,
-//            		0.0, 0.9, 0.1));
     }
 }

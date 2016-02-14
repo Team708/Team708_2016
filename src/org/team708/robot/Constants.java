@@ -27,7 +27,7 @@ public final class Constants {
 	public static final double DRIVE_MOTOR_MAX_SPEED 		= 0.4;
 	public static final double ROTATE_MOTOR_MAX_SPEED 		= 0.4;
 	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 0.6;
-	
+	public static final double VISION_ROTATE_MOTOR_SPEED	= 0.5;
 
 	/*
 	 * Smart Dashboard

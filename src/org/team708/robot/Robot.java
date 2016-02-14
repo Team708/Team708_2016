@@ -13,6 +13,7 @@ import org.team708.robot.commands.autonomous.DoNothing;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.LowBar;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
+import org.team708.robot.commands.autonomous.DriveToTarget;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
 //import org.team708.robot.subsystems.Intake;
@@ -99,7 +100,7 @@ public class Robot extends IterativeRobot {
     }
 
     /**
-     * Runs when teleop mode initialises
+     * Runs when teleop mode initializes
      */
     public void teleopInit() {
 	    // This makes sure that the autonomous stops running when
@@ -155,10 +156,11 @@ public class Robot extends IterativeRobot {
      * Adds every autonomous mode to the selection box and adds the box to the Smart Dashboard
      */
     private void queueAutonomousModes() {
-		autonomousMode.addObject("1) Drive in Square", new DriveInSquare());
-		autonomousMode.addObject("2) Low Bar", new LowBar());
-		autonomousMode.addObject("3) Low Bar Shoot High", new LowBarShootHigh());
-		autonomousMode.addObject("4) Do Nothing", new DoNothing());
+		autonomousMode.addObject("Find Target", new DriveToTarget());
+		autonomousMode.addObject("Drive in Square", new DriveInSquare());
+		autonomousMode.addObject("Low Bar", new LowBar());
+		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
+		autonomousMode.addObject("Do Nothing", new DoNothing());
 
 		// make a selection table to select partial auto routines
 		//
