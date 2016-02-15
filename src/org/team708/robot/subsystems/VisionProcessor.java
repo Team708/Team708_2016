@@ -65,12 +65,12 @@ public class VisionProcessor extends Subsystem {
 	public void processData() {
 		try {
 			targetX= roboRealmInfo.getNumber("cx", 0);
-			upper_left_x = (double) roboRealmInfo.getNumber("p1x");
-            upper_left_y = (double) roboRealmInfo.getNumber("p1y");
-            upper_right_x = (double)roboRealmInfo.getNumber("p2x");
-            upper_right_y = (double)roboRealmInfo.getNumber("p2y");
-            lower_left_x = (double) roboRealmInfo.getNumber("p3x");
-            lower_left_y = (double) roboRealmInfo.getNumber("p3y");
+//			upper_left_x = (double) roboRealmInfo.getNumber("p1x");
+//            upper_left_y = (double) roboRealmInfo.getNumber("p1y");
+//            upper_right_x = (double)roboRealmInfo.getNumber("p2x");
+//            upper_right_y = (double)roboRealmInfo.getNumber("p2y");
+//            lower_left_x = (double) roboRealmInfo.getNumber("p3x");
+//            lower_left_y = (double) roboRealmInfo.getNumber("p3y");
 			
 			if (targetX > 0) {
 				hasTarget = true;
