@@ -1,5 +1,4 @@
 package org.team708.robot.commands.shooter;
-
 import org.team708.robot.Constants;
 import org.team708.robot.OI;
 import org.team708.robot.Robot;
@@ -8,6 +7,7 @@ import org.team708.robot.util.Gamepad;
 import org.team708.robot.commands.shooter.Fire;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -34,7 +34,8 @@ public class SpinShooter extends Command {
 
     	
 //    	if (distance < 3 && Lpressed == true) {
-    		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);
+//    		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);
+		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);
 //    			
 //    	}
 //    	else {
@@ -46,15 +47,16 @@ public class SpinShooter extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    		if (Fire.fire_pressed)
-    			return(false);
-    		else
-    			return(true);
+    	if (OI.fire.get()) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.manualSpeed(Constants.MOTOR_OFF);
     }
 
     // Called when another command which requires one or more of the same

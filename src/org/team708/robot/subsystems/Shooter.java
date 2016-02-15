@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
  * This class represents the Shooter, the part of the robot that takes
  * the ball from the loader wheel and uses a flywheel to launch it.
- * @author Nick Iannarone, Jillan Wang, Thomas Zhao
+ * @author Nick Iannarone, Jialin Wang, Thomas Zhao
  */
 public class Shooter extends Subsystem {
 	// Put methods for controlling this subsystem here. Call these
@@ -24,7 +24,7 @@ public class Shooter extends Subsystem {
 	
 	private Encoder shooterEncoder;			// Encoder for intermediate travel
 
-	private Talon shooterMotor;
+	public static Talon shooterMotor;
 	/**
 	 * Constructor
 	 */

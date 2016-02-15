@@ -24,11 +24,7 @@ public class Intake extends Subsystem {
       * Constructor
       */
 	public Intake() {
-		
 	intakeMotor = new Relay(RobotMap.INTAKE_MOTOR);
-		
-		  
-		
 	}
 	
 	public void initDefaultCommand() {
@@ -37,7 +33,6 @@ public class Intake extends Subsystem {
     }
 	
 	public void moveMotor(Value value) {
-		
 		intakeMotor.set(value);
 	}
     
@@ -45,7 +40,6 @@ public class Intake extends Subsystem {
      * Sends data about the subsystem to the Smart Dashboard
      */
     public void sendToDashboard() {
-    	
     }
     
     

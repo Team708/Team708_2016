@@ -3,6 +3,7 @@ package org.team708.robot.commands.shooter;
 import org.team708.robot.Constants;
 import org.team708.robot.OI;
 import org.team708.robot.Robot;
+import org.team708.robot.subsystems.Shooter;
 import org.team708.robot.util.Gamepad;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,11 +20,9 @@ public class Fire extends Command {
     	requires(Robot.loader);
     }
     
-public static boolean fire_pressed = false;
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Fire.fire_pressed = false;
     	//if the spin shooter button is not activated, cancel
 //    	if (OI.spinShooter.get() == false){ 
 //    		cancel();
@@ -37,9 +36,11 @@ public static boolean fire_pressed = false;
     	//if the spinshooter button is activated, and the fire button is activated, load the ball
 //    	if (OI.spinShooter.get() == true) {
 //    		if (OI.fire.get() == true) {
-    			Robot.loader.manualMove(Constants.LOADER_MOTOR_FORWARD);
-    	    	new WaitCommand(2.0);
-    	    	fire_pressed = true;
+    	if(Shooter.shooterMotor.getSpeed() == Constants.SHOOTER_MOTOR_FORWARD) {
+    		
+    		Robot.loader.manualMove(Constants.LOADER_MOTOR_FORWARD);
+    	}
+
 //    		}
 //    	}
 //    	
@@ -49,8 +50,12 @@ public static boolean fire_pressed = false;
     protected boolean isFinished() {
     	//stops the loop after ball leaves holding position (thus, is shot out of the robot)
 //    	if (Robot.loader.irGetDistance()> 3){
-
+    	if(!OI.fire.get()) {
     	return true;
+    	}
+    	else {
+    		return(false);
+    	}
 //    	}
     	
 //    	return(false);
@@ -58,8 +63,9 @@ public static boolean fire_pressed = false;
 
     // Called once after isFinished returns true
     protected void end() {
-    	if (fire_pressed)
-    		Robot.loader.stop();
+    	new WaitCommand(1.0);
+    	Robot.loader.manualMove(Constants.MOTOR_OFF);
+    	Robot.shooter.manualSpeed(Constants.MOTOR_OFF);
     }
 
     // Called when another command which requires one or more of the same

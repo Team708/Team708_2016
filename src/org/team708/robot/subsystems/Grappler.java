@@ -40,7 +40,7 @@ public class Grappler extends Subsystem {
 		lowerSwitch = new DigitalInput(RobotMap.grapplerLowerSwitch);
 		// Initializes the motor
 		grapplerMotorMaster = new CANTalon(RobotMap.grapplerMotorMaster);
-		grapplerMotorSlave = new CANTalon (RobotMap.grapplerMotorSlave);
+		grapplerMotorSlave 	= new CANTalon (RobotMap.grapplerMotorSlave);
 		
 		setupMasterSlave();
 	}
@@ -89,11 +89,10 @@ public class Grappler extends Subsystem {
 	 * Sends data to the Smart Dashboard
 	 */
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Lower Switch", getLowerSwitch());
-		SmartDashboard.putBoolean("Upper Switch", getUpperSwitch());
+		SmartDashboard.putBoolean("Grappler Lower Switch", getLowerSwitch());
+		SmartDashboard.putBoolean("Grappler Upper Switch", getUpperSwitch());
 		
 //		if (Constants.DEBUG) {
-
 //		}
 	}
 }
