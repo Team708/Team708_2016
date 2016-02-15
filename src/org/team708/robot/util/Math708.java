@@ -130,6 +130,17 @@ public class Math708 {
     	return makeWithin(getPercentError(currentValue, goalValue), minimumValue, maximumValue);
     }
     
+    public static double convergeOnSpeed(double speed){
+    	double converge = 0;
+    	int arbitraryNumber = 1000;
+    	
+    	for (int i = 0; i <= arbitraryNumber; i -= 1){
+    		converge = speed * (i/1000);
+    	}
+    	
+    	return converge;
+    }
+    
     /**
      * Checks if a sensor reading is within a threshold of a desired value
      * @param currentValue

@@ -14,6 +14,7 @@ public class RotateAndDriveToTarget extends Command {
 	private double 		minValue;
 	private double 		maxValue;
 	private double		moveSpeed;
+	private double		rotate;
 	
 	/**
 	 * Constructor
@@ -29,6 +30,7 @@ public class RotateAndDriveToTarget extends Command {
         this.tolerance = tolerance;
         this.minValue = minValue;
         this.maxValue = maxValue;
+        
     }
 
     // Called just before this Command runs the first time
@@ -38,6 +40,7 @@ public class RotateAndDriveToTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	rotate = Robot.visionProcessor.getRotate();
     	Robot.visionProcessor.processData();
     	if (Robot.visionProcessor.isHasTarget()){
     	moveSpeed = Robot.drivetrain.moveByUltrasonic(targetDistance, minValue, maxValue, tolerance);
@@ -45,7 +48,7 @@ public class RotateAndDriveToTarget extends Command {
     	else {
     		moveSpeed = 0.0;
     	}
-    	Robot.drivetrain.haloDrive(moveSpeed, Robot.visionProcessor.getRotate(), true);
+    	Robot.drivetrain.haloDrive(moveSpeed, rotate, true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
