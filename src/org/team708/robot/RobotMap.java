@@ -17,7 +17,7 @@ public class RobotMap {
 	public static final int operatorGamepad = 2;
 	
 	// PWM Ports
-	public static final int INTAKE_PWM	 	= 0;
+//	public static final int 			 	= 0;
 	public static final int LOADER_PWM	 	= 1;
 	public static final int SHOOTER_PWM	 	= 2;
 //	public static final int  				= 3;
@@ -39,8 +39,8 @@ public class RobotMap {
 	public static final int pivotArmMotorSlave  = 32;
 	
 	// Grappler Grabber CAN Device IDs
-	public static final int grapplerMoterMaster	= 41;
-	public static final int grapplerMoterSlave 	= 42;
+	public static final int grapplerMotorMaster	= 41;
+	public static final int grapplerMotorSlave 	= 42;
 	
 	// Digital IO
 	public static final int drivetrainEncoderARt		= 0;
@@ -54,6 +54,11 @@ public class RobotMap {
 	public static final int grapplerUpperSwitch 		= 8;
 	public static final int grapplerLowerSwitch			= 9;
 	
+	// RELAY
+	public static final int INTAKE_MOTOR 	= 0;
+//	public static final int 			 	= 1;
+//	public static final int 			 	= 2;
+//	public static final int 			 	= 3;
 	
 	//Analog sesnor IDs
 	public static final int DTSonar				= 1;
