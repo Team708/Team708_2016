@@ -108,7 +108,8 @@ public class VisionProcessor extends Subsystem {
 	public double getMove(double targetAmount) {
 		double move;
 		
-		if (hasTarget) {
+		if (hasTarget) 
+		{
 			double ratio = targetWidth / imageWidth;
 			
 			double difference = ratio - targetAmount;
