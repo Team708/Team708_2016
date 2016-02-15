@@ -9,19 +9,26 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class RotateAndDriveToTarget extends Command {
 	
-	public double targetAmount;
-
+	private double 		targetDistance;
+	private double 		tolerance;
+	private double 		minValue;
+	private double 		maxValue;
+	private double		moveSpeed;
+	
 	/**
 	 * Constructor
 	 * @param rotationSpeed
 	 * @param goalDegrees
 	 */
-    public RotateAndDriveToTarget(double targetAmount) {
+    public RotateAndDriveToTarget(int targetDistance, double minValue, double maxValue, double tolerance) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
         requires(Robot.visionProcessor);
         
-        this.targetAmount = targetAmount;
+        this.targetDistance = targetDistance;
+        this.tolerance = tolerance;
+        this.minValue = minValue;
+        this.maxValue = maxValue;
     }
 
     // Called just before this Command runs the first time
@@ -31,7 +38,8 @@ public class RotateAndDriveToTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.haloDrive(Robot.visionProcessor.getMove(targetAmount), Robot.visionProcessor.getRotate(), true);
+    	moveSpeed = Robot.drivetrain.moveByUltrasonic(targetDistance, minValue, maxValue, tolerance);
+    	Robot.drivetrain.haloDrive(moveSpeed, Robot.visionProcessor.getRotate(), true);
     }
 
     // Make this return true when this Command no longer needs to run execute()

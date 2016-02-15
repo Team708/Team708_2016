@@ -46,6 +46,9 @@ public class VisionProcessor extends Subsystem {
     private double lower_left_y = 0;
     private double radius = 0;
     private double blob_count = 0;
+    
+    private double lowerLengthX;
+    private double setProportion;
     	
     //daisy says to set this to 43.5 deg
     private final double cameraFOVRads = Math.toRadians(47);
@@ -61,7 +64,14 @@ public class VisionProcessor extends Subsystem {
 	
 	public void processData() {
 		try {
-			targetX= roboRealmInfo.getNumber("hcx", 0);
+			targetX= roboRealmInfo.getNumber("cx", 0);
+			upper_left_x = (double) roboRealmInfo.getNumber("p1x");
+            upper_left_y = (double) roboRealmInfo.getNumber("p1y");
+            upper_right_x = (double)roboRealmInfo.getNumber("p2x");
+            upper_right_y = (double)roboRealmInfo.getNumber("p2y");
+            lower_left_x = (double) roboRealmInfo.getNumber("p3x");
+            lower_left_y = (double) roboRealmInfo.getNumber("p3y");
+			
 			if (targetX > 0) {
 				hasTarget = true;
 			} else {
@@ -132,6 +142,10 @@ public class VisionProcessor extends Subsystem {
 		}
 		
 		return move;
+	}
+	
+	public double distanceToTarget(){
+		return lowerLengthX * setProportion;
 	}
 	
 	/**

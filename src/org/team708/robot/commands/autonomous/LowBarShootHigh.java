@@ -2,6 +2,7 @@ package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.AutoConstants;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
+import org.team708.robot.commands.drivetrain.RotateAndDriveToTarget;
 import org.team708.robot.commands.drivetrain.TurnToDegrees;
 
 
@@ -13,7 +14,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LowBarShootHigh extends CommandGroup {
 	
 	public  LowBarShootHigh() {
-		//addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_TARGET_DISTANCE));
+		
+		
+		addSequential(new DriveStraightToEncoderDistance(172));
+		addSequential(new RotateAndDriveToTarget(48, 0.1, 0.4, 5));
     	//addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.NINETY_DEGREE_TURN));
 
    
