@@ -39,8 +39,8 @@ public class RobotMap {
 	public static final int pivotArmMotorSlave  = 32;
 	
 	// Grappler Grabber CAN Device IDs
-	public static final int grapplerMoterMaster	= 41;
-	public static final int grapplerMoterSlave 	= 42;
+	public static final int grapplerMotorMaster	= 41;
+	public static final int grapplerMotorSlave 	= 42;
 	
 	// Digital IO
 	public static final int drivetrainEncoderARt		= 0;
