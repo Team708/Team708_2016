@@ -68,35 +68,6 @@ public class VisionProcessor extends Subsystem {
 				hasTarget = false;
 			}
 			
-//            NetworkTable table = NetworkTable.getTable("vision");
-//            upper_left_x = (double) table.getNumber("p1x");
-//            upper_left_y = (double) table.getNumber("p1y");
-//            upper_right_x = (double)table.getNumber("p2x");
-//            upper_right_y = (double)table.getNumber("p2y");
-//            lower_left_x = (double) table.getNumber("p3x");
-//            lower_left_y = (double) table.getNumber("p3y");
-//            center_x = (double) table.getNumber("cx");
-//            radius = (double) table.getNumber("r");
-//            hasBall = table.getNumber("ball") > 0;
-//            blob_count = (double) table.getNumber("count");
-//            
-//            
-//            //calculate aspect ratio of observed target
-//            currentAspectRatio = (upper_right_x - upper_left_x) / (upper_left_y - lower_left_y);
-//            
-//            //make sure that target aspect ratio is within tolerance
-//            //if it isn't, we really don't have a target
-//            if(Math.abs(currentAspectRatio - highGoalAspectRatio) > aspectRatioTolerance || blob_count < 1) {
-//                isHighGoal = false;
-//            } else {
-//                isHighGoal = true;
-//            }
-//            
-//            distanceToTarget = (ballDiameterIn * imageWidthPx)/
-//                                    ((2* radius) * Math.tan(cameraFOVRads/2) * 2);
-//            
-//            //calculate difference between center of target and center of screen
-//            differencePx = (int)(center_x - (imageWidthPx / 2.0));
             
 		} catch (TableKeyNotDefinedException e) {
 			e.printStackTrace();
@@ -106,7 +77,8 @@ public class VisionProcessor extends Subsystem {
 	public double getRotate() {
 		double rotate;
 		
-		if (hasTarget) {
+		if (hasTarget) 
+		{
 			double difference = centerX - (targetX);
 			
 			if (Math.abs(difference) <= thresholdX) {
@@ -119,15 +91,19 @@ public class VisionProcessor extends Subsystem {
 				if (rotate >= 0.0) {
 					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
 				} else {
-					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
+					rotate = -Constants.VISION_ROTATE_MOTOR_SPEED;
 				}
 			}
-		} else {
+		}
+		
+		else {
 			rotate = 0.65;
 		}
 		
 		return rotate;
 	}
+	
+	//Returns how to move to get to target distance (targetAmount = target ratio)
 	
 	public double getMove(double targetAmount) {
 		double move;
