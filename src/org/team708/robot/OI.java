@@ -38,8 +38,8 @@ public class OI {
 	 * Operator Button Assignment
 	 */
 	// Shooter
-	private static final int SPIN_LOADER_BUTTON		= Gamepad.button_L_Shoulder;
-	private static final int SPIN_SHOOTER_BUTTON	= Gamepad.button_R_Shoulder;
+	private static final int SPIN_SHOOTER_BUTTON		= Gamepad.button_L_Shoulder;
+	private static final int SPIN_LOADER_BUTTON	= Gamepad.button_R_Shoulder;
 	
 	// ARM
 	private static final int OPERATE_ARM_BUTTON		= Gamepad.leftStick_Y;
@@ -86,7 +86,8 @@ public class OI {
 		 */
 		loaderSpinIn.whileHeld(new LoaderSpinIn());
 		loaderSpinOut.whileHeld(new LoaderSpinOut());
-		fire.whenPressed(new Fire());
-		spinShooter.whenActive(new SpinShooter());
+//		spinShooter.whileHeld(new Shooting());
+		spinShooter.whileHeld(new SpinShooter());
+		fire.whileHeld(new Fire());
 	}
 }
