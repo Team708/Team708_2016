@@ -21,7 +21,7 @@ public class OI {
 	
 	// Gamepads
 	public final static Gamepad driverGamepad 	= new Gamepad(RobotMap.driverGamepad);	// Driver gamepad
-	public final static Gamepad operatorGamepad 	= new Gamepad(RobotMap.operatorGamepad);// Operator gamepad
+	public final static Gamepad operatorGamepad = new Gamepad(RobotMap.operatorGamepad);// Operator gamepad
 	
 	// look in Gamepad.java for button constants
 	
@@ -38,12 +38,12 @@ public class OI {
 	 * Operator Button Assignment
 	 */
 	// Shooter
-	private static final int SPIN_LOADER_BUTTON		= Gamepad.button_L_Shoulder;
-	private static final int SPIN_SHOOTER_BUTTON	= Gamepad.button_R_Shoulder;
+	private static final int SPIN_LOADER_BUTTON		= Gamepad.button_R_Shoulder;
+	private static final int SPIN_SHOOTER_BUTTON	= Gamepad.button_L_Shoulder;
 	
 	// ARM
 	private static final int OPERATE_ARM_BUTTON		= Gamepad.leftStick_Y;
-	private static final int OPERATE_GRAPPLER_BUTTON	= Gamepad.rightStick_Y;
+	private static final int OPERATE_GRAPPLER_BUTTON= Gamepad.rightStick_X;
 	
 	// LOADER Buttons
 	public static final int LOADER_IN_BUTTON 	= Gamepad.button_X;
@@ -86,7 +86,8 @@ public class OI {
 		 */
 		loaderSpinIn.whileHeld(new LoaderSpinIn());
 		loaderSpinOut.whileHeld(new LoaderSpinOut());
-		fire.whenPressed(new Fire());
-		spinShooter.whenActive(new SpinShooter());
-	}
+
+		spinShooter.whileHeld(new SpinShooter());
+		fire.whileHeld(new Fire());
+		}
 }
