@@ -39,9 +39,10 @@ public class Arm extends Subsystem {
 		// Initializes the switches
 		upperSwitch = new DigitalInput(RobotMap.pivotArmUpperSwitch);
 		lowerSwitch = new DigitalInput(RobotMap.pivotArmLowerSwitch);
+
 		// Initializes the motor
 		pivotArmMotorMaster = new CANTalon(RobotMap.pivotArmMotorMaster);
-		pivotArmMotorSlave = new CANTalon (RobotMap.pivotArmMotorSlave);
+		pivotArmMotorSlave	= new CANTalon(RobotMap.pivotArmMotorSlave);
 		
 		setupMasterSlave();
 	}
@@ -93,12 +94,11 @@ public class Arm extends Subsystem {
 	 * Sends data to the Smart Dashboard
 	 */
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Lower Switch", getLowerSwitch());
-		SmartDashboard.putBoolean("Upper Switch", getUpperSwitch());
+		SmartDashboard.putBoolean("Arm Lower Switch", getLowerSwitch());
+		SmartDashboard.putBoolean("Arm Upper Switch", getUpperSwitch());
 
 		SmartDashboard.putNumber("Arm Angle", pot.getAngle());
 //		if (Constants.DEBUG) {
-
 //		}
 	}
 }
