@@ -97,20 +97,29 @@ public class VisionProcessor extends Subsystem {
 				difference = 0.0;
 			}
 			
+			//changes the lastSeenSide to positive or negative depending on last recorded difference
 			if (difference >= 0.0){
 				lastSeenSide = -1;
 			}
 			
 			rotate = difference / centerX;
 			
+			//makes vision rotate speed the max speed
+			if (Math.abs(rotate) > Constants.VISION_ROTATE_MOTOR_SPEED) {
+				rotate = Constants.VISION_ROTATE_MOTOR_SPEED * Math.signum(rotate);
+			}
+			
+			//keeps rotate as the speed so it slows down when approaching the center
 			if (Math.abs(rotate) < Constants.VISION_ROTATE_MOTOR_SPEED && Math.abs(rotate) != 0.0) {
 				if (rotate >= 0.0) {
+					//reverses the sign to turn left, when target is left
 					rotate = -rotate;
 				}
 			}
 		}
 		
 		else {
+			//rotates in lastSeenSide's direction (default is right) if loses/doesn't have target
 			rotate = 0.65 * lastSeenSide;
 		}
 		
