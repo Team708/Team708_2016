@@ -87,6 +87,7 @@ public class VisionProcessor extends Subsystem {
 	
 	public double getRotate() {
 		double rotate;
+		int lastSeenSide = 1; //1 is right, -1 is left
 		
 		if (hasTarget) 
 		{
@@ -96,19 +97,21 @@ public class VisionProcessor extends Subsystem {
 				difference = 0.0;
 			}
 			
+			if (difference >= 0.0){
+				lastSeenSide = -1;
+			}
+			
 			rotate = difference / centerX;
 			
 			if (Math.abs(rotate) < Constants.VISION_ROTATE_MOTOR_SPEED && Math.abs(rotate) != 0.0) {
 				if (rotate >= 0.0) {
-					rotate = -Constants.VISION_ROTATE_MOTOR_SPEED;
-				} else {
-					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
+					rotate = -rotate;
 				}
 			}
 		}
 		
 		else {
-			rotate = 0.65;
+			rotate = 0.65 * lastSeenSide;
 		}
 		
 		return rotate;

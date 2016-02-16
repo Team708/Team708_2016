@@ -130,11 +130,23 @@ public class Math708 {
     	return makeWithin(getPercentError(currentValue, goalValue), minimumValue, maximumValue);
     }
     
+    public double accelerateToSpeed(double maxSpeed, double accel){
+    	double speed = 0;
+    	
+    	speed += accel;
+    	
+    	if (speed >= maxSpeed){
+    		speed = maxSpeed;
+    	}
+    	
+    	return speed;
+    }
+    
     public static double convergeOnSpeed(double speed){
     	double converge = 0;
     	int arbitraryNumber = 1000;
     	
-    	for (int i = 0; i <= arbitraryNumber; i++){
+    	for (int i = 0; i <= arbitraryNumber;){
     		converge = speed * (i/arbitraryNumber);
     		
     		return converge;
