@@ -1,6 +1,7 @@
 package org.team708.robot.commands.drivetrain;
 
 import org.team708.robot.Robot;
+import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -53,9 +54,9 @@ public class RotateAndDriveToTarget extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (Robot.drivetrain.getSonarDistance() < 15 && Robot.drivetrain.getSonarDistance() > 5){
-    		return true;
-    	}
+//    	if (Robot.drivetrain.getSonarDistance() < 54 && Robot.drivetrain.getSonarDistance() > 34){
+//    		return true;
+//    	}
     	return false;
     }
 

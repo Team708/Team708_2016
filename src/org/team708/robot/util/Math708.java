@@ -134,11 +134,13 @@ public class Math708 {
     	double converge = 0;
     	int arbitraryNumber = 1000;
     	
-    	for (int i = 0; i <= arbitraryNumber; i -= 1){
-    		converge = speed * (i/1000);
+    	for (int i = 0; i <= arbitraryNumber; i++){
+    		converge = speed * (i/arbitraryNumber);
+    		
+    		return converge;
     	}
     	
-    	return converge;
+    	return speed;
     }
     
     /**

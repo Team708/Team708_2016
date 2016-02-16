@@ -3,6 +3,7 @@ package org.team708.robot.subsystems;
 //import org.team708.robot.commands.visionProcessor.ProcessData;
 
 import org.team708.robot.Constants;
+import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -99,9 +100,9 @@ public class VisionProcessor extends Subsystem {
 			
 			if (Math.abs(rotate) < Constants.VISION_ROTATE_MOTOR_SPEED && Math.abs(rotate) != 0.0) {
 				if (rotate >= 0.0) {
-					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
-				} else {
 					rotate = -Constants.VISION_ROTATE_MOTOR_SPEED;
+				} else {
+					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
 				}
 			}
 		}
