@@ -130,22 +130,6 @@ public class Math708 {
     	return makeWithin(getPercentError(currentValue, goalValue), minimumValue, maximumValue);
     }
     
-    /**
-     * Gets the percent error of a sensor reading with a desired value,
-     * but clips it to prevent the error being too low to overcome torque
-     * or so high that the error proposes mechanical issues. This has sign changes.
-     * @param currentValue
-     * @param goalValue
-     * @param minimumValue
-     * @param maximumValue
-     * @return
-     */
-    public static double getSignedClippedPercentError(double currentValue, double goalValue, double minimumValue, double maximumValue) {
-    	//gets positive or negative
-    	double sign = Math.signum(getPercentError(currentValue, goalValue));
-    	return makeWithin(getPercentError(currentValue, goalValue), minimumValue, maximumValue) * sign;
-    }
-    
     public double accelerateToSpeed(double maxSpeed, double accel){
     	double speed = 0;
     	

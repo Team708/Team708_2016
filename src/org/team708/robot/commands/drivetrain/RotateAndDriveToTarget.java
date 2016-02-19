@@ -41,28 +41,23 @@ public class RotateAndDriveToTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.visionProcessor.processData();
-
     	rotate = Robot.visionProcessor.getRotate();
-    	
-    	if (Robot.visionProcessor.isHasTarget() == true){
-    		moveSpeed = 1;
+    	Robot.visionProcessor.processData();
+    	if (Robot.visionProcessor.isHasTarget()){
+    	moveSpeed = Robot.drivetrain.moveByUltrasonic(targetDistance, minValue, maxValue, tolerance);
     	}
     	else {
     		moveSpeed = 0.0;
     	}
-    	
     	Robot.drivetrain.haloDrive(moveSpeed, rotate, true);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if ( Robot.drivetrain.getSonarDistance() <= 44  && Robot.visionProcessor.isHasTarget()){
-   		return true;
-    	}
-    	
+//    	if (Robot.drivetrain.getSonarDistance() < 54 && Robot.drivetrain.getSonarDistance() > 34){
+//    		return true;
+//    	}
     	return false;
-    	
     }
 
     // Called once after isFinished returns true
