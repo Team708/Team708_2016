@@ -22,7 +22,7 @@ public class LowBarShootHigh extends CommandGroup {
 		
 		//addSequential(new DriveStraightToEncoderDistance(172));
 //		addSequential(new DriveStraightForTime(0.6, 2));
-		addSequential(new RotateAndDriveToTarget(44, 0.6, 1, 10));
+		addSequential(new RotateAndDriveToTarget(44));
 //		addSequential(new AutoShoot());
     	//addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.NINETY_DEGREE_TURN));
 

@@ -1,7 +1,9 @@
 package org.team708.robot.commands.autonomous;
+import edu.wpi.first.wpilibj.Preferences;
 
 import org.team708.robot.AutoConstants;
 import org.team708.robot.Constants;
+import org.team708.robot.Robot;
 import org.team708.robot.commands.arm.ArmDown;
 import org.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
@@ -16,15 +18,18 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class DoEverything extends CommandGroup {
 	
-	public int defenceNumber;
-	public int turnDirection;//1 for right, 0 for straight, -1 for left
-	public double driveThroughDefence = 3;
+	Preferences prefs;
+
+	int defenceNumber = prefs.getInt("DefenceNumbers", 0);
+	int turnDirection = prefs.getInt("TurnDirection", 0);
+	double driveThroughDefenceTime = prefs.getDouble("TimeThroughDefence", 3);
 	
-	public  DoEverything() {
+	public  DoEverything(){
+		
 		addSequential(new ArmDown()); //always gonna happen
 		addSequential(new DriveStraightToEncoderDistance(50 * defenceNumber, Constants.DRIVE_MOTOR_MAX_SPEED, true));
 		addSequential(new TurnToDegrees(Constants.ROTATE_MOTOR_MAX_SPEED, 90 * turnDirection));
-		addSequential(new DriveStraightForTime(1.0, driveThroughDefence));
+		addSequential(new DriveStraightForTime(1.0, driveThroughDefenceTime));
 		addSequential(new RotateAndDriveToTarget(44));
 		addSequential(new AutoShoot());
 		
@@ -45,4 +50,6 @@ public class DoEverything extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     }
+	
+	
 }
