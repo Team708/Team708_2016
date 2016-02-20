@@ -55,10 +55,15 @@ public class RotateAndDriveToTarget extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 
-    	if (Robot.drivetrain.getSonarDistance() < 44  && Robot.visionProcessor.isHasTarget()){
+    	if (Robot.drivetrain.getSonarDistance() < 44  && Robot.visionProcessor.wasCentered()){
     		return true;
     	}
+    	else if (Robot.drivetrain.getSonarDistance() < 44 && Robot.visionProcessor.isHasTarget()) {
+    		return true;
+    	}
+    	
     	return false;
+    	
     }
 
     // Called once after isFinished returns true

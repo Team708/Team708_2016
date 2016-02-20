@@ -19,6 +19,7 @@ public class VisionProcessor extends Subsystem {
 	private NetworkTable roboRealmInfo;
 	private NumberArray targetCrosshair;
 	private boolean hasTarget;
+	private boolean wasCentered;
 	
 	private final double 	imageWidth = 320;
 	private final double 	targetWidth = 18; //width of target in inches
@@ -97,6 +98,10 @@ public class VisionProcessor extends Subsystem {
 			if (Math.abs(difference) <= thresholdX) {
 				difference = 0.0;
 				rotate = 0.0;
+				wasCentered = true;
+			}
+			else if (Math.abs(difference) > thresholdX) {
+				wasCentered = false;
 			}
 			
 			//changes the lastSeenSide to positive or negative depending on last recorded difference
@@ -128,6 +133,7 @@ public class VisionProcessor extends Subsystem {
 		else {
 			//rotates in lastSeenSide's direction (default is right) if loses/doesn't have target
 			rotate = 0.5 * lastSeenSide;
+			
 		}
 		
 		return rotate;
@@ -176,9 +182,13 @@ public class VisionProcessor extends Subsystem {
 		return hasTarget;
 	}
 	
+	public boolean wasCentered() {
+		return wasCentered;
+	}
 
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("See Target", isHasTarget());
+		SmartDashboard.putBoolean("Was Centered", wasCentered());
 		SmartDashboard.putNumber("Center of Target", targetX);
 	}
 
