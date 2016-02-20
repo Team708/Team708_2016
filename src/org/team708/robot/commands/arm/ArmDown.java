@@ -13,19 +13,13 @@ public class ArmDown extends Command {
 	
 	private boolean isAtLimit;
 	
-	private boolean useSmoothing;
-	
 	private double moveSpeed = Constants.MOTOR_REVERSE;
 
-    public ArmDown() {
-        this(false);
-    }
     
-    public ArmDown(boolean useSmoothing) {
+    public ArmDown() {
     	// Use requires() here to declare subsystem dependencies
     	requires(Robot.arm);
     	
-    	this.useSmoothing = useSmoothing;
     }
 
     // Called just before this Command runs the first time
@@ -52,11 +46,7 @@ public class ArmDown extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	if (Robot.arm.getLowerSwitch()) {
-    		
-    	}
     	Robot.arm.stop();
-
     }
 
     // Called when another command which requires one or more of the same

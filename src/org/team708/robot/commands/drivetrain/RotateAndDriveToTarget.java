@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateAndDriveToTarget extends Command {
 	
 	private double 		targetDistance;
-	private double 		tolerance;
-	private double 		minValue;
-	private double 		maxValue;
 	private double		moveSpeed;
 	private double		rotate;
 	
@@ -22,16 +19,12 @@ public class RotateAndDriveToTarget extends Command {
 	 * @param rotationSpeed
 	 * @param goalDegrees
 	 */
-    public RotateAndDriveToTarget(int targetDistance, double minValue, double maxValue, double tolerance) {
+    public RotateAndDriveToTarget(double targetDistance) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
         requires(Robot.visionProcessor);
         
         this.targetDistance = targetDistance;
-        this.tolerance = tolerance;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-        
     }
 
     // Called just before this Command runs the first time
@@ -41,8 +34,8 @@ public class RotateAndDriveToTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	rotate = Robot.visionProcessor.getRotate();
     	Robot.visionProcessor.processData();
+    	rotate = Robot.visionProcessor.getRotate();
     	if (Robot.visionProcessor.isHasTarget()){
     		moveSpeed = 1.0;
     	}
@@ -55,10 +48,10 @@ public class RotateAndDriveToTarget extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 
-    	if (Robot.drivetrain.getSonarDistance() < 44  && Robot.visionProcessor.wasCentered()){
+    	if (Robot.drivetrain.getSonarDistance() < targetDistance  && Robot.visionProcessor.wasCentered()){
     		return true;
     	}
-    	else if (Robot.drivetrain.getSonarDistance() < 44 && Robot.visionProcessor.isHasTarget()) {
+    	else if (Robot.drivetrain.getSonarDistance() < targetDistance && Robot.visionProcessor.isHasTarget()) {
     		return true;
     	}
     	
