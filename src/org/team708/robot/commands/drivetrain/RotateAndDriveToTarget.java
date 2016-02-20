@@ -44,7 +44,7 @@ public class RotateAndDriveToTarget extends Command {
     	rotate = Robot.visionProcessor.getRotate();
     	Robot.visionProcessor.processData();
     	if (Robot.visionProcessor.isHasTarget()){
-    	moveSpeed = Robot.drivetrain.moveByUltrasonic(targetDistance, minValue, maxValue, tolerance);
+    		moveSpeed = 1.0;
     	}
     	else {
     		moveSpeed = 0.0;
@@ -54,9 +54,10 @@ public class RotateAndDriveToTarget extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-//    	if (Robot.drivetrain.getSonarDistance() < 54 && Robot.drivetrain.getSonarDistance() > 34){
-//    		return true;
-//    	}
+
+    	if (Robot.drivetrain.getSonarDistance() < 44  && Robot.visionProcessor.isHasTarget()){
+    		return true;
+    	}
     	return false;
     }
 
