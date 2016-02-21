@@ -18,7 +18,6 @@ public class RobotMap {
 	
 	// PWM Ports
 //	public static final int 			 	= 0;
-	public static final int LOADER_PWM	 	= 1;
 	public static final int SHOOTER_PWM	 	= 2;
 //	public static final int  				= 3;
 //	public static final int  				= 4;
@@ -33,6 +32,9 @@ public class RobotMap {
 	public static final int drivetrainLeftMotorSlave   = 12;
 	public static final int drivetrainRightMotorMaster = 13;
 	public static final int drivetrainRightMotorSlave  = 14;
+	
+
+	public static final int loaderMotor	 	= 21;
 	
 	// Pivot Arm CAN Device ID
 	public static final int pivotArmMotor	= 31;
