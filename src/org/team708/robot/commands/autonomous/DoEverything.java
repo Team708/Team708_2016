@@ -20,12 +20,12 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
  */
 public class DoEverything extends CommandGroup {
 	
-
+	double turnDirection;
 	
 	
 //	public  DoEverything(double defenceNumber, double turnDirection, double driveThroughDefenceTime){
-	public  DoEverything(double turnDirection){
-		
+	public  DoEverything(){
+		turnDirection = Robot.turnDirection;
 	//	addSequential(new ArmDown()); //always gonna happen
 	//	addSequential(new DriveStraightToEncoderDistance(50 * defenceNumber, Constants.DRIVE_MOTOR_MAX_SPEED, true));
 		

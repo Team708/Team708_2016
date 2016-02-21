@@ -53,7 +53,7 @@ public class Arm extends Subsystem {
 	 * @return At upper limit
 	 */
 	public boolean getUpperSwitch() {
-		return !upperSwitch.get();   // not because default is closed, stops if circuit is broken
+		return false;// !upperSwitch.get();   // not because default is closed, stops if circuit is broken
 	}
 	
 	/**
@@ -61,7 +61,7 @@ public class Arm extends Subsystem {
 	 * @return At lower limit
 	 */
 	public boolean getLowerSwitch() {
-		return !lowerSwitch.get(); // not because default is closed, stops if circuit is broken
+		return false;// !lowerSwitch.get(); // not because default is closed, stops if circuit is broken
 	}
 		
 	//Sets the motor speed to whatever the variable speed is

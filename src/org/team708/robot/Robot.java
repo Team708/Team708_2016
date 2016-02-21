@@ -13,6 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.team708.robot.commands.autonomous.DoEverything;
 import org.team708.robot.commands.autonomous.DoNothing;
+import org.team708.robot.commands.autonomous.Drive1TurnLeftShoot;
+import org.team708.robot.commands.autonomous.Drive1TurnRightShoot;
+import org.team708.robot.commands.autonomous.Drive2TurnLeftShoot;
+import org.team708.robot.commands.autonomous.Drive2TurnRightShoot;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.DriveForwardShoot;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
@@ -55,6 +59,7 @@ public class Robot extends IterativeRobot {
 	
     Command 			autonomousCommand;
     SendableChooser 	autonomousMode;
+    Preferences			prefs;
     
 
     /**
@@ -92,12 +97,16 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		sendStatistics();
+		prefs = Preferences.getInstance();
 	}
 
 	/**
 	 * Runs at the start of autonomous mode
 	 */
     	public void autonomousInit() {
+    	
+    	turnDirection = prefs.getDouble("TurnDirection", 4.0);
+    		
     	// schedule the autonomous command (example)   		
     	autonomousCommand = (Command)autonomousMode.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
@@ -176,12 +185,17 @@ public class Robot extends IterativeRobot {
     	
 		autonomousMode.addObject("Find Target", new DriveToTarget());
 		autonomousMode.addObject("Drive in Square", new DriveInSquare());
-		autonomousMode.addObject("Low Bar", new DriveForwardShoot());
+		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
 //		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
-		autonomousMode.addObject("Do Everything", new DoEverything(0));//need to change
-
+		autonomousMode.addObject("Do Everything", new DoEverything());//need to change
+		autonomousMode.addObject("Drive1TurnLeftShoot", new Drive1TurnLeftShoot());
+		autonomousMode.addObject("Drive2TurnLeftShoot", new Drive2TurnLeftShoot());
+		autonomousMode.addObject("Drive1TurnRightShoot", new Drive1TurnRightShoot());
+		autonomousMode.addObject("Drive2TurnRightShoot", new Drive2TurnRightShoot());
+		
+		
 		// make a selection table to select partial auto routines
 		//
 		//		0) lower arm

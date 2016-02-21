@@ -23,7 +23,7 @@ public class Drive2TurnLeftShoot extends CommandGroup {
 
 	
 	
-	public  Drive2TurnLeftShoot(double turnDirection){
+	public  Drive2TurnLeftShoot(){
 		
 		addSequential(new ArmDown()); //always gonna happen
 		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_DEFENSE_DISTANCE * AutoConstants.GO_TO_2_DEFENSES, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED, false));
