@@ -29,8 +29,6 @@ public class VisionProcessor extends Subsystem {
 	private double thresholdX = 20.0;
 	private double thresholdY = 0.1;
 	
-	
-	
     // High goal aspect ratio (11ft6in/3ft1in) in inches (3.729 repeating)
     private final double targetAspectRatio = 3.73; 
     
@@ -99,32 +97,30 @@ public class VisionProcessor extends Subsystem {
 				difference = 0.0;
 			}
 			
-			
 			//changes the lastSeenSide to positive or negative depending on last recorded difference
 			if (difference >= 0.0){
 				lastSeenSide = -1;
 			}
 			
-			rotate = Math708.getSignedClippedPercentError(targetX, centerX, 0.5, 1.0);
+			rotate = difference / centerX;
+			
 			//makes vision rotate speed the max speed
-//			if (Math.abs(rotate) > Constants.VISION_ROTATE_MOTOR_SPEED) {
-//				rotate = Constants.VISION_ROTATE_MOTOR_SPEED * Math.signum(rotate);
-//			}
+			if (Math.abs(rotate) > Constants.VISION_ROTATE_MOTOR_SPEED) {
+				rotate = Constants.VISION_ROTATE_MOTOR_SPEED * Math.signum(rotate);
+			}
 			
 			//keeps rotate as the speed so it slows down when approaching the center
-			//if (Math.abs(rotate) < Constants.VISION_ROTATE_MOTOR_SPEED && Math.abs(rotate) != 0.0) {
-//				if (rotate >= 0.0) {
-//					//reverses the sign to turn left, when target is left
-//					rotate = -Constants.VISION_ROTATE_MOTOR_SPEED;
-//				} else{
-//					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
-//				}
-			//}
+			if (Math.abs(rotate) < Constants.VISION_ROTATE_MOTOR_SPEED && Math.abs(rotate) != 0.0) {
+				if (rotate >= 0.0) {
+					//reverses the sign to turn left, when target is left
+					rotate = -rotate;
+				}
+			}
 		}
 		
 		else {
 			//rotates in lastSeenSide's direction (default is right) if loses/doesn't have target
-			rotate = 0.5 * lastSeenSide;
+			rotate = 0.65 * lastSeenSide;
 		}
 		
 		return rotate;
