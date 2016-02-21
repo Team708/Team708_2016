@@ -13,12 +13,12 @@ public final class Constants {
 	/*
 	 * Motor Controllers
 	 */
-	public static final Relay.Value INTAKE_FORWARD 		= Relay.Value.kForward;
-	public static final Relay.Value INTAKE_REVERSE 		= Relay.Value.kReverse;
-	public static final Relay.Value INTAKE_OFF 			= Relay.Value.kOff;
-	public static final Relay.Value LOADER_FORWARD 		= Relay.Value.kForward;
-	public static final Relay.Value LOADER_REVERSE 		= Relay.Value.kReverse;
-	public static final Relay.Value LOADER_OFF 			= Relay.Value.kOff;
+	public static final double INTAKE_FORWARD 		= 1.0;
+	public static final double INTAKE_REVERSE 		= -1.0;
+	public static final double INTAKE_OFF 			= 0.0;
+	public static final double LOADER_FORWARD 		= 1.0;
+	public static final double LOADER_REVERSE 		= -1.0;
+	public static final double LOADER_OFF 			= 0.0;
 
 	public static final double MOTOR_FORWARD 		= 0.3;
 	public static final double MOTOR_REVERSE 		= -0.3;

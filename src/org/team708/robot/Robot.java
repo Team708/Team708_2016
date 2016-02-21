@@ -2,6 +2,7 @@
 package org.team708.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -9,6 +10,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.team708.robot.commands.autonomous.DoEverything;
 import org.team708.robot.commands.autonomous.DoNothing;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.LowBar;
@@ -48,12 +50,14 @@ public class Robot extends IterativeRobot {
 
     Command 			autonomousCommand;
     SendableChooser 	autonomousMode;
+    
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    public void robotInit() {
+    public void robotInit() {    	
+    	
         statsTimer = new Timer();	// Initializes the timer for sending Smart Dashboard data
         statsTimer.start();		// Starts the timer for the Smart Dashboard
 
@@ -89,6 +93,7 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command (example)
     	autonomousCommand = (Command)autonomousMode.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
+        
     }
 
     /**
@@ -137,6 +142,9 @@ public class Robot extends IterativeRobot {
     /**
      * Sends data from each subsystem periodically as set by sendStatsIntervalSec
      */
+    
+    
+    
     private void sendStatistics() {
         if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) {
             statsTimer.reset();
@@ -161,7 +169,9 @@ public class Robot extends IterativeRobot {
 		autonomousMode.addObject("Low Bar", new LowBar());
 		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
-
+		autonomousMode.addObject("Do Everything", new DoEverything());
+		
+		
 		// make a selection table to select partial auto routines
 		//
 		//		0) lower arm

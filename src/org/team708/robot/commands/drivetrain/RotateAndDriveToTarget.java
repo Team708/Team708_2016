@@ -11,9 +11,6 @@ import edu.wpi.first.wpilibj.command.Command;
 public class RotateAndDriveToTarget extends Command {
 	
 	private double 		targetDistance;
-	private double 		tolerance;
-	private double 		minValue;
-	private double 		maxValue;
 	private double		moveSpeed;
 	private double		rotate;
 	
@@ -22,16 +19,12 @@ public class RotateAndDriveToTarget extends Command {
 	 * @param rotationSpeed
 	 * @param goalDegrees
 	 */
-    public RotateAndDriveToTarget(int targetDistance, double minValue, double maxValue, double tolerance) {
+    public RotateAndDriveToTarget(double targetDistance) {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.drivetrain);
         requires(Robot.visionProcessor);
         
         this.targetDistance = targetDistance;
-        this.tolerance = tolerance;
-        this.minValue = minValue;
-        this.maxValue = maxValue;
-        
     }
 
     // Called just before this Command runs the first time
@@ -41,10 +34,10 @@ public class RotateAndDriveToTarget extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	rotate = Robot.visionProcessor.getRotate();
     	Robot.visionProcessor.processData();
-    	if (Robot.visionProcessor.isHasTarget()){
-    	moveSpeed = Robot.drivetrain.moveByUltrasonic(targetDistance, minValue, maxValue, tolerance);
+    	rotate = Robot.visionProcessor.getRotate();
+    	if (Robot.visionProcessor.isHasTarget() || Robot.visionProcessor.wasCentered()){
+    		moveSpeed = 1.0;
     	}
     	else {
     		moveSpeed = 0.0;
@@ -54,10 +47,16 @@ public class RotateAndDriveToTarget extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-//    	if (Robot.drivetrain.getSonarDistance() < 54 && Robot.drivetrain.getSonarDistance() > 34){
-//    		return true;
-//    	}
+
+    	if (Robot.drivetrain.getSonarDistance() < targetDistance  && Robot.visionProcessor.wasCentered()){
+    		return true;
+    	}
+    	else if (Robot.drivetrain.getSonarDistance() < targetDistance && Robot.visionProcessor.isHasTarget()) {
+    		return true;
+    	}
+    	
     	return false;
+    	
     }
 
     // Called once after isFinished returns true

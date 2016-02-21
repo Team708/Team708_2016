@@ -15,16 +15,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Description
+ * Leaders
  * @Jialin Wang 
  * @Nick Iannarone
  * @Thomas Zhao
+ * @Alex Tysak
  */
 public class Loader extends Subsystem {
 	
 	private static IRSensor irSensor;
 	
-	private Talon loadMotor;
+	private CANTalon loadMotor;
 	/**
 	 * Constructor
 	 */
@@ -32,7 +33,7 @@ public class Loader extends Subsystem {
 		
 //		irSensor = new IRSensor(RobotMap.ballInIRSensor, IRSensor.GP2Y0A02YK0F); //Two models of infrared sensors in the IRSensor class
 		
-		loadMotor = new Talon(RobotMap.LOADER_PWM); //initializes the loading motor
+		loadMotor = new CANTalon(RobotMap.loaderMotor); //initializes the loading motor
 		
 	}
 	

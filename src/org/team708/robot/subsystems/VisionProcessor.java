@@ -19,6 +19,7 @@ public class VisionProcessor extends Subsystem {
 	private NetworkTable roboRealmInfo;
 	private NumberArray targetCrosshair;
 	private boolean hasTarget;
+	private boolean wasCentered;
 	
 	private final double 	imageWidth = 320;
 	private final double 	targetWidth = 18; //width of target in inches
@@ -26,7 +27,7 @@ public class VisionProcessor extends Subsystem {
 	private double 			centerX = 0.0;
 	private double 			targetX = 0.0;
 
-	private double thresholdX = 20.0;
+	private double thresholdX = 25.0;
 	private double thresholdY = 0.1;
 	
     // High goal aspect ratio (11ft6in/3ft1in) in inches (3.729 repeating)
@@ -91,10 +92,16 @@ public class VisionProcessor extends Subsystem {
 		
 		if (hasTarget) 
 		{
+			
 			double difference = centerX - (targetX);
 			
 			if (Math.abs(difference) <= thresholdX) {
 				difference = 0.0;
+				rotate = 0.0;
+				wasCentered = true;
+			}
+			else if (Math.abs(difference) > thresholdX) {
+				wasCentered = false;
 			}
 			
 			//changes the lastSeenSide to positive or negative depending on last recorded difference
@@ -102,25 +109,31 @@ public class VisionProcessor extends Subsystem {
 				lastSeenSide = -1;
 			}
 			
-			rotate = difference / centerX;
+//			rotate = difference / centerX;
+			rotate = Math708.getSignClippedPercentError(targetX, centerX, .5, 1.0);
+			
 			
 			//makes vision rotate speed the max speed
-			if (Math.abs(rotate) > Constants.VISION_ROTATE_MOTOR_SPEED) {
-				rotate = Constants.VISION_ROTATE_MOTOR_SPEED * Math.signum(rotate);
-			}
+//			if (Math.abs(rotate) > Constants.VISION_ROTATE_MOTOR_SPEED) {
+//				rotate = Constants.VISION_ROTATE_MOTOR_SPEED * Math.signum(rotate);
+//			}
 			
 			//keeps rotate as the speed so it slows down when approaching the center
-			if (Math.abs(rotate) < Constants.VISION_ROTATE_MOTOR_SPEED && Math.abs(rotate) != 0.0) {
+			/*
 				if (rotate >= 0.0) {
 					//reverses the sign to turn left, when target is left
-					rotate = -rotate;
+					rotate = -Constants.VISION_ROTATE_MOTOR_SPEED;
 				}
-			}
+				else {
+					rotate = Constants.VISION_ROTATE_MOTOR_SPEED;
+				}
+				*/
 		}
 		
 		else {
 			//rotates in lastSeenSide's direction (default is right) if loses/doesn't have target
-			rotate = 0.65 * lastSeenSide;
+			rotate = 0.5 * lastSeenSide;
+			
 		}
 		
 		return rotate;
@@ -169,9 +182,13 @@ public class VisionProcessor extends Subsystem {
 		return hasTarget;
 	}
 	
+	public boolean wasCentered() {
+		return wasCentered;
+	}
 
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("See Target", isHasTarget());
+		SmartDashboard.putBoolean("Was Centered", wasCentered());
 		SmartDashboard.putNumber("Center of Target", targetX);
 	}
 
