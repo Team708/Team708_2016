@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.team708.robot.commands.autonomous.DoEverything;
 import org.team708.robot.commands.autonomous.DoNothing;
 import org.team708.robot.commands.autonomous.DriveInSquare;
-import org.team708.robot.commands.autonomous.LowBar;
+import org.team708.robot.commands.autonomous.DriveForwardShoot;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
 import org.team708.robot.commands.autonomous.DriveToTarget;
 import org.team708.robot.subsystems.Drivetrain;
@@ -176,7 +176,7 @@ public class Robot extends IterativeRobot {
     	
 		autonomousMode.addObject("Find Target", new DriveToTarget());
 		autonomousMode.addObject("Drive in Square", new DriveInSquare());
-		autonomousMode.addObject("Low Bar", new LowBar());
+		autonomousMode.addObject("Low Bar", new DriveForwardShoot());
 		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
 //		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
