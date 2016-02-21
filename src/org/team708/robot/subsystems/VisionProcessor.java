@@ -5,6 +5,7 @@ package org.team708.robot.subsystems;
 import org.team708.robot.Constants;
 import org.team708.robot.util.Math708;
 
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.networktables2.type.NumberArray;
@@ -18,6 +19,7 @@ public class VisionProcessor extends Subsystem {
     
 	private NetworkTable roboRealmInfo;
 	private NumberArray targetCrosshair;
+	
 	private boolean hasTarget;
 	private boolean wasCentered;
 	
@@ -55,11 +57,12 @@ public class VisionProcessor extends Subsystem {
     //daisy says to set this to 43.5 deg
     private final double cameraFOVRads = Math.toRadians(47);
 //    private double cameraFOVRads = Math.toRadians(43.5);
+	double rotate;
     
 	public VisionProcessor() {
 		super("Vision Processor");
 		roboRealmInfo = NetworkTable.getTable("vision");
-
+		
 		targetCrosshair = new NumberArray();
 		centerX = imageWidth / 2;
 	}
@@ -87,13 +90,13 @@ public class VisionProcessor extends Subsystem {
 	}
 	
 	public double getRotate() {
-		double rotate;
 		int lastSeenSide = 1; //1 is right, -1 is left
 		
 		if (hasTarget) 
 		{
 			
 			double difference = centerX - (targetX);
+			rotate = Math708.getSignClippedPercentError(targetX, centerX, 0.5, 0.8);
 			
 			if (Math.abs(difference) <= thresholdX) {
 				difference = 0.0;
@@ -109,18 +112,11 @@ public class VisionProcessor extends Subsystem {
 				lastSeenSide = -1;
 			}
 			
-//			rotate = difference / centerX;
-			rotate = Math708.getSignClippedPercentError(targetX, centerX, .5, 1.0);
-			
-			
-			//makes vision rotate speed the max speed
-//			if (Math.abs(rotate) > Constants.VISION_ROTATE_MOTOR_SPEED) {
-//				rotate = Constants.VISION_ROTATE_MOTOR_SPEED * Math.signum(rotate);
-//			}
-			
-			//keeps rotate as the speed so it slows down when approaching the center
 			/*
-				if (rotate >= 0.0) {
+			rotate = difference / centerX;
+			
+			
+				if (rotate > 0.0) {
 					//reverses the sign to turn left, when target is left
 					rotate = -Constants.VISION_ROTATE_MOTOR_SPEED;
 				}
@@ -190,6 +186,7 @@ public class VisionProcessor extends Subsystem {
 		SmartDashboard.putBoolean("See Target", isHasTarget());
 		SmartDashboard.putBoolean("Was Centered", wasCentered());
 		SmartDashboard.putNumber("Center of Target", targetX);
+		SmartDashboard.putNumber("Rotation", rotate);
 	}
 
     public void initDefaultCommand() {

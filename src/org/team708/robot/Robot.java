@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -47,7 +48,11 @@ public class Robot extends IterativeRobot {
 	public static Arm 				arm;
 	public static OI 				oi;
 
-
+	public static double defenceNumber;
+	public static double turnDirection;
+	public static double driveThroughDefenceTime;
+ 
+	
     Command 			autonomousCommand;
     SendableChooser 	autonomousMode;
     
@@ -56,11 +61,13 @@ public class Robot extends IterativeRobot {
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
-    public void robotInit() {    	
+    public void robotInit() {
     	
         statsTimer = new Timer();	// Initializes the timer for sending Smart Dashboard data
         statsTimer.start();		// Starts the timer for the Smart Dashboard
-
+        
+		
+        
 // Subsystem Initialization
     drivetrain 		= new Drivetrain();
 	visionProcessor = new VisionProcessor();
@@ -76,6 +83,7 @@ public class Robot extends IterativeRobot {
 		
 	autonomousMode = new SendableChooser();	// Initializes the Autonomous selection box
 	queueAutonomousModes();			// Adds autonomous modes to the selection box
+        
     }
 	
     /**
@@ -90,16 +98,16 @@ public class Robot extends IterativeRobot {
 	 * Runs at the start of autonomous mode
 	 */
     	public void autonomousInit() {
-        // schedule the autonomous command (example)
+    	// schedule the autonomous command (example)   		
     	autonomousCommand = (Command)autonomousMode.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
-        
+
     }
 
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {
+    public void autonomousPeriodic() {	
         Scheduler.getInstance().run();
         sendStatistics();
     }
@@ -164,14 +172,16 @@ public class Robot extends IterativeRobot {
      * Adds every autonomous mode to the selection box and adds the box to the Smart Dashboard
      */
     private void queueAutonomousModes() {
+    	
+    	
 		autonomousMode.addObject("Find Target", new DriveToTarget());
 		autonomousMode.addObject("Drive in Square", new DriveInSquare());
 		autonomousMode.addObject("Low Bar", new LowBar());
 		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
-		autonomousMode.addObject("Do Everything", new DoEverything());
-		
-		
+//		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
+		autonomousMode.addObject("Do Everything", new DoEverything(0));//need to change
+
 		// make a selection table to select partial auto routines
 		//
 		//		0) lower arm
@@ -192,7 +202,7 @@ public class Robot extends IterativeRobot {
 		//			c) fire
 
 		
-    	SmartDashboard.putData("Autonomous Selection", autonomousMode);
+    	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	
     }
     
     /**

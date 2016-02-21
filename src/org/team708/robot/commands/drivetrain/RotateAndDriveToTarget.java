@@ -42,7 +42,11 @@ public class RotateAndDriveToTarget extends Command {
     	else {
     		moveSpeed = 0.0;
     	}
-    	Robot.drivetrain.haloDrive(moveSpeed, rotate, true);
+    	if (Robot.visionProcessor.wasCentered()){
+    		rotate = 0.0;
+    	}
+    	
+    	Robot.drivetrain.haloDrive(moveSpeed, rotate, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

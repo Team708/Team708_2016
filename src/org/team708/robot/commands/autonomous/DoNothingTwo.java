@@ -1,49 +1,38 @@
-package org.team708.robot.commands.drivetrain;
+package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.Robot;
-import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * this does putting
  */
-public class DriveStraightForTime extends Command {
+public class DoNothingTwo extends Command {
 
-	private double moveSpeed;
-	private double runTime;
-	
-    public DriveStraightForTime(double moveSpeed, double runTime) {
+    public DoNothingTwo() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.drivetrain);
-        
-        this.moveSpeed = moveSpeed;
-        this.runTime = runTime;
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.drivetrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.haloDrive(moveSpeed, 0.0, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (this.timeSinceInitialized() >= runTime);
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.drivetrain.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
     }
 }
