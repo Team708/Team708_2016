@@ -24,9 +24,7 @@ public class Arm extends Subsystem {
 	
 	private DigitalInput upperSwitch, lowerSwitch;	// Limit switches for the top and bottom of the travel
 	
-	private static CANTalon pivotArmMotorMaster; //Motor to pivot the arm
-	
-	private static CANTalon pivotArmMotorSlave;
+	private static CANTalon pivotArmMotor;
 	
 	
 	/**
@@ -41,10 +39,8 @@ public class Arm extends Subsystem {
 		lowerSwitch = new DigitalInput(RobotMap.pivotArmLowerSwitch);
 
 		// Initializes the motor
-		pivotArmMotorMaster = new CANTalon(RobotMap.pivotArmMotorMaster);
-		pivotArmMotorSlave	= new CANTalon(RobotMap.pivotArmMotorSlave);
+		pivotArmMotor = new CANTalon(RobotMap.pivotArmMotor);
 		
-		setupMasterSlave();
 	}
 
 	public void initDefaultCommand() {
@@ -70,20 +66,13 @@ public class Arm extends Subsystem {
 		
 	//Sets the motor speed to whatever the variable speed is
 	public void manualMove(double speed) {
-		pivotArmMotorMaster.set(speed);
+		pivotArmMotor.set(speed);
 	}
 	
 	public void stop(){
-		pivotArmMotorMaster.set(Constants.MOTOR_OFF);
-		pivotArmMotorSlave.set(Constants.MOTOR_OFF);
+		pivotArmMotor.set(Constants.MOTOR_OFF);
 	}
 	
-	//Makes slave motor follow master motor
-	public void setupMasterSlave(){
-		pivotArmMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
-		
-		pivotArmMotorSlave.set(pivotArmMotorMaster.getDeviceID());
-	}
 	
 	public double getPot(){
 		return pot.getAngle(); //gets arm angle hopefully

@@ -36,7 +36,7 @@ public class RotateAndDriveToTarget extends Command {
     protected void execute() {
     	Robot.visionProcessor.processData();
     	rotate = Robot.visionProcessor.getRotate();
-    	if (Robot.visionProcessor.isHasTarget()){
+    	if (Robot.visionProcessor.isHasTarget() || Robot.visionProcessor.wasCentered()){
     		moveSpeed = 1.0;
     	}
     	else {
