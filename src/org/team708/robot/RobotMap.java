@@ -18,6 +18,7 @@ public class RobotMap {
 	
 	// PWM Ports
 //	public static final int 			 	= 0;
+	public static final int INTAKE_MOTOR 	= 1;
 	public static final int SHOOTER_PWM	 	= 2;
 //	public static final int  				= 3;
 //	public static final int  				= 4;
@@ -56,7 +57,6 @@ public class RobotMap {
 	public static final int grapplerLowerSwitch			= 9;
 	
 	// RELAY
-	public static final int INTAKE_MOTOR 	= 0;
 //	public static final int 			 	= 1;
 //	public static final int 			 	= 2;
 //	public static final int 			 	= 3;
