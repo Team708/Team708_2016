@@ -19,6 +19,7 @@ public class IntakeIn extends Command {
     public IntakeIn() {
     	requires(Robot.intake);
     	requires(Robot.loader);
+    	requires(Robot.drivetrain);
     }
     
 
@@ -35,7 +36,7 @@ return;
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.loader.getIRDistance() < Constants.IR_HAS_BALL_DISTANCE) {
+    	if(Robot.drivetrain.getIRDistance() < Constants.IR_HAS_BALL_DISTANCE) {
     		return true;
     	}
     	
