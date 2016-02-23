@@ -16,10 +16,7 @@ public final class Constants {
 	public static final double INTAKE_FORWARD 		= -1.0;
 	public static final double INTAKE_REVERSE 		= 1.0;
 	public static final double INTAKE_OFF 			= 0.0;
-	public static final double LOADER_FORWARD 		= 1.0;
-	public static final double LOADER_REVERSE 		= -1.0;
-	public static final double LOADER_OFF 			= 0.0;
-
+	
 	public static final double MOTOR_FORWARD 		= 1.0;
 	public static final double MOTOR_REVERSE 		= -1.0;
 	public static final double MOTOR_OFF 			= 0.0;
@@ -29,10 +26,14 @@ public final class Constants {
 	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 1.0;
 	public static final double VISION_ROTATE_MOTOR_SPEED	= 0.8;
 	
-	public static final double LOADER_MOTOR_FORWARD 		=  1.0;
-	public static final double LOADER_MOTOR_REVERSE 		=  -1.0;
+	public static final double LOADER_MOTOR_FORWARD 		=  0.5;
+	public static final double LOADER_MOTOR_REVERSE 		=  -0.5;
+	public static final double LOADER_OFF 			= 0.0;
+	
 	public static final double SHOOTER_MOTOR_FORWARD 		=  -1.0;
+	public static final double SHOOTER_MOTOR_BACKWARD 		=   0.4;
 
+	
 	/*
 	 * Smart Dashboard
 	 */

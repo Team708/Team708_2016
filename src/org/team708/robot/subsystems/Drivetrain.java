@@ -77,7 +77,7 @@ public class Drivetrain extends PIDSubsystem {
 	encoder.setDistancePerPulse(distancePerPulse);
 	encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
 		
-	drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
+	//drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
 	drivetrainUltrasonicSensor = new UltrasonicSensor(RobotMap.DTSonar, UltrasonicSensor.MB1010);
 
 //	setInputRange(-25.0, 25.0);
