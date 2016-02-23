@@ -48,6 +48,7 @@ public class SpinShooterBack extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	if (!OI.spinShooterBack.get()) {
+    		Robot.shooter.manualSpeed(Constants.MOTOR_OFF);
     		return true;
     	}
     	else {
