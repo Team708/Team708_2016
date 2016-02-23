@@ -4,7 +4,9 @@ import org.team708.robot.Constants;
 import org.team708.robot.OI;
 import org.team708.robot.Robot;
 import org.team708.robot.RobotMap;
-import org.team708.robot.subsystems.*;
+//import org.team708.robot.subsystems.*;
+import org.team708.robot.subsystems.Loader;
+
 
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
@@ -36,7 +38,7 @@ return;
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.drivetrain.getIRDistance() < Constants.IR_HAS_BALL_DISTANCE) {
+    	if(Robot.loader.GetIRDistance() < Constants.IR_HAS_BALL_DISTANCE) {
     		return true;
     	}
     	

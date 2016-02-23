@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Loader extends Subsystem {
 	
-	//private static IRSensor irSensor;
+	private static IRSensor irSensor;
 	
 	private CANTalon loadMotor;
 	/**
@@ -31,7 +31,7 @@ public class Loader extends Subsystem {
 	 */
 	public Loader() {
 		
-//		irSensor = new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F); //Two models of infrared sensors in the IRSensor class
+		irSensor = new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F); //Two models of infrared sensors in the IRSensor class
 		
 		loadMotor = new CANTalon(RobotMap.loaderMotor); //initializes the loading motor
 		
@@ -45,16 +45,15 @@ public class Loader extends Subsystem {
 		loadMotor.set(speed);
 	}
 	
-//	public static double irGetDistance() {
-//		return irSensor.getDistance();
-//	}
+	public static double GetIRDistance() {
+		return irSensor.getDistance();
+	}
 	
 	public void stop(){
 		loadMotor.set(Constants.MOTOR_OFF);
 	}
 	
 	public void sendToDashboard() {
-
-//		SmartDashboard.putNumber("IR Distance", irGetDistance());
+		SmartDashboard.putNumber("Loader IR Distance", GetIRDistance());
 	}
 }

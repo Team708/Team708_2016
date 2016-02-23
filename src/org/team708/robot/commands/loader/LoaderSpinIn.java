@@ -28,11 +28,11 @@ public class LoaderSpinIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	double distance = Loader.irGetDistance();
+    	double distance = Loader.GetIRDistance();
     	
-//    	if (distance >=3) {
+    	if (distance >=Constants.IR_HAS_BALL_DISTANCE) {
     		Robot.loader.manualMove(Constants.LOADER_MOTOR_FORWARD);
-//    	}
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

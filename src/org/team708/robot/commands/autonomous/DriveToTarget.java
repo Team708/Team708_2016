@@ -12,17 +12,19 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 
 public class DriveToTarget extends CommandGroup {
 
-	private static final double driveStraightSpeed = 0.4;
+	private static final double driveStraightSpeed = -0.6;
 	private static final double driveStraightTime = 2;
 	
-	private static final double turnSpeed = 0.4;
+	private static final double turnSpeed = 0.5;
 	private static final double turnDegrees = 90;
    
 	
     public  DriveToTarget() {
-    	addSequential(new WaitCommand(2.0));
-    	addSequential(new DriveToIRDistance(30,.4,.8,2));
+//   	addSequential(new WaitCommand(1.0));
+//    	addSequential(new DriveToIRDistance(30,.4,.8,2));
     	addSequential(new WaitCommand(1.0));
-//    	addSequential(new FindTarget());
+    	addSequential(new FindTarget());
+    	addSequential(new DriveToUltrasonic(40,.5,.8,2));
+
     }
 }
