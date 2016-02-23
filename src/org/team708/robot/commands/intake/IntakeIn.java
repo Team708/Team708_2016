@@ -30,6 +30,7 @@ return;
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.intake.moveMotor(Constants.INTAKE_FORWARD);
+    	Robot.loader.manualMove(Constants.LOADER_MOTOR_FORWARD);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -43,6 +44,7 @@ return;
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.loader.stop();
     	Robot.intake.moveMotor(Constants.INTAKE_OFF);
     }
 
