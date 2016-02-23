@@ -63,7 +63,7 @@ public class RobotMap {
 	
 	//Analog sesnor IDs
 	public static final int DTSonar				= 1;
-	public static final int DTIRSensor			= 2;
+	public static final int LoaderIRSensor		= 2;
 	public static final int armPotentiometer	= 0;
 	
 	// PCM Ports

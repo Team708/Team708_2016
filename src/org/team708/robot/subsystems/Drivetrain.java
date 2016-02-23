@@ -77,7 +77,7 @@ public class Drivetrain extends PIDSubsystem {
 	encoder.setDistancePerPulse(distancePerPulse);
 	encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
 		
-	drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
+//	drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
 	drivetrainUltrasonicSensor = new UltrasonicSensor(RobotMap.DTSonar, UltrasonicSensor.MB1010);
 
 //	setInputRange(-25.0, 25.0);
@@ -347,7 +347,7 @@ public class Drivetrain extends PIDSubsystem {
     	
     	SmartDashboard.putNumber("Gyro angle", gyro.getAngle());			// Gyro angle
     	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
-    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
+//    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
     	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());			// Sonar distance reading
     	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());		// Encoder reading
     }

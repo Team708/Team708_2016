@@ -31,7 +31,7 @@ public class Loader extends Subsystem {
 	 */
 	public Loader() {
 		
-		irSensor = new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F); //Two models of infrared sensors in the IRSensor class
+		irSensor = new IRSensor(RobotMap.LoaderIRSensor, IRSensor.GP2Y0A21YK0F); //Two models of infrared sensors in the IRSensor class
 		
 		loadMotor = new CANTalon(RobotMap.loaderMotor); //initializes the loading motor
 		
