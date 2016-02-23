@@ -54,8 +54,8 @@ public class OI {
 	/*
 	 * Driver Button Commands
 	 */
-	private static final Button intakeOut 	= new JoystickButton(driverGamepad, INTAKE_OUT_HOLD_BUTTON);
-	private static final Button intakeIn 	= new JoystickButton(driverGamepad, INTAKE_IN_HOLD_BUTTON);
+	public static final Button intakeOut 	= new JoystickButton(driverGamepad, INTAKE_OUT_HOLD_BUTTON);
+	public static final Button intakeIn 	= new JoystickButton(driverGamepad, INTAKE_IN_HOLD_BUTTON);
 
 	/*
 	 * Operator Button Commands
@@ -80,7 +80,10 @@ public class OI {
 		/*
 		 * Driver Commands to be called by button
 		 */
+		
 		intakeIn.whileHeld(new IntakeIn());
+//		intakeIn.whenPressed(new IntakeIn());
+//		intakeIn.whenReleased(new IntakeStop());
 		intakeOut.whileHeld(new IntakeOut());
 		
 		/*
