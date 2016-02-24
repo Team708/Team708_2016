@@ -87,6 +87,8 @@ public class Arm extends Subsystem {
 		SmartDashboard.putBoolean("Arm Upper Switch", getUpperSwitch());
 
 		SmartDashboard.putNumber("Arm Angle", pot.getAngle());
+		SmartDashboard.putNumber("Pot Voltage",  pot.getVoltage());
+		
 //		if (Constants.DEBUG) {
 //		}
 	}

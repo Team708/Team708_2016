@@ -27,10 +27,12 @@ public class VisionProcessor extends Subsystem {
 	private final double 	targetWidth = 18; //width of target in inches
 
 	private double 			centerX = 0.0;
-	private double 			targetX = 0.0;
+	private double			targetY = 198;
+	private double 			currentX = 0.0;
+	private double			currentY = 0.0;
 
 	private double thresholdX = 25.0;
-	private double thresholdY = 0.1;
+	private double thresholdY = 3.0;
 	
     // High goal aspect ratio (11ft6in/3ft1in) in inches (3.729 repeating)
     private final double targetAspectRatio = 3.73; 
@@ -69,7 +71,8 @@ public class VisionProcessor extends Subsystem {
 	
 	public void processData() {
 		try {
-			targetX= roboRealmInfo.getNumber("cx", 0);
+			currentX= roboRealmInfo.getNumber("cx", 0);
+			currentY= roboRealmInfo.getNumber("cy", 0);
 //			upper_left_x = (double) roboRealmInfo.getNumber("p1x");
 //            upper_left_y = (double) roboRealmInfo.getNumber("p1y");
 //            upper_right_x = (double)roboRealmInfo.getNumber("p2x");
@@ -77,7 +80,7 @@ public class VisionProcessor extends Subsystem {
 //            lower_left_x = (double) roboRealmInfo.getNumber("p3x");
 //            lower_left_y = (double) roboRealmInfo.getNumber("p3y");
 			
-			if (targetX > 0) {
+			if (currentX > 0) {
 				hasTarget = true;
 			} else {
 				hasTarget = false;
@@ -95,8 +98,8 @@ public class VisionProcessor extends Subsystem {
 		if (hasTarget) 
 		{
 			
-			double difference = centerX - (targetX);
-			rotate = Math708.getSignClippedPercentError(targetX, centerX, 0.5, 0.8);
+			double difference = centerX - (currentX);
+			rotate = Math708.getSignClippedPercentError(currentX, centerX, 0.5, 0.8);
 			
 			if (Math.abs(difference) <= thresholdX) {
 				difference = 0.0;
@@ -142,32 +145,17 @@ public class VisionProcessor extends Subsystem {
 		
 		if (hasTarget) 
 		{
-			double ratio = targetWidth / imageWidth;
-			
-			double difference = ratio - targetAmount;
-			
-			if (Math.abs(difference) <= thresholdY) {
-				difference = 0.0;
+			double difference = targetY - currentY;			
+			move = Math708.getSignClippedPercentError(currentY, targetY, 0.5, 0.8);
+			if (difference <= thresholdY) {
+				move = 0.0;
 			}
 			
-			move = difference / targetAmount;
-			
-			if (Math.abs(move) < 0.65 && Math.abs(move) != 0.0) {
-				if (move >= 0.0) {
-					move = 0.65;
-				} else {
-					move = -0.65;
-				}
-			}	
 		} else {
 			move = 0.0;
 		}
 		
 		return move;
-	}
-	
-	public double distanceToTarget(){
-		return lowerLengthX * setProportion;
 	}
 	
 	/**
@@ -185,7 +173,7 @@ public class VisionProcessor extends Subsystem {
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("See Target", isHasTarget());
 		SmartDashboard.putBoolean("Was Centered", wasCentered());
-		SmartDashboard.putNumber("Center of Target", targetX);
+		SmartDashboard.putNumber("Center of Target", currentX);
 		SmartDashboard.putNumber("Rotation", rotate);
 	}
 

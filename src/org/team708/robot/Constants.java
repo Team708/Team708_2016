@@ -26,12 +26,12 @@ public final class Constants {
 	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 1.0;
 	public static final double VISION_ROTATE_MOTOR_SPEED	= 0.8;
 	
-	public static final double LOADER_MOTOR_FORWARD 		=  0.5;
+	public static final double LOADER_MOTOR_FORWARD 		=  1.0;
 	public static final double LOADER_MOTOR_REVERSE 		=  -1.0;
 	public static final double LOADER_OFF 					= 0.0;
 	
 	public static final double SHOOTER_MOTOR_FORWARD 		=  -1.0;
-	public static final double SHOOTER_MOTOR_BACKWARD 		=   0.8;
+	public static final double SHOOTER_MOTOR_BACKWARD 		=   1.0;
 
 	
 	/*
@@ -44,7 +44,7 @@ public final class Constants {
 	/*
 	 * Sensors
 	 */
-	public static final double IR_HAS_BALL_DISTANCE 					= 3.0;
+	public static final double IR_HAS_BALL_DISTANCE 					= 2.65;
 	public static final double ENCODER_BOTTOM_POSITION 					= 0.0;
 	public static final double GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 128.0;
 	

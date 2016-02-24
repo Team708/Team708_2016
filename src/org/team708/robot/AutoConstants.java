@@ -11,6 +11,8 @@ public final class AutoConstants {
 	public static final double TURN_RIGHT     		= 1.0;
 	public static final double NEIN_TURN     		= 0.0;
 	
+	public static final double ARM_DOWN_SPEED     		= -0.4;
+	
 	public static final double ROBOT_ENCODER_DRIVE_SPEED     		= 0.6;
 	public static final double ROBOT_TIME_DRIVE_SPEED	     		= 1.0;
 	

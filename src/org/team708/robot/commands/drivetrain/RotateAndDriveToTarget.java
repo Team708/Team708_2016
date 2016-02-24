@@ -4,6 +4,7 @@ import org.team708.robot.Robot;
 import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
@@ -46,7 +47,7 @@ public class RotateAndDriveToTarget extends Command {
     		rotate = 0.0;
     	}
     	
-    	Robot.drivetrain.haloDrive(moveSpeed, rotate, false);
+    	Robot.drivetrain.haloDrive(-moveSpeed, -rotate, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
