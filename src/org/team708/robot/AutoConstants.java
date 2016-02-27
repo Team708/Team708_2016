@@ -7,8 +7,8 @@ public final class AutoConstants {
 	 */
 	public static final double NINETY_DEGREE_TURN 		= 85.0;
 	public static final double TURN_SPEED     		= 0.6;
-	public static final double TURN_LEFT     		= -1.0;
-	public static final double TURN_RIGHT     		= 1.0;
+	public static final double TURN_LEFT     		= -90.0;
+	public static final double TURN_RIGHT     		= 90.0;
 	public static final double NEIN_TURN     		= 0.0;
 	
 	public static final double ARM_DOWN_SPEED     		= -1.0;
