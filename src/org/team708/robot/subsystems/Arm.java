@@ -26,6 +26,9 @@ public class Arm extends Subsystem {
 	
 	private static CANTalon pivotArmMotor;
 	
+	private boolean upperLimit = false;
+	private boolean lowerLimit= false;
+	
 	
 	/**
 	 * Constructor
@@ -53,15 +56,19 @@ public class Arm extends Subsystem {
 	 * @return At upper limit
 	 */
 	public boolean getUpperSwitch() {
-		return false;// !upperSwitch.get();   // not because default is closed, stops if circuit is broken
+		//pivotArmMotor.enableLimitSwitch(upperLimit, lowerLimit);
+		return pivotArmMotor.isFwdLimitSwitchClosed();
 	}
+	
 	
 	/**
 	 * Returns true if the lower switch is pressed
 	 * @return At lower limit
+	 * 
 	 */
 	public boolean getLowerSwitch() {
-		return false;// !lowerSwitch.get(); // not because default is closed, stops if circuit is broken
+		//pivotArmMotor.enableLimitSwitch(upperLimit, lowerLimit);
+		return pivotArmMotor.isRevLimitSwitchClosed();
 	}
 		
 	//Sets the motor speed to whatever the variable speed is

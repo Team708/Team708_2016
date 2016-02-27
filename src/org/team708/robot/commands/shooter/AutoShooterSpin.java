@@ -12,14 +12,13 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class SpinShooter extends Command {
+public class AutoShooterSpin extends Command {
 
 
-    public SpinShooter() {
+    public AutoShooterSpin() {
     	requires(Robot.shooter);
     }
     
-    boolean Lpressed;
     // Called just before this Command runs the first time
     protected void initialize() {
 
@@ -27,17 +26,16 @@ public class SpinShooter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);
+		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
+    	return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same

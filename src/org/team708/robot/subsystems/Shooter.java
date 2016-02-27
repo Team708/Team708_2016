@@ -67,8 +67,11 @@ public class Shooter extends Subsystem {
 	
 	
 	public void manualSpeed(double speed) {
-		
 			shooterMotor.set(speed);
+	}
+	
+	public void stop(){
+			shooterMotor.set(Constants.MOTOR_OFF);
 	}
 	
 

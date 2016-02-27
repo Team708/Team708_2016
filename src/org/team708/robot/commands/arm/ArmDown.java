@@ -60,11 +60,8 @@ public class ArmDown extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-  //  		return Robot.arm.getLowerSwitch();
-    	if (Robot.arm.getPot() <= 2)
-    		return true;
-    	else
-    	    return false;
+ 		return Robot.arm.getLowerSwitch();
+    	
     }
 
     // Called once after isFinished returns true

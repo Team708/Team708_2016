@@ -44,7 +44,7 @@ public final class Constants {
 	/*
 	 * Sensors
 	 */
-	public static final double IR_HAS_BALL_DISTANCE 					= 2.65;
+	public static final double IR_HAS_BALL_DISTANCE 					= 2.7;
 	public static final double ENCODER_BOTTOM_POSITION 					= 0.0;
 	public static final double GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 128.0;
 	

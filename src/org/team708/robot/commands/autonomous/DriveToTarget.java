@@ -2,6 +2,7 @@ package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.team708.robot.commands.drivetrain.DriveToUltrasonic;
+import org.team708.robot.commands.drivetrain.RotateAndDriveToTarget;
 import org.team708.robot.commands.drivetrain.DriveToIRDistance;
 import org.team708.robot.commands.drivetrain.TurnToDegrees;
 import org.team708.robot.commands.visionProcessor.FindTarget;
@@ -20,11 +21,6 @@ public class DriveToTarget extends CommandGroup {
    
 	
     public  DriveToTarget() {
-//   	addSequential(new WaitCommand(1.0));
-//    	addSequential(new DriveToIRDistance(30,.4,.8,2));
-    	addSequential(new WaitCommand(1.0));
-    	addSequential(new FindTarget());
-    	addSequential(new DriveToUltrasonic(40,.5,.8,2));
-
+		addSequential(new RotateAndDriveToTarget(44));
     }
 }

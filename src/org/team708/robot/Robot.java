@@ -2,6 +2,7 @@
 package org.team708.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
@@ -84,6 +85,11 @@ public class Robot extends IterativeRobot {
 	arm 			= new Arm();
 	oi 				= new OI();		// Initializes the OI. 
 									// This MUST BE LAST or a NullPointerException will be thrown
+	
+	CameraServer server1 = CameraServer.getInstance();
+	server1.setQuality(50);
+	
+	server1.startAutomaticCapture("cam1");
 	sendDashboardSubsystems();		// Sends each subsystem's currently running command to the Smart Dashboard
 		
 	autonomousMode = new SendableChooser();	// Initializes the Autonomous selection box

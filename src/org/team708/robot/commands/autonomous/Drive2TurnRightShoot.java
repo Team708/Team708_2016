@@ -10,7 +10,7 @@ import org.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.team708.robot.commands.drivetrain.RotateAndDriveToTarget;
 import org.team708.robot.commands.drivetrain.TurnToDegrees;
-import org.team708.robot.commands.shooter.AutoShoot;
+import org.team708.robot.commands.shooter.AutoShooterSpin;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;
@@ -31,7 +31,7 @@ public class Drive2TurnRightShoot extends CommandGroup {
 		addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, 90 * AutoConstants.TURN_RIGHT));
 		addSequential(new DriveStraightForTime(AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 		addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE));
-		addSequential(new AutoShoot());
+		addSequential(new AutoShooterSpin());
 		
         // Add Commands here:
         // e.g. addSequential(new Command1());
