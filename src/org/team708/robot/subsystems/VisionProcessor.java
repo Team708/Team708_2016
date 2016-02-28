@@ -1,5 +1,7 @@
 package org.team708.robot.subsystems;
 
+import org.team708.robot.AutoConstants;
+
 //import org.team708.robot.commands.visionProcessor.ProcessData;
 
 import org.team708.robot.Constants;
@@ -22,17 +24,18 @@ public class VisionProcessor extends Subsystem {
 	
 	private boolean hasTarget;
 	private boolean wasCentered;
+	private boolean isAtY = false;
 	
 	private final double 	imageWidth = 320;
 	private final double 	targetWidth = 18; //width of target in inches
 
 	private double 			centerX = 0.0;
-	private double			targetY = 198;
+	private double			targetY = AutoConstants.Y_TARGET;
 	private double 			currentX = 0.0;
 	private double			currentY = 0.0;
 
-	private double thresholdX = 25.0;
-	private double thresholdY = 3.0;
+	private double thresholdX = AutoConstants.X_THRESHOLD;
+	private double thresholdY = AutoConstants.Y_THRESHOLD;
 	
     // High goal aspect ratio (11ft6in/3ft1in) in inches (3.729 repeating)
     private final double targetAspectRatio = 3.73; 
@@ -113,6 +116,8 @@ public class VisionProcessor extends Subsystem {
 			//changes the lastSeenSide to positive or negative depending on last recorded difference
 			if (difference >= 0.0){
 				lastSeenSide = -1;
+			} else {
+				lastSeenSide = 1;
 			}
 			
 			/*
@@ -140,19 +145,20 @@ public class VisionProcessor extends Subsystem {
 	
 	//Returns how to move to get to target distance (targetAmount = target ratio)
 	
-	public double getMove(double targetAmount) {
+	public double getMove() {
 		double move;
 		
 		if (hasTarget) 
 		{
 			double difference = targetY - currentY;			
-			move = Math708.getSignClippedPercentError(currentY, targetY, 0.5, 0.8);
+			move = Math708.getSignClippedPercentError(currentY, targetY, 0.2, 0.4);
 			if (difference <= thresholdY) {
 				move = 0.0;
+				isAtY = true;
 			}
 			
 		} else {
-			move = 0.0;
+ 			move = 0.0;
 		}
 		
 		return move;
@@ -166,6 +172,10 @@ public class VisionProcessor extends Subsystem {
 		return hasTarget;
 	}
 	
+	public boolean isAtY() {
+		return isAtY;
+	}
+	
 	public boolean wasCentered() {
 		return wasCentered;
 	}
@@ -173,6 +183,8 @@ public class VisionProcessor extends Subsystem {
 	public void sendToDashboard() {
 		SmartDashboard.putBoolean("See Target", isHasTarget());
 		SmartDashboard.putBoolean("Was Centered", wasCentered());
+		SmartDashboard.putBoolean("Is At Y", isAtY());
+		SmartDashboard.putNumber("Current Y", currentY);
 		SmartDashboard.putNumber("Center of Target", currentX);
 		SmartDashboard.putNumber("Rotation", rotate);
 	}

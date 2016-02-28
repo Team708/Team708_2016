@@ -37,26 +37,27 @@ public class RotateAndDriveToTarget extends Command {
     protected void execute() {
     	Robot.visionProcessor.processData();
     	rotate = Robot.visionProcessor.getRotate();
-    	if (Robot.visionProcessor.isHasTarget() || Robot.visionProcessor.wasCentered()){
-    		moveSpeed = 0.6;
-    	}
-    	else {
-    		moveSpeed = 0.0;
-    	}
+    	moveSpeed = Robot.visionProcessor.getMove();
+//    	if (Robot.visionProcessor.isHasTarget() || Robot.visionProcessor.wasCentered()){
+//    		moveSpeed = 0.6;
+//    	}
+//    	else {
+//    		moveSpeed = 0.0;
+//    	}
     	if (Robot.visionProcessor.wasCentered()){
     		rotate = 0.0;
     	}
     	
-    	Robot.drivetrain.haloDrive(-moveSpeed, -rotate, false);
+    	Robot.drivetrain.haloDrive(moveSpeed, -rotate, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 
-    	if (Robot.drivetrain.getSonarDistance() < targetDistance  && Robot.visionProcessor.wasCentered()){
+    	if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.wasCentered()){
     		return true;
     	}
-    	else if (Robot.drivetrain.getSonarDistance() < targetDistance && Robot.visionProcessor.isHasTarget()) {
+    	else if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.isHasTarget()) {
     		return true;
     	}
     	

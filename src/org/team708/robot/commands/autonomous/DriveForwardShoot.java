@@ -1,6 +1,7 @@
 package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.AutoConstants;
+import org.team708.robot.commands.arm.ArmDown;
 import org.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.team708.robot.commands.drivetrain.RotateAndDriveToTarget;
@@ -18,6 +19,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class DriveForwardShoot extends CommandGroup {
 	
 	public  DriveForwardShoot() {
+		addSequential(new ArmDown());
 		addSequential(new DriveStraightForTime(AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
     	addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE));
     	//Shooting Sequence
