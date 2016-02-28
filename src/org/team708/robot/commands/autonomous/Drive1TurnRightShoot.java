@@ -29,7 +29,7 @@ public class Drive1TurnRightShoot extends CommandGroup {
 	public  Drive1TurnRightShoot(){
 		
 		addSequential(new ArmDown()); //always gonna happen
-		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_DEFENSE_DISTANCE * AutoConstants.GO_TO_1_DEFENSES, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED, false));
+		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_DEFENSE_DISTANCE * AutoConstants.GO_TO_1_DEFENSES, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
 		
 		addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.TURN_RIGHT));
 		addSequential(new DriveStraightForTime(AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));

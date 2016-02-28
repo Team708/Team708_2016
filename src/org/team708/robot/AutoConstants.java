@@ -33,8 +33,8 @@ public final class AutoConstants {
 	/*
 	 * Robot To Defense
 	 */
-	public static final double GO_TO_1_DEFENSES     		= -1;
-	public static final double GO_TO_2_DEFENSES     		= -2;
+	public static final double GO_TO_1_DEFENSES     		= 1;
+	public static final double GO_TO_2_DEFENSES     		= 2;
 	public static final double GO_TO_NO_DEFENSES     		= 0;
 	
 	public static final double ROBOT_TO_DEFENSE_DISTANCE 	= 52.0;
