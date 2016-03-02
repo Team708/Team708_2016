@@ -16,7 +16,6 @@ public class Fire extends Command {
 
 
     public Fire() {
-    	requires(Robot.shooter);
     	requires(Robot.loader);
     }
     
@@ -44,18 +43,8 @@ public class Fire extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	//stops the loop after ball leaves holding position (thus, is shot out of the robot)
-//    	if (Robot.loader.irGetDistance()> 3){
-    	if(!OI.fire.get()) {
-    	return true;
-    	}
-    	else {
-    		return(false);
-    	}
-//    	}
-    	
-//    	return(false);
+    protected boolean isFinished() {   	
+    	return(false);
     }
 
     // Called once after isFinished returns true
