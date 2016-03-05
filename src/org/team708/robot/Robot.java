@@ -21,6 +21,7 @@ import org.team708.robot.commands.autonomous.Drive2TurnRightShoot;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.DriveForwardShoot;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
+import org.team708.robot.commands.autonomous.OnlyShoot;
 import org.team708.robot.commands.autonomous.DriveToTarget;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
@@ -193,6 +194,7 @@ public class Robot extends IterativeRobot {
 		autonomousMode.addObject("Drive in Square", new DriveInSquare());
 		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
+		autonomousMode.addObject("Only Shoot", new OnlyShoot());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
 //		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
 		autonomousMode.addObject("Do Everything", new DoEverything());//need to change
