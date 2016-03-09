@@ -60,6 +60,9 @@ public class Loader extends Subsystem {
 	
 	public void sendToDashboard() {
 		SmartDashboard.putNumber("Loader IR Distance", GetIRDistance());
-		SmartDashboard.putBoolean("Has Ball", HasBall());
+		
+		if (Constants.DEBUG) {
+		    SmartDashboard.putBoolean("Has Ball", HasBall());
+		}
 	}
 }

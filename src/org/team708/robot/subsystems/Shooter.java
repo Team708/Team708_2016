@@ -81,13 +81,11 @@ public class Shooter extends Subsystem {
 	 */
 	public void sendToDashboard() {
 		
-		SmartDashboard.putNumber("Encoder Count", getEncoderCount());
-		
-		SmartDashboard.putNumber("Encoder RPM", getSpeedRPMs());
-//		if (Constants.DEBUG) {
-//			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
-//
-//		}
+		if (Constants.DEBUG) {
+			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
+			SmartDashboard.putNumber("Encoder Count", getEncoderCount());
+			SmartDashboard.putNumber("Encoder RPM", getSpeedRPMs());
+			}
 	}
 }
 

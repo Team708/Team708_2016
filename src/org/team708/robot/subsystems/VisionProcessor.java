@@ -185,8 +185,8 @@ public class VisionProcessor extends Subsystem {
 	}
 
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-//        setDefaultCommand(new ProcessData());
+		if (Constants.DEBUG) {
+		}    	
     }
 }
 

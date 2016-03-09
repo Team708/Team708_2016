@@ -207,26 +207,6 @@ public class Robot extends IterativeRobot {
 		autonomousMode.addObject("Drive2TurnLeftShoot", new Drive2TurnLeftShoot());
 		autonomousMode.addObject("Drive1TurnRightShoot", new Drive1TurnRightShoot());
 		autonomousMode.addObject("Drive2TurnRightShoot", new Drive2TurnRightShoot());
-		
-		
-		// make a selection table to select partial auto routines
-		//
-		//		0) lower arm
-		//		1) select drive to defense 1, 2, none
-		//		2) turn 90, -90, none
-		//
-		//		3) 	a) go to defense
-		//			b) go over defense
-		//
-		//		4) shoot (on|off)
-		//			a) turn 
-		//				1) clockwise
-		//				2) counter clockwise
-		//
-		//			b) aim
-		//				1) find target
-		//				2) drive to shooting distance
-		//			c) fire
 
 		
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	

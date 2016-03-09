@@ -18,9 +18,9 @@ public final class AutoConstants {
 	
 	public static final double ROBOT_LENGTH 						= 31.0;
 	
-	public static final double SHOOTING_SONAR_DISTANCE_CLOSE     	= 44;
-	public static final double SHOOTING_SONAR_DISTANCE_FAR     		= 80;
-	public static final double SHOOTER_MOTOR_SPINUP_TIME     		= 4;
+	public static final double SHOOTING_SONAR_DISTANCE_CLOSE     	= 44;  // 40 +- 5
+	public static final double SHOOTING_SONAR_DISTANCE_FAR     		= 84;  // 80 +- 5
+	public static final double SHOOTER_MOTOR_SPINUP_TIME     		= 2;
 	
 	public static final double LOADER_MOTOR_LOADING_TIME     		= 2;
 	
