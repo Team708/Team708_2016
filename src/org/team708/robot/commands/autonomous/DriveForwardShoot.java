@@ -21,11 +21,11 @@ public class DriveForwardShoot extends CommandGroup {
 	public  DriveForwardShoot() {
 		addSequential(new ArmDown());
 		addSequential(new DriveStraightForTime(AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
-    	addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE));
+    	addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE_CLOSE));
     	//Shooting Sequence
     	addSequential(new AutoShooterSpin());
 		addSequential(new WaitCommand(AutoConstants.SHOOTER_MOTOR_SPINUP_TIME));
-		addSequential(new AutoLoaderSpin());
+		addParallel(new AutoLoaderSpin());
 		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
 		addSequential(new AutoStopSL());
 

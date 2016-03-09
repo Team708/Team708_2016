@@ -2,6 +2,7 @@ package org.team708.robot.subsystems;
 
 
 import org.team708.robot.Constants;
+import org.team708.robot.Robot;
 import org.team708.robot.RobotMap;
 //import org.team708.robot.commands.arm.JoystickMoveArm;
 import org.team708.robot.commands.loader.ManualLoader;
@@ -23,7 +24,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Loader extends Subsystem {
 	
-	private static IRSensor irSensor;
+	private IRSensor irSensor;
 	
 	private CANTalon loadMotor;
 	/**
@@ -45,8 +46,12 @@ public class Loader extends Subsystem {
 		loadMotor.set(speed);
 	}
 	
-	public static double GetIRDistance() {
+	public double GetIRDistance() {
 		return irSensor.getDistance();
+	}
+	
+	public boolean HasBall() {
+		return GetIRDistance() < Constants.IR_HAS_BALL_DISTANCE;
 	}
 	
 	public void stop(){
@@ -55,5 +60,6 @@ public class Loader extends Subsystem {
 	
 	public void sendToDashboard() {
 		SmartDashboard.putNumber("Loader IR Distance", GetIRDistance());
+		SmartDashboard.putBoolean("Has Ball", HasBall());
 	}
 }

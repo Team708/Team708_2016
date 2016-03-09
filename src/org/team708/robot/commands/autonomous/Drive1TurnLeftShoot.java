@@ -33,7 +33,7 @@ public class Drive1TurnLeftShoot extends CommandGroup {
 		
 		addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.TURN_LEFT));
 		addSequential(new DriveStraightForTime(AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
-		addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE));
+		addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE_CLOSE));
 		addSequential(new AutoShooterSpin());
 		addSequential(new WaitCommand(AutoConstants.SHOOTER_MOTOR_SPINUP_TIME));
 		addSequential(new AutoLoaderSpin());

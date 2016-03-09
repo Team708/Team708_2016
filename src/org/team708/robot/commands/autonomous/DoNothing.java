@@ -1,5 +1,7 @@
 package org.team708.robot.commands.autonomous;
 
+import org.team708.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -14,6 +16,9 @@ public class DoNothing extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.drivetrain.resetEncoder();
+    	Robot.drivetrain.resetEncoder2();
+    	Robot.drivetrain.resetGyro();
     }
 
     // Called repeatedly when this Command is scheduled to run

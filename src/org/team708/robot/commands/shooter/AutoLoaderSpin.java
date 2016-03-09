@@ -16,7 +16,7 @@ public class AutoLoaderSpin extends Command {
 
 
     public AutoLoaderSpin() {
-    	requires(Robot.shooter);
+    	requires(Robot.loader);
     }
     
     // Called just before this Command runs the first time

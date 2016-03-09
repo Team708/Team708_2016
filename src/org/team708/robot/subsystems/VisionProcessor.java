@@ -96,7 +96,6 @@ public class VisionProcessor extends Subsystem {
 	}
 	
 	public double getRotate() {
-		int lastSeenSide = 1; //1 is right, -1 is left
 		
 		if (hasTarget) 
 		{
@@ -105,7 +104,6 @@ public class VisionProcessor extends Subsystem {
 			rotate = Math708.getSignClippedPercentError(currentX, centerX, 0.5, 0.8);
 			
 			if (Math.abs(difference) <= thresholdX) {
-				difference = 0.0;
 				rotate = 0.0;
 				wasCentered = true;
 			}
@@ -113,12 +111,6 @@ public class VisionProcessor extends Subsystem {
 				wasCentered = false;
 			}
 			
-			//changes the lastSeenSide to positive or negative depending on last recorded difference
-			if (difference >= 0.0){
-				lastSeenSide = -1;
-			} else {
-				lastSeenSide = 1;
-			}
 			
 			/*
 			rotate = difference / centerX;
@@ -135,8 +127,8 @@ public class VisionProcessor extends Subsystem {
 		}
 		
 		else {
-			//rotates in lastSeenSide's direction (default is right) if loses/doesn't have target
-			rotate = 0.5 * lastSeenSide;
+			//rotates if not target (default is right) if loses/doesn't have target
+			rotate = -0.5;
 			
 		}
 		
@@ -152,9 +144,12 @@ public class VisionProcessor extends Subsystem {
 		{
 			double difference = targetY - currentY;			
 			move = Math708.getSignClippedPercentError(currentY, targetY, 0.2, 0.4);
+			//Check if target is at correct level within threshold
 			if (difference <= thresholdY) {
 				move = 0.0;
 				isAtY = true;
+			} else {
+				isAtY = false;
 			}
 			
 		} else {

@@ -28,7 +28,7 @@ public class LowBarShootHigh extends CommandGroup {
 		//Shooting Sequence
 		addSequential(new AutoShooterSpin());
 		addSequential(new WaitCommand(AutoConstants.SHOOTER_MOTOR_SPINUP_TIME));
-		addSequential(new AutoLoaderSpin());
+		addParallel(new AutoLoaderSpin());
 		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
 		addSequential(new AutoStopSL());
 		

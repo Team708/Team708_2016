@@ -36,6 +36,10 @@ public class Intake extends Subsystem {
 	public void moveMotor(double speed) {
 		intakeMotor.set(speed);
 	}
+	
+	public void stop(){
+		intakeMotor.set(Constants.INTAKE_OFF);
+	}
     
     /**
      * Sends data about the subsystem to the Smart Dashboard

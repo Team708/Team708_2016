@@ -30,7 +30,7 @@ public final class Constants {
 	public static final double LOADER_MOTOR_REVERSE 		=  -1.0;
 	public static final double LOADER_OFF 					= 0.0;
 	
-	public static final double SHOOTER_MOTOR_FORWARD 		=  -1.0;
+	public static final double SHOOTER_MOTOR_FORWARD 		=  -0.9;
 	public static final double SHOOTER_MOTOR_BACKWARD 		=   1.0;
 
 	
@@ -44,7 +44,7 @@ public final class Constants {
 	/*
 	 * Sensors
 	 */
-	public static final double IR_HAS_BALL_DISTANCE 					= 9.0;
+	public static final double IR_HAS_BALL_DISTANCE 					= 5.0;
 	public static final double ENCODER_BOTTOM_POSITION 					= 0.0;
 	public static final double GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 128.0;
 	

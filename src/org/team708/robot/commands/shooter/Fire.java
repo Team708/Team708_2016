@@ -33,7 +33,7 @@ public class Fire extends Command {
     protected void execute() {
 
     	//if the spinshooter button is activated, and the fire button is activated, load the ball
-    	if(Shooter.shooterMotor.getSpeed() == Constants.SHOOTER_MOTOR_FORWARD) {
+    	if(OI.operatorGamepad.getButton(Gamepad.button_L_Shoulder)) {
     		Robot.loader.manualMove(Constants.LOADER_MOTOR_FORWARD);
     	}
     	else {

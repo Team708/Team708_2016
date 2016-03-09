@@ -16,13 +16,14 @@ public class AutoStopSL extends Command {
 
 
     public AutoStopSL() {
+    	requires(Robot.loader);
     	requires(Robot.shooter);
-    	
     }
     
     // Called just before this Command runs the first time
     protected void initialize() {
-
+    	Robot.loader.stop(); 	
+		Robot.shooter.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run

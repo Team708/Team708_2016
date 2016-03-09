@@ -38,6 +38,8 @@ public class Drivetrain extends PIDSubsystem {
 	private HatterDrive drivetrain;						// FRC provided drivetrain class
 	
 	private Encoder encoder;						// Encoder for the drivetrain
+	private Encoder encoder2;						// Encoder for the drivetrain
+
 	private double distancePerPulse;
 	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
 	private ADXRS450_Gyro gyro;							// Gyro that is used for drift correction
@@ -70,13 +72,16 @@ public class Drivetrain extends PIDSubsystem {
 	gyro 			= new ADXRS450_Gyro();			// Initializes the gyro
 	gyro.reset();									// Resets the gyro so that it starts with a 0.0 value
 	encoder = new Encoder(RobotMap.drivetrainEncoderARt, RobotMap.drivetrainEncoderBRt, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
-														// Initializes the encoder
+	encoder2 = new Encoder(RobotMap.drivetrainEncoderALeft, RobotMap.drivetrainEncoderBLeft, !Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+													// Initializes the encoder
 	distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
 					(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV);
 											// Sets the distance per pulse of the encoder to read distance properly
 	encoder.setDistancePerPulse(distancePerPulse);
 	encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
-		
+	encoder2.setDistancePerPulse(distancePerPulse);
+	encoder2.reset();								// Resets the encoder so that it starts with a 0.0 value
+
 //	drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
 	drivetrainUltrasonicSensor = new UltrasonicSensor(RobotMap.DTSonar, UltrasonicSensor.MB1010);
 
@@ -290,6 +295,10 @@ public class Drivetrain extends PIDSubsystem {
     	encoder.setReverseDirection(Constants.DRIVETRAIN_USE_LEFT_ENCODER);
     }
     
+    public void setEncoderReading2() {
+    	encoder.setReverseDirection(!Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+    }
+    
     /**
      * 
      * @return Distance traveled since last encoder reset
@@ -297,14 +306,18 @@ public class Drivetrain extends PIDSubsystem {
     public double getEncoderDistance() {
     	return encoder.getDistance();
     }
-    
+    public double getEncoderDistance2() {
+    	return encoder2.getDistance();
+    }
     /**
      * Resets the encoder to 0.0
      */
     public void resetEncoder() {
     	encoder.reset();
     }
-    
+    public void resetEncoder2() {
+    	encoder2.reset();
+    }
     /**
      * Returns if the optical sensor detects the color white
      * @return
@@ -350,6 +363,7 @@ public class Drivetrain extends PIDSubsystem {
 //    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
     	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());			// Sonar distance reading
     	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());		// Encoder reading
+    	SmartDashboard.putNumber("DT Encoder 2 Distance", encoder2.getDistance());		// Encoder reading
     	
     	SmartDashboard.putNumber("DT Rt Master", rightMaster.getTemperature());
     	SmartDashboard.putNumber("DT Rt Slave", rightSlave.getTemperature());
