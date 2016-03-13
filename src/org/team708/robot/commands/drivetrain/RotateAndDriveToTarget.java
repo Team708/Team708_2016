@@ -35,14 +35,14 @@ public class RotateAndDriveToTarget extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.visionProcessor.processData();
-    	rotate = Robot.visionProcessor.getRotate();
+    	rotate = -Robot.visionProcessor.getRotate();  // was + made -
  //   	moveSpeed = Robot.visionProcessor.getMove();
     	//If target is in view or if it was centered, move forward
     	if (Robot.visionProcessor.isHasTarget()){
-    		moveSpeed = 0.5;
+    		moveSpeed = -0.5; // was + made -
     	} //If target was/is centered, moveforward and stop rotation 
     	else if (Robot.visionProcessor.wasCentered()) {
-    		moveSpeed = 0.6;
+    		moveSpeed = -0.5; //was + made -
     		rotate = 0.0;
     	} //If target is not in view or was not centered, don't move forward.
     	else {

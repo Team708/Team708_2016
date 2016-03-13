@@ -6,7 +6,7 @@ public final class AutoConstants {
 	 * Shared Constants
 	 */
 	public static final double NINETY_DEGREE_TURN 		= 85.0;
-	public static final double TURN_SPEED     			= 0.6;
+	public static final double TURN_SPEED     			= 0.75;
 	public static final double TURN_LEFT     			= -90.0;
 	public static final double TURN_RIGHT     			= 90.0;
 	public static final double NEIN_TURN     			= 0.0;
@@ -20,7 +20,7 @@ public final class AutoConstants {
 	
 	public static final double SHOOTING_SONAR_DISTANCE_CLOSE     	= 44;  // 40 +- 5
 	public static final double SHOOTING_SONAR_DISTANCE_FAR     		= 84;  // 80 +- 5
-	public static final double SHOOTER_MOTOR_SPINUP_TIME     		= 2;
+	public static final double SHOOTER_MOTOR_SPINUP_TIME     		= 3;
 	
 	public static final double LOADER_MOTOR_LOADING_TIME     		= 2;
 	
@@ -44,7 +44,7 @@ public final class AutoConstants {
 	public static final double ROBOT_TO_TARGET_DISTANCE 	= 52.0;
 	public static final double ROBOT_THROUGH_LOW_BAR		= 210.0;
 	
-	public static final double ROBOT_OVER_DEFENSE_TIME			= 3.0;
+	public static final double ROBOT_OVER_DEFENSE_TIME			= 4.0;
 	
 	
 }

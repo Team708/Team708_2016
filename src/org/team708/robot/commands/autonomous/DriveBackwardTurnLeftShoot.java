@@ -21,7 +21,7 @@ public class DriveBackwardTurnLeftShoot extends CommandGroup {
 	public  DriveBackwardTurnLeftShoot() {
 		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 		addSequential(new ArmDown());
-		addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 130.0));
+//		addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 130.0));
     	addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE_CLOSE));
 		
 

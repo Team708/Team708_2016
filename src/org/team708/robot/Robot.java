@@ -194,11 +194,11 @@ public class Robot extends IterativeRobot {
     	
 //		autonomousMode.addObject("Find Target", new DriveToTarget());
 //		autonomousMode.addObject("Drive in Square", new DriveInSquare());
-		autonomousMode.addDefault("DriveBackwardShoot", new DriveBackwardShoot());
+		autonomousMode.addObject("DriveBackwardShoot", new DriveBackwardShoot());
 		autonomousMode.addObject("DriveBackwardTurnLeftShoot", new DriveBackwardTurnLeftShoot());
 		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 
-		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
+		autonomousMode.addDefault("Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("Only Shoot", new OnlyShoot());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
 //		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
