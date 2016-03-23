@@ -18,10 +18,12 @@ import org.team708.robot.commands.autonomous.Drive1TurnLeftShoot;
 import org.team708.robot.commands.autonomous.Drive1TurnRightShoot;
 import org.team708.robot.commands.autonomous.Drive2TurnLeftShoot;
 import org.team708.robot.commands.autonomous.Drive2TurnRightShoot;
+import org.team708.robot.commands.autonomous.DriveBackwardNoShoot;
 import org.team708.robot.commands.autonomous.DriveBackwardShoot;
 import org.team708.robot.commands.autonomous.DriveBackwardTurnLeftShoot;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.DriveForwardShoot;
+import org.team708.robot.commands.autonomous.LowBarNoShoot;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
 import org.team708.robot.commands.autonomous.OnlyShoot;
 import org.team708.robot.commands.autonomous.DriveToTarget;
@@ -194,19 +196,23 @@ public class Robot extends IterativeRobot {
     	
 //		autonomousMode.addObject("Find Target", new DriveToTarget());
 //		autonomousMode.addObject("Drive in Square", new DriveInSquare());
+    	autonomousMode.addObject("DriveToTargett", new DriveToTarget());
 		autonomousMode.addObject("DriveBackwardShoot", new DriveBackwardShoot());
+		autonomousMode.addObject("DriveBackwardNoShoot", new DriveBackwardNoShoot());
 		autonomousMode.addObject("DriveBackwardTurnLeftShoot", new DriveBackwardTurnLeftShoot());
 		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 
-		autonomousMode.addDefault("Low Bar Shoot High", new LowBarShootHigh());
+		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
+		autonomousMode.addDefault("Low Bar No Shoot", new LowBarNoShoot());
 		autonomousMode.addObject("Only Shoot", new OnlyShoot());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
 //		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
 //		autonomousMode.addObject("Do Everything", new DoEverything());//need to change
-		autonomousMode.addObject("Drive1TurnLeftShoot", new Drive1TurnLeftShoot());
-		autonomousMode.addObject("Drive2TurnLeftShoot", new Drive2TurnLeftShoot());
-		autonomousMode.addObject("Drive1TurnRightShoot", new Drive1TurnRightShoot());
-		autonomousMode.addObject("Drive2TurnRightShoot", new Drive2TurnRightShoot());
+//		autonomousMode.addObject("Drive1TurnLeftShoot", new Drive1TurnLeftShoot());
+//		autonomousMode.addObject("Drive2TurnLeftShoot", new Drive2TurnLeftShoot());
+//		autonomousMode.addObject("Drive1TurnRightShoot", new Drive1TurnRightShoot());
+//		autonomousMode.addObject("Drive2TurnRightShoot", new Drive2TurnRightShoot());
+//		
 
 		
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	

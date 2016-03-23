@@ -16,23 +16,15 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class LowBarShootHigh extends CommandGroup {
+public class LowBarNoShoot extends CommandGroup {
 	
-	public  LowBarShootHigh() {
+	public  LowBarNoShoot() {
 		
 		//addSequential(new DriveStraightToEncoderDistance(172));
 		addSequential(new ArmDown());
 		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_THROUGH_LOW_BAR, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
 		addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 50.0));
-		addSequential(new DriveStraightToEncoderDistance(18, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
-
-		addSequential(new RotateAndDriveToTarget(42));
-		//Shooting Sequence
-		addSequential(new AutoShooterSpin());
-		addSequential(new WaitCommand(AutoConstants.SHOOTER_MOTOR_SPINUP_TIME));
-		addParallel(new AutoLoaderSpin());
-		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
-		addSequential(new AutoStopSL());
+		addSequential(new DriveStraightToEncoderDistance(36, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
 		
 		
     	//addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.NINETY_DEGREE_TURN));

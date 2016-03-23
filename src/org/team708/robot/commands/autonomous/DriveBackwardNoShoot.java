@@ -2,6 +2,7 @@ package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.AutoConstants;
 import org.team708.robot.commands.arm.ArmDown;
+import org.team708.robot.commands.arm.ArmUp;
 import org.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.team708.robot.commands.drivetrain.RotateAndDriveToTarget;
@@ -16,27 +17,14 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 /**
  *
  */
-public class LowBarShootHigh extends CommandGroup {
+public class DriveBackwardNoShoot extends CommandGroup {
 	
-	public  LowBarShootHigh() {
-		
-		//addSequential(new DriveStraightToEncoderDistance(172));
+	public  DriveBackwardNoShoot() {
+		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 		addSequential(new ArmDown());
-		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_THROUGH_LOW_BAR, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
-		addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 50.0));
-		addSequential(new DriveStraightToEncoderDistance(18, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
+		addParallel(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 
-		addSequential(new RotateAndDriveToTarget(42));
-		//Shooting Sequence
-		addSequential(new AutoShooterSpin());
-		addSequential(new WaitCommand(AutoConstants.SHOOTER_MOTOR_SPINUP_TIME));
-		addParallel(new AutoLoaderSpin());
-		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
-		addSequential(new AutoStopSL());
 		
-		
-    	//addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.NINETY_DEGREE_TURN));
-
    
         // Add Commands here:
         // e.g. addSequential(new Command1());

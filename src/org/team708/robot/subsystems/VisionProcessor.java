@@ -101,7 +101,7 @@ public class VisionProcessor extends Subsystem {
 		{
 			
 			double difference = centerX - (currentX);
-			rotate = Math708.getSignClippedPercentError(currentX, centerX, 0.5, 0.5); //was + now -
+			rotate = Math708.getSignClippedPercentError(currentX, centerX, 0.3, 0.5);
 			
 			if (Math.abs(difference) <= thresholdX) {
 				rotate = 0.0;
@@ -128,7 +128,7 @@ public class VisionProcessor extends Subsystem {
 		
 		else {
 			//rotates if not target (default is right) if loses/doesn't have target
-			rotate = -0.5;
+			rotate = -0.4;
 			
 		}
 		
@@ -168,6 +168,13 @@ public class VisionProcessor extends Subsystem {
 	}
 	
 	public boolean isAtY() {
+		double difference = targetY - currentY;			
+		//Check if target is at correct level within threshold
+		if (difference <= thresholdY) {
+			isAtY = true;
+		} else {
+			isAtY = false;
+		}
 		return isAtY;
 	}
 	

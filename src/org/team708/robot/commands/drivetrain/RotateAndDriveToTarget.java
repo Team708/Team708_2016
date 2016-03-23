@@ -61,7 +61,7 @@ public class RotateAndDriveToTarget extends Command {
     		return true;
     	}
     	else if (Robot.drivetrain.getSonarDistance() < targetDistance && Robot.visionProcessor.isHasTarget()) {
-//    	else if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.isHasTarget()) {
+    //	else if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.isHasTarget()) {
     		return true;
     	}
     	

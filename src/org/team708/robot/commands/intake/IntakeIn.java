@@ -49,10 +49,6 @@ public class IntakeIn extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-       	if (Robot.loader.HasBall() == true){
-    		Robot.intake.stop();
-        	Robot.loader.stop();
-       	}
     	return(Robot.loader.HasBall());
     }
 
