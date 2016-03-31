@@ -33,13 +33,13 @@ public class Loader extends Subsystem {
 	public Loader() {
 		
 		irSensor = new IRSensor(RobotMap.LoaderIRSensor, IRSensor.GP2Y0A21YK0F); //Two models of infrared sensors in the IRSensor class
-		
+
 		loadMotor = new CANTalon(RobotMap.loaderMotor); //initializes the loading motor
 		
 	}
 	
 	public void initDefaultCommand() {
-        setDefaultCommand(new ManualLoader());
+  //      setDefaultCommand(new ManualLoader());
     }
 	
 	public void manualMove(double speed){
@@ -51,7 +51,10 @@ public class Loader extends Subsystem {
 	}
 	
 	public boolean HasBall() {
-		return GetIRDistance() < Constants.IR_HAS_BALL_DISTANCE;
+		if (GetIRDistance() > 0)
+		    return GetIRDistance() < Constants.IR_HAS_BALL_DISTANCE;
+		else
+			return(false);
 	}
 	
 	public void stop(){

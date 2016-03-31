@@ -1,49 +1,44 @@
-package org.team708.robot.commands.shooter;
-import org.team708.robot.Constants;
-import org.team708.robot.OI;
+package org.team708.robot.commands.visionProcessor;
+
 import org.team708.robot.Robot;
-import org.team708.robot.subsystems.Loader;
-import org.team708.robot.util.Gamepad;
-import org.team708.robot.commands.shooter.Fire;
+import org.team708.robot.subsystems.Drivetrain;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  *
  */
-public class AutoStopSL extends Command {
-
-
-    public AutoStopSL() {
-    	requires(Robot.loader);
+public class SonarOverride extends Command {
+	
+    public SonarOverride() {
+        // Use requires() here to declare subsystem dependencies
     }
-    
+
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.loader.stop(); 	
-		Robot.shooter.stop();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.loader.stop(); 	
-		Robot.shooter.stop();
+    	if (Robot.drivetrain.sonarOverride < 2){
+    		Robot.drivetrain.sonarOverride += 1;
+    	} else {
+    		Robot.drivetrain.sonarOverride = 0;
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return true;
+        return true;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.loader.stop();
-    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same
-    // subsystems are scheduled to run
+    // subsystems is scheduled to run
     protected void interrupted() {
     	end();
     }

@@ -31,7 +31,7 @@ public final class AutoConstants {
 	public static final double SONAR_DISTANCE_THRESHOLD     		= 5;
 	
 	public static final double Y_THRESHOLD							= 5;
-	public static final double Y_TARGET 							= 200;
+	public static final double Y_TARGET 							= 190;
 	
 	/*
 	 * Robot To Defense

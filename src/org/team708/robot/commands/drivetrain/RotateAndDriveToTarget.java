@@ -42,7 +42,7 @@ public class RotateAndDriveToTarget extends Command {
     		moveSpeed = -0.5; // was + made -
     	} //If target was/is centered, moveforward and stop rotation 
     	else if (Robot.visionProcessor.wasCentered()) {
-    		moveSpeed = -0.5; //was + made -
+    		moveSpeed = -0.3; //was + made -
     		rotate = 0.0;
     	} //If target is not in view or was not centered, don't move forward.
     	else {
@@ -56,12 +56,12 @@ public class RotateAndDriveToTarget extends Command {
     protected boolean isFinished() {
 
     	//Check if the sonar distance is less then the target Distance, end
-    	if (Robot.drivetrain.getSonarDistance() < targetDistance  && Robot.visionProcessor.wasCentered()){
-    //	if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.wasCentered()){
+   // 	if (Robot.drivetrain.getSonarDistance() < targetDistance  && Robot.visionProcessor.wasCentered()){
+    	if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.wasCentered()){
     		return true;
     	}
-    	else if (Robot.drivetrain.getSonarDistance() < targetDistance && Robot.visionProcessor.isHasTarget()) {
-    //	else if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.isHasTarget()) {
+//    	else if (Robot.drivetrain.getSonarDistance() < targetDistance && Robot.visionProcessor.isHasTarget()) {
+    	else if (Robot.visionProcessor.isAtY() && Robot.visionProcessor.isHasTarget()) {
     		return true;
     	}
     	

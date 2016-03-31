@@ -170,7 +170,7 @@ public class VisionProcessor extends Subsystem {
 	public boolean isAtY() {
 		double difference = targetY - currentY;			
 		//Check if target is at correct level within threshold
-		if (difference <= thresholdY) {
+		if (Math.abs(difference) <= thresholdY) {
 			isAtY = true;
 		} else {
 			isAtY = false;

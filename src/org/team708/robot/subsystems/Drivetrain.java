@@ -1,8 +1,10 @@
 package org.team708.robot.subsystems;
 
 import org.team708.robot.Constants;
+import org.team708.robot.OI;
 import org.team708.robot.RobotMap;
 import org.team708.robot.commands.drivetrain.JoystickDrive;
+import org.team708.robot.commands.visionProcessor.SonarOverride;
 import org.team708.robot.util.HatterDrive;
 import org.team708.robot.util.IRSensor;
 import org.team708.robot.util.UltrasonicSensor;
@@ -48,6 +50,7 @@ public class Drivetrain extends PIDSubsystem {
 	private UltrasonicSensor drivetrainUltrasonicSensor;	// Sonar used for <=21feet
 	private DigitalInput opticalSensor;
 	
+	public int sonarOverride = 0;	//0 = default, 1 = high, 2 = low; Used for overriding sonar
 	private boolean brake = true;		// Whether the talons should be in coast or brake mode
 						// (this could be important if a jerky robot causes things to topple
 	
@@ -227,7 +230,6 @@ public class Drivetrain extends PIDSubsystem {
     
     public double getSonarDistance() {
     	return drivetrainUltrasonicSensor.getClippedAverageDistance();
-//  //  	return drivetrainUltrasonicSensor.getAverageDistance();
     }
     
     /**
@@ -369,7 +371,7 @@ public class Drivetrain extends PIDSubsystem {
     	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());		// Sonar distance reading
     	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());	// Encoder reading
     	SmartDashboard.putNumber("DT Encoder 2 Distance", encoder2.getDistance());		// Encoder reading
-    	
+    	SmartDashboard.putNumber("Sonar Mode", sonarOverride);
 
     }
 }

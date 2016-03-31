@@ -30,8 +30,14 @@ public final class Constants {
 	public static final double LOADER_MOTOR_REVERSE 		=  -1.0;
 	public static final double LOADER_OFF 					= 0.0;
 	
-	public static final double SHOOTER_MOTOR_FORWARD 		=  -0.9;
-	public static final double SHOOTER_MOTOR_BACKWARD 		=   1.0;
+	public static final double SHOOTER_MOTOR_SPEED_LOW 		=  5000;
+	public static final double SHOOTER_MOTOR_SPEED_HIGH 	=  7000;
+	
+	public static final double SHOOTER_MOTOR_POWER_FORWARD_HIGH 	=  0.75; //.8
+	public static final double SHOOTER_MOTOR_POWER_FORWARD_LOW 		=  0.1;//.6
+	
+	public static final double SHOOTER_MOTOR_FORWARD 		=  	0.1;
+	public static final double SHOOTER_MOTOR_BACKWARD 		=  -1.0;
 
 	
 	/*
@@ -44,6 +50,8 @@ public final class Constants {
 	/*
 	 * Sensors
 	 */
+	public static final double SONAR_CLOSE 								= 30.0;
+	public static final double SONAR_FAR 								= 80.0;
 	public static final double IR_HAS_BALL_DISTANCE 					= 5.0;
 	public static final double ENCODER_BOTTOM_POSITION 					= 0.0;
 	public static final double GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 128.0;

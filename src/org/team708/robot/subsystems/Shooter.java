@@ -23,8 +23,9 @@ public class Shooter extends Subsystem {
 	
 	
 	private Encoder shooterEncoder;			// Encoder for intermediate travel
+	public boolean motorIsHigh = false;
 
-	public static Talon shooterMotor;
+	public static CANTalon shooterMotor;
 	/**
 	 * Constructor
 	 */
@@ -34,7 +35,7 @@ public class Shooter extends Subsystem {
         
 		
 		// Initializes the motor
-        shooterMotor = new Talon(RobotMap.SHOOTER_PWM);
+        shooterMotor = new CANTalon(RobotMap.shooterMotor);
 
 		
 	}
@@ -81,11 +82,11 @@ public class Shooter extends Subsystem {
 	 */
 	public void sendToDashboard() {
 		
-		if (Constants.DEBUG) {
+//		if (Constants.DEBUG) {
 			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
-			SmartDashboard.putNumber("Encoder Count", getEncoderCount());
-			SmartDashboard.putNumber("Encoder RPM", getSpeedRPMs());
-			}
+//			}
+		SmartDashboard.putNumber("Shooter Encoder RPM", getSpeedRPMs());
+		SmartDashboard.putBoolean("Shooter is High", motorIsHigh);
 	}
 }
 

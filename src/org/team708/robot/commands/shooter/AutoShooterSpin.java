@@ -26,7 +26,7 @@ public class AutoShooterSpin extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);    	
+		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_LOW);    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

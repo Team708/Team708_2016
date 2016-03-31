@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.*;
 import org.team708.robot.commands.drivetrain.*;
 import org.team708.robot.commands.intake.*;
 import org.team708.robot.commands.shooter.*;
+import org.team708.robot.commands.visionProcessor.SonarOverride;
 import org.team708.robot.commands.loader.*;
 import org.team708.robot.commands.arm.*;
 import org.team708.robot.commands.grappler.*;
@@ -40,7 +41,8 @@ public class OI {
 	// Shooter
 	private static final int SPIN_LOADER_BUTTON		= Gamepad.button_R_Shoulder;
 	private static final int SPIN_SHOOTER_BUTTON	= Gamepad.button_L_Shoulder;
-	private static final int SPIN_SHOOTER_BACK_BUTTON	= Gamepad.button_A;
+	private static final int SPIN_SHOOTER_BACK_BUTTON	= Gamepad.button_RightStick;
+	private static final int SPIN_ALL_BACK_BUTTON	= Gamepad.button_A;
 	
 	// ARM
 	private static final int OPERATE_ARM_BUTTON		= Gamepad.leftStick_Y;
@@ -50,6 +52,8 @@ public class OI {
 	public static final int LOADER_IN_BUTTON 	= Gamepad.button_X;
 	public static final int LOADER_OUT_BUTTON 	= Gamepad.button_B;
 	
+	// OTHER
+	public static final int SONAR_OVERRIDE 	= Gamepad.button_Y;
 	
 	/*
 	 * Driver Button Commands
@@ -61,10 +65,13 @@ public class OI {
 	 * Operator Button Commands
 	 */
 	public static final Button spinShooter		= new JoystickButton(operatorGamepad, SPIN_SHOOTER_BUTTON);
-	public static final Button spinShooterBack = new JoystickButton(operatorGamepad, SPIN_SHOOTER_BACK_BUTTON);
+	public static final Button spinShooterBack	= new JoystickButton(operatorGamepad, SPIN_SHOOTER_BACK_BUTTON);
+	public static final Button spinAllBack		= new JoystickButton(operatorGamepad, SPIN_ALL_BACK_BUTTON);
 	public static final Button fire				= new JoystickButton(operatorGamepad, SPIN_LOADER_BUTTON);
 	public static final Button loaderSpinIn		= new JoystickButton(operatorGamepad, LOADER_IN_BUTTON);
 	public static final Button loaderSpinOut	= new JoystickButton(operatorGamepad, LOADER_OUT_BUTTON);
+	public static final Button sonarOverride	= new JoystickButton(operatorGamepad, SONAR_OVERRIDE);
+
 
 	private static final AxisUp 	armUp 		= new AxisUp(operatorGamepad, 	OPERATE_ARM_BUTTON);		
 	private static final AxisDown 	armDown		= new AxisDown(operatorGamepad, OPERATE_ARM_BUTTON);
@@ -91,8 +98,11 @@ public class OI {
 		 */
 		loaderSpinIn.whileHeld(new LoaderSpinIn());
 		loaderSpinOut.whileHeld(new LoaderSpinOut());
+		
+		sonarOverride.whenPressed(new SonarOverride());
 
 		spinShooterBack.whileHeld(new SpinShooterBack());
+		spinAllBack.whileHeld(new LowGoalFire());
 		spinShooter.whileHeld(new SpinShooter());
 		fire.whileHeld(new Fire());
 		}
