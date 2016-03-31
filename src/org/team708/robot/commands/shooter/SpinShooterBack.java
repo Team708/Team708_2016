@@ -36,6 +36,7 @@ public class SpinShooterBack extends Command {
 //    	if (distance < 3 && Lpressed == true) {
 //    		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);
 		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_BACKWARD);
+		
 //    			
 //    	}
 //    	else {
