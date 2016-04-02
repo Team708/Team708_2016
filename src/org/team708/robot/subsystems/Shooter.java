@@ -6,6 +6,8 @@ import org.team708.robot.RobotMap;
 import org.team708.robot.commands.shooter.SpinShooter;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
@@ -36,8 +38,19 @@ public class Shooter extends Subsystem {
 		
 		// Initializes the motor
         shooterMotor = new CANTalon(RobotMap.shooterMotor);
-
-		
+        shooterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+        shooterMotor.reverseSensor(false);
+        shooterMotor.configEncoderCodesPerRev(128);
+        
+        /* set the peak and nominal outputs, 12V means full */
+        shooterMotor.configNominalOutputVoltage(+0.0, -0.0);
+        shooterMotor.configPeakOutputVoltage(+12.0, 0.0);
+        /* set closed loop gains in slot1 */
+        shooterMotor.setProfile(1);
+        shooterMotor.setF(0.2398);
+        shooterMotor.setP(0.5);
+        shooterMotor.setI(0);
+        shooterMotor.setD(0);
 	}
 
 	public void initDefaultCommand() {
@@ -62,13 +75,15 @@ public class Shooter extends Subsystem {
 		return shooterEncoder.get();
 	}
 	
-	public double getSpeedRPMs(){
-		return shooterEncoder.getRate() * 60;
-	}
-	
 	
 	public void manualSpeed(double speed) {
-			shooterMotor.set(speed);
+		shooterMotor.changeControlMode(TalonControlMode.PercentVbus);
+		shooterMotor.set(speed);
+	}
+	
+	public void manualRPM(double rpm){
+		shooterMotor.changeControlMode(TalonControlMode.Speed);
+		shooterMotor.set(rpm);
 	}
 	
 	public void stop(){
@@ -84,8 +99,10 @@ public class Shooter extends Subsystem {
 		
 //		if (Constants.DEBUG) {
 			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
+			SmartDashboard.putNumber("T error", shooterMotor.getClosedLoopError());
 //			}
-		SmartDashboard.putNumber("Shooter Encoder RPM", getSpeedRPMs());
+		SmartDashboard.putNumber("T Output", shooterMotor.getOutputVoltage()/shooterMotor.getBusVoltage());
+		SmartDashboard.putNumber("T Speed", shooterMotor.getSpeed());
 		SmartDashboard.putBoolean("Shooter is High", motorIsHigh);
 	}
 }
