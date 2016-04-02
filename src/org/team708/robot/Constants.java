@@ -34,9 +34,9 @@ public final class Constants {
 	public static final double SHOOTER_MOTOR_SPEED_HIGH 	=  7000;
 	
 	public static final double SHOOTER_MOTOR_POWER_FORWARD_HIGH 	=  0.8;
-	public static final double SHOOTER_MOTOR_POWER_FORWARD_LOW 		=  0.6;
+	public static final double SHOOTER_MOTOR_POWER_FORWARD_LOW 		=  0.8;
 	
-	public static final double SHOOTER_MOTOR_FORWARD 		=  	0.1;
+	public static final double SHOOTER_MOTOR_FORWARD 		=  	0.8;
 	public static final double SHOOTER_MOTOR_BACKWARD 		=  -1.0;
 
 	
