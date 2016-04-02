@@ -30,7 +30,6 @@ public class AutoStopSL extends Command {
     protected void execute() {
 		Robot.loader.stop(); 	
 		Robot.shooter.stop();
-		Robot.intake.stop();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -42,7 +41,6 @@ public class AutoStopSL extends Command {
     protected void end() {
     	Robot.loader.stop();
     	Robot.shooter.stop();
-    	Robot.intake.stop();
     }
 
     // Called when another command which requires one or more of the same
