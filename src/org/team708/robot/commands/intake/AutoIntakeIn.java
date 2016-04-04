@@ -16,11 +16,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *@author James Alex Thomas Mikhael
  */
-public class IntakeIn extends Command {
+public class AutoIntakeIn extends Command {
 
 	private boolean hasBall;
 
-    public IntakeIn() {
+    public AutoIntakeIn() {
     	requires(Robot.intake);
     	requires(Robot.loader);
     }
@@ -28,7 +28,7 @@ public class IntakeIn extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if (Robot.loader.HasBall() == true){
+    	if (Robot.loader.HasBall()){
         	Robot.loader.stop();
         	cancel();
     	}
@@ -37,15 +37,8 @@ public class IntakeIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.loader.HasBall() == true){
-    		Robot.intake.stop();
-        	Robot.loader.stop();
-    		cancel();
-    	} else {
-    	
     	Robot.intake.moveMotor(Constants.INTAKE_FORWARD);
-    	Robot.loader.manualMove(0.5);
-    	}
+    	Robot.loader.manualMove(0.4);
     }
 
     // Make this return true when this Command no longer needs to run execute()

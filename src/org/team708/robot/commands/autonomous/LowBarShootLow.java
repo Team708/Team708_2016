@@ -9,8 +9,10 @@ import org.team708.robot.commands.drivetrain.TurnToDegrees;
 import org.team708.robot.commands.shooter.AutoLoaderSpin;
 import org.team708.robot.commands.shooter.AutoShooterSpin;
 import org.team708.robot.commands.shooter.AutoStopSL;
+import org.team708.robot.commands.intake.AutoIntakeIn;
 import org.team708.robot.commands.loader.AutoLowGoalFire;
 import org.team708.robot.commands.loader.LowGoalFire;
+
 
 
 
@@ -32,11 +34,18 @@ public class LowBarShootLow extends CommandGroup {
 
 		addSequential(new RotateAndDriveToTarget(42));
 		
-		addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 170.0));
-		addSequential(new DriveStraightToEncoderDistance(-12, -AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
+		addSequential(new TurnToDegrees(-0.6, 167.0));
+		addSequential(new DriveStraightToEncoderDistance(18, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED, false));
 		
 		addSequential(new AutoLowGoalFire());
-		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME+2));
+		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
+		addSequential(new AutoStopSL());
+		
+		addSequential(new AutoIntakeIn());
+		addSequential(new WaitCommand(1));
+		addSequential(new TurnToDegrees(0.6, -2.0));
+		addSequential(new AutoLowGoalFire());
+		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
 		addSequential(new AutoStopSL());
 
 		//Shooting Sequence

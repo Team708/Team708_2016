@@ -24,21 +24,22 @@ public class Shooter extends Subsystem {
 	// from Commands.
 	
 	
-	private Encoder shooterEncoder;			// Encoder for intermediate travel
+//	private Encoder shooterEncoder;			// Encoder for intermediate travel
 	public boolean motorIsHigh = false;
 
 	public static CANTalon shooterMotor;
+	
 	/**
 	 * Constructor
 	 */
 	public Shooter() {
 		// Initializes the encoder
-        shooterEncoder = new Encoder(RobotMap.shooterEncoderA, RobotMap.shooterEncoderB);
         
 		
 		// Initializes the motor
         shooterMotor = new CANTalon(RobotMap.shooterMotor);
         shooterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+        
         shooterMotor.reverseSensor(false);
         shooterMotor.configEncoderCodesPerRev(128);
         
@@ -47,8 +48,8 @@ public class Shooter extends Subsystem {
         shooterMotor.configPeakOutputVoltage(+12.0, 0.0);
         /* set closed loop gains in slot1 */
         shooterMotor.setProfile(1);
-        shooterMotor.setF(0.2398);
-        shooterMotor.setP(0.5);
+        shooterMotor.setF(Constants.SHOOTER_F_LOW);
+        shooterMotor.setP(0.6);
         shooterMotor.setI(0);
         shooterMotor.setD(0);
 	}
@@ -61,9 +62,9 @@ public class Shooter extends Subsystem {
 	/**
 	 * Resets the encoder
 	 */
-	public void resetEncoder() {
-		shooterEncoder.reset();
-	}
+//	public void resetEncoder() {
+//		shooterEncoder.reset();
+//	}
 	
 
 	
@@ -71,9 +72,9 @@ public class Shooter extends Subsystem {
 	 * Returns the raw encoder count
 	 * @return
 	 */
-	public double getEncoderCount() {
-		return shooterEncoder.get();
-	}
+//	public double getEncoderCount() {
+//		return shooterEncoder.get();
+//	}
 	
 	
 	public void manualSpeed(double speed) {
@@ -84,6 +85,10 @@ public class Shooter extends Subsystem {
 	public void manualRPM(double rpm){
 		shooterMotor.changeControlMode(TalonControlMode.Speed);
 		shooterMotor.set(rpm);
+	}
+	
+	public void setFgain(double F){
+		shooterMotor.setF(F);
 	}
 	
 	public void stop(){
@@ -98,10 +103,12 @@ public class Shooter extends Subsystem {
 	public void sendToDashboard() {
 		
 //		if (Constants.DEBUG) {
-			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
+//			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
 			SmartDashboard.putNumber("T error", shooterMotor.getClosedLoopError());
+			SmartDashboard.putNumber("F-value", shooterMotor.getF());
 //			}
 		SmartDashboard.putNumber("T Output", shooterMotor.getOutputVoltage()/shooterMotor.getBusVoltage());
+		SmartDashboard.putNumber("T Encoder Count", shooterMotor.get());
 		SmartDashboard.putNumber("T Speed", shooterMotor.getSpeed());
 		SmartDashboard.putBoolean("Shooter is High", motorIsHigh);
 	}

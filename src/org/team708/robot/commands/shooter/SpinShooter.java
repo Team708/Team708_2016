@@ -28,17 +28,26 @@ public class SpinShooter extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (Robot.drivetrain.sonarOverride == 1){
-		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_HIGH);
-		Robot.shooter.motorIsHigh = true;
+    		//Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_HIGH);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_HIGH);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_HIGH);
+    		Robot.shooter.motorIsHigh = true;
     	} else if (Robot.drivetrain.sonarOverride == 2) {
-    		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_LOW);
+    		//Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_LOW);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_LOW);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_LOW);
     		Robot.shooter.motorIsHigh = false;
     	}
+    	
     	if (Robot.drivetrain.getSonarDistance() < Constants.SONAR_CLOSE){
-    		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_SPEED_HIGH);
+    	//	Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_SPEED_HIGH);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_HIGH);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_HIGH);
     		Robot.shooter.motorIsHigh = true;
     	} else {
-    		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_SPEED_LOW);
+    	//	Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_SPEED_LOW);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_LOW);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_LOW);
     		Robot.shooter.motorIsHigh = false;
     	}
     }

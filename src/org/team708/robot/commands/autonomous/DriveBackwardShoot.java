@@ -22,7 +22,7 @@ public class DriveBackwardShoot extends CommandGroup {
 	public  DriveBackwardShoot() {
 		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, 1.0));
 		addSequential(new ArmDown());
-		addParallel(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, 1.0));
+		
 
 		//addSequential(new ArmUp());
 		
