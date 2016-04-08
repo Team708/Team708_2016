@@ -20,7 +20,7 @@ import org.team708.robot.commands.autonomous.Drive2TurnLeftShoot;
 import org.team708.robot.commands.autonomous.Drive2TurnRightShoot;
 import org.team708.robot.commands.autonomous.DriveBackwardNoShoot;
 import org.team708.robot.commands.autonomous.DriveBackwardShoot;
-import org.team708.robot.commands.autonomous.DriveBackwardTurnLeftShoot;
+import org.team708.robot.commands.autonomous.DriveBackwardShootLow;
 import org.team708.robot.commands.autonomous.DriveInSquare;
 import org.team708.robot.commands.autonomous.DriveForwardShoot;
 import org.team708.robot.commands.autonomous.LowBarNoShoot;
@@ -197,17 +197,23 @@ public class Robot extends IterativeRobot {
     	
 //		autonomousMode.addObject("Find Target", new DriveToTarget());
 //		autonomousMode.addObject("Drive in Square", new DriveInSquare());
-    	autonomousMode.addObject("DriveToTargett", new DriveToTarget());
-		autonomousMode.addObject("DriveBackwardShoot", new DriveBackwardShoot());
-		autonomousMode.addObject("DriveBackwardNoShoot", new DriveBackwardNoShoot());
-		autonomousMode.addObject("DriveBackwardTurnLeftShoot", new DriveBackwardTurnLeftShoot());
-		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 
-		autonomousMode.addDefault("Low Bar Shoot High", new LowBarShootHigh());
-		autonomousMode.addObject("Low Bar Shoot Low", new LowBarShootLow());
+    	autonomousMode.addObject("Low Bar Shoot Low", new LowBarShootLow());
+    	autonomousMode.addDefault("Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("Low Bar No Shoot", new LowBarNoShoot());
-		autonomousMode.addObject("Only Shoot", new OnlyShoot());
+		
+		autonomousMode.addObject("Backward LeftSide Low", new DriveBackwardShootLow(false));
+		autonomousMode.addObject("Backward RightSide Low", new DriveBackwardShootLow(true));
+    	autonomousMode.addObject("Backward LeftSide High", new DriveBackwardShoot(false));
+		autonomousMode.addObject("Backward RightSide High", new DriveBackwardShoot(true));
+		autonomousMode.addObject("DriveBackwardNoShoot", new DriveBackwardNoShoot());
+		
+		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
+		
 		autonomousMode.addObject("Do Nothing", new DoNothing());
+		autonomousMode.addObject("DriveToTarget", new DriveToTarget());
+		autonomousMode.addObject("Only Shoot", new OnlyShoot());
+		
 //		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
 //		autonomousMode.addObject("Do Everything", new DoEverything());//need to change
 //		autonomousMode.addObject("Drive1TurnLeftShoot", new Drive1TurnLeftShoot());

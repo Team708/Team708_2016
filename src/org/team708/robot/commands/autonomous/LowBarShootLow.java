@@ -30,7 +30,7 @@ public class LowBarShootLow extends CommandGroup {
 		
 		//Arm Down Sequence
 		addSequential(new AutoArmDown());
-		addSequential(new WaitCommand(0.7));
+		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
 		addSequential(new ArmStop());
 		
 		//Drive Through Low Bar
@@ -42,8 +42,10 @@ public class LowBarShootLow extends CommandGroup {
 		addSequential(new RotateAndDriveToTarget(42));
 		
 		//Rotate nearly 180 degrees
-		addSequential(new TurnToDegrees(-0.6, 167.0));
-		addSequential(new DriveStraightToEncoderDistance(18, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED, false));
+		addSequential(new TurnToDegrees(-AutoConstants.LOWGOAL_TURN_SPEED, AutoConstants.TURN_180_FACE_LOWGOAL));
+		
+		//Drive Up Ramp
+		addSequential(new DriveStraightToEncoderDistance(AutoConstants.DRIVE_UP_RAMP_DISTANCE, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED, false));
 		
 		//Spits Ball Out Intake
 		addSequential(new AutoLowGoalFire());

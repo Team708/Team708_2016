@@ -2,7 +2,9 @@ package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.AutoConstants;
 import org.team708.robot.commands.arm.ArmDown;
+import org.team708.robot.commands.arm.ArmStop;
 import org.team708.robot.commands.arm.ArmUp;
+import org.team708.robot.commands.arm.AutoArmDown;
 import org.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.team708.robot.commands.drivetrain.RotateAndDriveToTarget;
@@ -19,28 +21,35 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class DriveBackwardShoot extends CommandGroup {
 	
-	public  DriveBackwardShoot() {
-		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, 1.0));
-		addSequential(new ArmDown());
+	public  DriveBackwardShoot(boolean rightSide) {
+		//Drive Forward
+		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
+				
+		//Arm Down Sequence
+		addSequential(new AutoArmDown());
+		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
+		addSequential(new ArmStop());
 		
-
-		//addSequential(new ArmUp());
+		//Drive Forward Again
+		addParallel(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 		
-		//addSequential(new ArmDown());
-		//addParallel(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, 2.0));
 		
-		//addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, 130.0));
-    	addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE_CLOSE));
+		//Turn To to Target
+		if (rightSide){
+			addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, -AutoConstants.TURN_AROUND_FACE_TARGET));
+		} else {
+			addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, AutoConstants.TURN_AROUND_FACE_TARGET));
+		}
+				
+		//Track and Drive to Target
+		addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE_CLOSE));
 		
-
-    	//Shooting Sequence
-    	addSequential(new AutoShooterSpin());
+		//Shooting Sequence
+		addSequential(new AutoShooterSpin());
 		addSequential(new WaitCommand(AutoConstants.SHOOTER_MOTOR_SPINUP_TIME));
 		addParallel(new AutoLoaderSpin());
 		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
 		addSequential(new AutoStopSL());
-
-   
 
     }
 }

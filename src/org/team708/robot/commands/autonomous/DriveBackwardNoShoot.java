@@ -2,7 +2,9 @@ package org.team708.robot.commands.autonomous;
 
 import org.team708.robot.AutoConstants;
 import org.team708.robot.commands.arm.ArmDown;
+import org.team708.robot.commands.arm.ArmStop;
 import org.team708.robot.commands.arm.ArmUp;
+import org.team708.robot.commands.arm.AutoArmDown;
 import org.team708.robot.commands.drivetrain.DriveStraightForTime;
 import org.team708.robot.commands.drivetrain.DriveStraightToEncoderDistance;
 import org.team708.robot.commands.drivetrain.RotateAndDriveToTarget;
@@ -20,8 +22,16 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class DriveBackwardNoShoot extends CommandGroup {
 	
 	public  DriveBackwardNoShoot() {
+		
+		//Drive Forward
 		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
-		addSequential(new ArmDown());
+		
+		//Arm Down Sequence
+		addSequential(new AutoArmDown());
+		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
+		addSequential(new ArmStop());
+		
+		//Drive Forward Again (Hopefully over defense)
 		addParallel(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 
 		

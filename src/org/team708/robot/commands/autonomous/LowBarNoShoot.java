@@ -24,7 +24,7 @@ public class LowBarNoShoot extends CommandGroup {
 		
 		//Arm Down Sequence
 		addSequential(new AutoArmDown());
-		addSequential(new WaitCommand(0.7));
+		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
 		addSequential(new ArmStop());
 		
 		//Drive Through Lowbar and Turn
