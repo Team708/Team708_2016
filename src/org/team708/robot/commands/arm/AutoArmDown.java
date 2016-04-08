@@ -13,9 +13,17 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoArmDown extends Command {
     
+	private double speed;
+	
     public AutoArmDown() {
+    	this(AutoConstants.ARM_DOWN_SPEED);
+    }
+    
+    public AutoArmDown(double armSpeed) {
     	// Use requires() here to declare subsystem dependencies
     	requires(Robot.arm);
+    	
+    	this.speed = armSpeed;
     }
 
     // Called just before this Command runs the first time
@@ -25,7 +33,7 @@ public class AutoArmDown extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.arm.manualMove(AutoConstants.ARM_DOWN_SPEED);
+    	Robot.arm.manualMove(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,7 +49,7 @@ public class AutoArmDown extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	end();
+    	Robot.arm.stop();
     }
 }
 

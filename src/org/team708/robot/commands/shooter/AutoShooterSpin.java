@@ -14,9 +14,16 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class AutoShooterSpin extends Command {
 
-
-    public AutoShooterSpin() {
+	private double speed;
+	
+	public AutoShooterSpin() {
+		this(Constants.SHOOTER_MOTOR_SPEED_LOW);
+    }
+    
+    public AutoShooterSpin(double speed) {
     	requires(Robot.shooter);
+    	
+    	this.speed = speed;
     }
     
     // Called just before this Command runs the first time
@@ -26,7 +33,7 @@ public class AutoShooterSpin extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_LOW);    	
+		Robot.shooter.manualRPM(speed);    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -41,6 +48,6 @@ public class AutoShooterSpin extends Command {
     // Called when another command which requires one or more of the same
     // subsystems are scheduled to run
     protected void interrupted() {
-    	end();
+    	Robot.shooter.stop();
     }
 }

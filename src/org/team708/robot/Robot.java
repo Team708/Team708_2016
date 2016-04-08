@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.team708.robot.commands.autonomous.ChevalShootHigh;
 import org.team708.robot.commands.autonomous.DoEverything;
 import org.team708.robot.commands.autonomous.DoNothing;
 import org.team708.robot.commands.autonomous.Drive1TurnLeftShoot;
@@ -208,6 +209,8 @@ public class Robot extends IterativeRobot {
 		autonomousMode.addObject("Backward RightSide High", new DriveBackwardShoot(true));
 		autonomousMode.addObject("DriveBackwardNoShoot", new DriveBackwardNoShoot());
 		
+		autonomousMode.addObject("Cheval High", new ChevalShootHigh(false));
+		
 		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 		
 		autonomousMode.addObject("Do Nothing", new DoNothing());
@@ -220,7 +223,6 @@ public class Robot extends IterativeRobot {
 //		autonomousMode.addObject("Drive2TurnLeftShoot", new Drive2TurnLeftShoot());
 //		autonomousMode.addObject("Drive1TurnRightShoot", new Drive1TurnRightShoot());
 //		autonomousMode.addObject("Drive2TurnRightShoot", new Drive2TurnRightShoot());
-//		
 
 		
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	
