@@ -36,6 +36,7 @@ import org.team708.robot.subsystems.Loader;
 import org.team708.robot.subsystems.Shooter;
 import org.team708.robot.subsystems.Grappler;
 import org.team708.robot.subsystems.Arm;
+import org.team708.robot.util.CameraServer2;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -93,7 +94,7 @@ public class Robot extends IterativeRobot {
 	oi 				= new OI();		// Initializes the OI. 
 									// This MUST BE LAST or a NullPointerException will be thrown
 	
-	CameraServer server1 = CameraServer.getInstance();
+	CameraServer2 server1 = CameraServer2.getInstance();
 	server1.setQuality(50);
 	
 	server1.startAutomaticCapture("cam1");
@@ -199,8 +200,8 @@ public class Robot extends IterativeRobot {
 //		autonomousMode.addObject("Find Target", new DriveToTarget());
 //		autonomousMode.addObject("Drive in Square", new DriveInSquare());
 
-    	autonomousMode.addObject("Low Bar Shoot Low", new LowBarShootLow());
-    	autonomousMode.addDefault("Low Bar Shoot High", new LowBarShootHigh());
+    	autonomousMode.addDefault("Low Bar Shoot Low", new LowBarShootLow());
+    	autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
 		autonomousMode.addObject("Low Bar No Shoot", new LowBarNoShoot());
 		
 		autonomousMode.addObject("Backward LeftSide Low", new DriveBackwardShootLow(false));
@@ -209,7 +210,8 @@ public class Robot extends IterativeRobot {
 		autonomousMode.addObject("Backward RightSide High", new DriveBackwardShoot(true));
 		autonomousMode.addObject("DriveBackwardNoShoot", new DriveBackwardNoShoot());
 		
-		autonomousMode.addObject("Cheval High", new ChevalShootHigh(false));
+		autonomousMode.addObject("Cheval High Left", new ChevalShootHigh(false));
+		autonomousMode.addObject("Cheval High Right", new ChevalShootHigh(true));
 		
 		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 		

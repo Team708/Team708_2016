@@ -23,22 +23,25 @@ public class ChevalShootHigh extends CommandGroup {
 	
 	public  ChevalShootHigh(boolean rightSide) {
 		//Drive Slowly to Cheval
-		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_CHEVAL, AutoConstants.ROBOT_TO_CHEVAL_SPEED));
-				
+		addSequential(new DriveStraightToEncoderDistance(48, -AutoConstants.ROBOT_TO_CHEVAL_SPEED, false));
+
+		
 		//Arm Down Sequence
 		addSequential(new AutoArmDown());
-		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
+		addSequential(new WaitCommand(.8));
 		addSequential(new ArmStop());
 		
+		
 		//Drive Forward Again
-		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_TO_DEFENSE_DISTANCE, -AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
+		addSequential(new DriveStraightToEncoderDistance(1, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
+		addSequential(new DriveStraightToEncoderDistance(80, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED, false));
 		
 		
 		//Turn To to Target
 		if (rightSide){
-			addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, -AutoConstants.TURN_AROUND_FACE_TARGET));
+			addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, -180));
 		} else {
-			addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, AutoConstants.TURN_AROUND_FACE_TARGET));
+			addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 180));
 		}
 				
 		//Track and Drive to Target

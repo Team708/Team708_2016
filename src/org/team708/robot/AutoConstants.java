@@ -21,7 +21,7 @@ public final class AutoConstants {
 	 * Arm
 	 */
 	public static final double ARM_DOWN_SPEED     		= -1.0;
-	public static final double ARM_DOWN_TIME     		= 0.7;
+	public static final double ARM_DOWN_TIME     		= 0.65;
 	
 	/*
 	 * Shooter
@@ -54,10 +54,10 @@ public final class AutoConstants {
 	public static final double ROBOT_TO_DEFENSE_DISTANCE 	= 52.0;
 	public static final double ROBOT_TO_TARGET_DISTANCE 	= 52.0;
 	public static final double ROBOT_THROUGH_LOW_BAR		= 210.0;
-	public static final double ROBOT_TO_CHEVAL				= 20.0;
+	public static final double ROBOT_TO_CHEVAL				= 44.0;
 	public static final double ROBOT_TO_CHEVAL_SPEED		= 0.3;
 	
-	public static final double ROBOT_OVER_DEFENSE_TIME			= 2.0;
+	public static final double ROBOT_OVER_DEFENSE_TIME			= 1.25;
 	
 	
 }

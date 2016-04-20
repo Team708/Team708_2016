@@ -29,7 +29,7 @@ public class DriveBackwardShootLow extends CommandGroup {
 		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 		
 		//Arm Down Sequence
-		addSequential(new AutoArmDown());
+		addSequential(new AutoArmDown()); //Can set manual speed if necessary
 		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
 		addSequential(new ArmStop());
 		

@@ -57,7 +57,7 @@ public class LowBarShootLow extends CommandGroup {
 		addSequential(new WaitCommand(1));
 		
 		//Turn Slightly and Fire Again
-		addSequential(new TurnToDegrees(0.6, -2.0));
+		addSequential(new TurnToDegrees(-0.6, -2.0));
 		addSequential(new AutoLowGoalFire());
 		addSequential(new WaitCommand(AutoConstants.LOADER_MOTOR_LOADING_TIME));
 		addSequential(new AutoStopSL());
