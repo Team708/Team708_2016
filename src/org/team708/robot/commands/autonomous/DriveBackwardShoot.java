@@ -23,7 +23,7 @@ public class DriveBackwardShoot extends CommandGroup {
 	
 	public  DriveBackwardShoot(boolean rightSide) {
 		//Drive Forward
-		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
+		addSequential(new DriveStraightForTime(-(-.5), AutoConstants.ROBOT_OVER_DEFENSE_TIME));
 				
 		//Arm Down Sequence
 		addSequential(new AutoArmDown());
@@ -31,18 +31,18 @@ public class DriveBackwardShoot extends CommandGroup {
 		addSequential(new ArmStop());
 		
 		//Drive Forward Again
-		addParallel(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
+		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, 0.5));
 		
 		
 		//Turn To to Target
 		if (rightSide){
-			addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, -AutoConstants.TURN_AROUND_FACE_TARGET));
+			addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, 160));
 		} else {
-			addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, AutoConstants.TURN_AROUND_FACE_TARGET));
+			addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, -160));
 		}
 				
 		//Track and Drive to Target
-		addSequential(new RotateAndDriveToTarget(AutoConstants.SHOOTING_SONAR_DISTANCE_CLOSE));
+		addSequential(new RotateAndDriveToTarget(40));
 		
 		//Shooting Sequence
 		addSequential(new AutoShooterSpin());

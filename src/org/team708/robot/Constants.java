@@ -30,8 +30,8 @@ public final class Constants {
 	public static final double LOADER_MOTOR_REVERSE 		=  -1.0;
 	public static final double LOADER_OFF 					= 0.0;
 	
-	public static final double SHOOTER_MOTOR_SPEED_LOW 		=  5000;
-	public static final double SHOOTER_MOTOR_SPEED_HIGH 	=  5000;
+	public static final double SHOOTER_MOTOR_SPEED_LOW 		=  5200;
+	public static final double SHOOTER_MOTOR_SPEED_HIGH 	=  5200;
 	public static final double SHOOTER_F_HIGH 		=  .17126;
 	public static final double SHOOTER_F_LOW 		=  .2398;
 	

@@ -28,11 +28,11 @@ public class LowBarNoShoot extends CommandGroup {
 		addSequential(new ArmStop());
 		
 		//Drive Through Lowbar and Turn
-		addSequential(new DriveStraightToEncoderDistance(AutoConstants.ROBOT_THROUGH_LOW_BAR, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
-		addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 50.0));
-		addSequential(new DriveStraightToEncoderDistance(36, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
-		
-		
+		addSequential(new DriveStraightToEncoderDistance(44, -.4));
+//		addSequential(new TurnToDegrees(-AutoConstants.TURN_SPEED, 50.0));
+//		addSequential(new DriveStraightToEncoderDistance(36, AutoConstants.ROBOT_ENCODER_DRIVE_SPEED));
+//		
+//		
     	//addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, AutoConstants.NINETY_DEGREE_TURN));
 
    
