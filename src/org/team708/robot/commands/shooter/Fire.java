@@ -16,7 +16,6 @@ public class Fire extends Command {
 
 
     public Fire() {
-    	requires(Robot.shooter);
     	requires(Robot.loader);
     }
     
@@ -34,36 +33,22 @@ public class Fire extends Command {
     protected void execute() {
 
     	//if the spinshooter button is activated, and the fire button is activated, load the ball
-//    	if (OI.spinShooter.get() == true) {
-//    		if (OI.fire.get() == true) {
-    	if(Shooter.shooterMotor.getSpeed() == Constants.SHOOTER_MOTOR_FORWARD) {
-    		
+    	if(OI.operatorGamepad.getButton(Gamepad.button_L_Shoulder)) {
     		Robot.loader.manualMove(Constants.LOADER_MOTOR_FORWARD);
     	}
-
-//    		}
-//    	}
-//    	
+    	else {
+    		Robot.loader.manualMove(Constants.LOADER_OFF);
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-    	//stops the loop after ball leaves holding position (thus, is shot out of the robot)
-//    	if (Robot.loader.irGetDistance()> 3){
-    	if(!OI.fire.get()) {
-    	return true;
-    	}
-    	else {
-    		return(false);
-    	}
-//    	}
-    	
-//    	return(false);
+    protected boolean isFinished() {   	
+    	return(false);
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	new WaitCommand(1.0);
     	Robot.loader.manualMove(Constants.MOTOR_OFF);
     	Robot.shooter.manualSpeed(Constants.MOTOR_OFF);
     }

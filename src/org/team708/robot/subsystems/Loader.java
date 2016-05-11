@@ -2,6 +2,7 @@ package org.team708.robot.subsystems;
 
 
 import org.team708.robot.Constants;
+import org.team708.robot.Robot;
 import org.team708.robot.RobotMap;
 //import org.team708.robot.commands.arm.JoystickMoveArm;
 import org.team708.robot.commands.loader.ManualLoader;
@@ -15,45 +16,56 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Description
+ * Leaders
  * @Jialin Wang 
  * @Nick Iannarone
  * @Thomas Zhao
+ * @Alex Tysak
  */
 public class Loader extends Subsystem {
 	
-	private static IRSensor irSensor;
+	private IRSensor irSensor;
 	
-	private Talon loadMotor;
+	private CANTalon loadMotor;
 	/**
 	 * Constructor
 	 */
 	public Loader() {
 		
-//		irSensor = new IRSensor(RobotMap.ballInIRSensor, IRSensor.GP2Y0A02YK0F); //Two models of infrared sensors in the IRSensor class
-		
-		loadMotor = new Talon(RobotMap.LOADER_PWM); //initializes the loading motor
+		irSensor = new IRSensor(RobotMap.LoaderIRSensor, IRSensor.GP2Y0A21YK0F); //Two models of infrared sensors in the IRSensor class
+
+		loadMotor = new CANTalon(RobotMap.loaderMotor); //initializes the loading motor
 		
 	}
 	
 	public void initDefaultCommand() {
-        setDefaultCommand(new ManualLoader());
+  //      setDefaultCommand(new ManualLoader());
     }
 	
 	public void manualMove(double speed){
 		loadMotor.set(speed);
 	}
 	
-//	public static double irGetDistance() {
-//		return irSensor.getDistance();
-//	}
+	public double GetIRDistance() {
+		return irSensor.getDistance();
+	}
+	
+	public boolean HasBall() {
+		if (GetIRDistance() > 0)
+		    return GetIRDistance() < Constants.IR_HAS_BALL_DISTANCE;
+		else
+			return(false);
+	}
 	
 	public void stop(){
 		loadMotor.set(Constants.MOTOR_OFF);
 	}
 	
 	public void sendToDashboard() {
-
-//		SmartDashboard.putNumber("IR Distance", irGetDistance());
+		SmartDashboard.putNumber("Loader IR Distance", GetIRDistance());
+		
+		if (Constants.DEBUG) {
+		    SmartDashboard.putBoolean("Has Ball", HasBall());
+		}
 	}
 }

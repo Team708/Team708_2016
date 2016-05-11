@@ -28,19 +28,19 @@ public class LoaderSpinIn extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	double distance = Loader.irGetDistance();
+    //	double distance = Robot.loader.GetIRDistance();
     	
-//    	if (distance >=3) {
+    //	if (distance >=Constants.IR_HAS_BALL_DISTANCE) {
     		Robot.loader.manualMove(Constants.LOADER_MOTOR_FORWARD);
-//    	}
+    //	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	//if the loader spin in button is no longer pressed, stop loop
-    	if (!OI.loaderSpinIn.get()){
-    		return true;
-    	}
+//    	if (!OI.loaderSpinIn.get()){
+//    		return true;
+//    	}
     	
     	return(false);
     }

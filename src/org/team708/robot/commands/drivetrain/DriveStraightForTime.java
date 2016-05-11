@@ -1,6 +1,7 @@
 package org.team708.robot.commands.drivetrain;
 
 import org.team708.robot.Robot;
+import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -27,7 +28,7 @@ public class DriveStraightForTime extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.drivetrain.haloDrive(moveSpeed, 0.0, true);
+    	Robot.drivetrain.haloDrive(moveSpeed, 0.0, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()

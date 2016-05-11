@@ -2,17 +2,32 @@
 package org.team708.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.CameraServer;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.team708.robot.commands.autonomous.ChevalShootHigh;
+import org.team708.robot.commands.autonomous.DoEverything;
 import org.team708.robot.commands.autonomous.DoNothing;
+import org.team708.robot.commands.autonomous.Drive1TurnLeftShoot;
+import org.team708.robot.commands.autonomous.Drive1TurnRightShoot;
+import org.team708.robot.commands.autonomous.Drive2TurnLeftShoot;
+import org.team708.robot.commands.autonomous.Drive2TurnRightShoot;
+import org.team708.robot.commands.autonomous.DriveBackwardNoShoot;
+import org.team708.robot.commands.autonomous.DriveBackwardShoot;
+import org.team708.robot.commands.autonomous.DriveBackwardShootLow;
 import org.team708.robot.commands.autonomous.DriveInSquare;
-import org.team708.robot.commands.autonomous.LowBar;
+import org.team708.robot.commands.autonomous.DriveForwardShoot;
+import org.team708.robot.commands.autonomous.LowBarNoShoot;
 import org.team708.robot.commands.autonomous.LowBarShootHigh;
+import org.team708.robot.commands.autonomous.LowBarShootLow;
+import org.team708.robot.commands.autonomous.OnlyShoot;
 import org.team708.robot.commands.autonomous.DriveToTarget;
 import org.team708.robot.subsystems.Drivetrain;
 import org.team708.robot.subsystems.VisionProcessor;
@@ -21,6 +36,7 @@ import org.team708.robot.subsystems.Loader;
 import org.team708.robot.subsystems.Shooter;
 import org.team708.robot.subsystems.Grappler;
 import org.team708.robot.subsystems.Arm;
+import org.team708.robot.util.CameraServer2;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -45,18 +61,27 @@ public class Robot extends IterativeRobot {
 	public static Arm 				arm;
 	public static OI 				oi;
 
-
+	public static double defenceNumber;
+	public static double turnDirection;
+	public static double driveThroughDefenceTime;
+ 
+	
     Command 			autonomousCommand;
     SendableChooser 	autonomousMode;
+    Preferences			prefs;
+    
 
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	
         statsTimer = new Timer();	// Initializes the timer for sending Smart Dashboard data
         statsTimer.start();		// Starts the timer for the Smart Dashboard
-
+        
+		
+        
 // Subsystem Initialization
     drivetrain 		= new Drivetrain();
 	visionProcessor = new VisionProcessor();
@@ -68,10 +93,16 @@ public class Robot extends IterativeRobot {
 	arm 			= new Arm();
 	oi 				= new OI();		// Initializes the OI. 
 									// This MUST BE LAST or a NullPointerException will be thrown
+	
+	CameraServer2 server1 = CameraServer2.getInstance();
+	server1.setQuality(50);
+	
+	server1.startAutomaticCapture("cam1");
 	sendDashboardSubsystems();		// Sends each subsystem's currently running command to the Smart Dashboard
 		
 	autonomousMode = new SendableChooser();	// Initializes the Autonomous selection box
 	queueAutonomousModes();			// Adds autonomous modes to the selection box
+        
     }
 	
     /**
@@ -80,21 +111,26 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
 		sendStatistics();
+		prefs = Preferences.getInstance();
 	}
 
 	/**
 	 * Runs at the start of autonomous mode
 	 */
     	public void autonomousInit() {
-        // schedule the autonomous command (example)
+    	
+    	turnDirection = prefs.getDouble("TurnDirection", 4.0);
+    		
+    	// schedule the autonomous command (example)   		
     	autonomousCommand = (Command)autonomousMode.getSelected();
         if (autonomousCommand != null) autonomousCommand.start();
+
     }
 
     /**
      * This function is called periodically during autonomous
      */
-    public void autonomousPeriodic() {
+    public void autonomousPeriodic() {	
         Scheduler.getInstance().run();
         sendStatistics();
     }
@@ -137,6 +173,9 @@ public class Robot extends IterativeRobot {
     /**
      * Sends data from each subsystem periodically as set by sendStatsIntervalSec
      */
+    
+    
+    
     private void sendStatistics() {
         if (statsTimer.get() >= Constants.SEND_STATS_INTERVAL) {
             statsTimer.reset();
@@ -156,33 +195,39 @@ public class Robot extends IterativeRobot {
      * Adds every autonomous mode to the selection box and adds the box to the Smart Dashboard
      */
     private void queueAutonomousModes() {
-		autonomousMode.addObject("Find Target", new DriveToTarget());
-		autonomousMode.addObject("Drive in Square", new DriveInSquare());
-		autonomousMode.addObject("Low Bar", new LowBar());
-		autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
-		autonomousMode.addObject("Do Nothing", new DoNothing());
+    	
+    	
+//		autonomousMode.addObject("Find Target", new DriveToTarget());
+//		autonomousMode.addObject("Drive in Square", new DriveInSquare());
 
-		// make a selection table to select partial auto routines
-		//
-		//		0) lower arm
-		//		1) select drive to defense 1, 2, none
-		//		2) turn 90, -90, none
-		//
-		//		3) 	a) go to defense
-		//			b) go over defense
-		//
-		//		4) shoot (on|off)
-		//			a) turn 
-		//				1) clockwise
-		//				2) counter clockwise
-		//
-		//			b) aim
-		//				1) find target
-		//				2) drive to shooting distance
-		//			c) fire
+    	autonomousMode.addDefault("Low Bar Shoot Low", new LowBarShootLow());
+    	autonomousMode.addObject("Low Bar Shoot High", new LowBarShootHigh());
+		autonomousMode.addObject("Low Bar No Shoot", new LowBarNoShoot());
+		
+		autonomousMode.addObject("Backward LeftSide Low", new DriveBackwardShootLow(false));
+		autonomousMode.addObject("Backward RightSide Low", new DriveBackwardShootLow(true));
+    	autonomousMode.addObject("Backward LeftSide High", new DriveBackwardShoot(false));
+		autonomousMode.addObject("Backward RightSide High", new DriveBackwardShoot(true));
+		autonomousMode.addObject("DriveBackwardNoShoot", new DriveBackwardNoShoot());
+		
+		autonomousMode.addObject("Cheval High Left", new ChevalShootHigh(false));
+		autonomousMode.addObject("Cheval High Right", new ChevalShootHigh(true));
+		
+		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
+		
+		autonomousMode.addObject("Do Nothing", new DoNothing());
+		autonomousMode.addObject("DriveToTarget", new DriveToTarget());
+		autonomousMode.addObject("Only Shoot", new OnlyShoot());
+		
+//		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
+//		autonomousMode.addObject("Do Everything", new DoEverything());//need to change
+//		autonomousMode.addObject("Drive1TurnLeftShoot", new Drive1TurnLeftShoot());
+//		autonomousMode.addObject("Drive2TurnLeftShoot", new Drive2TurnLeftShoot());
+//		autonomousMode.addObject("Drive1TurnRightShoot", new Drive1TurnRightShoot());
+//		autonomousMode.addObject("Drive2TurnRightShoot", new Drive2TurnRightShoot());
 
 		
-    	SmartDashboard.putData("Autonomous Selection", autonomousMode);
+    	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	
     }
     
     /**

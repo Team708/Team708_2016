@@ -14,15 +14,11 @@ public class GrapplerOut extends Command {
 	
 	private boolean isAtLimit;
 	
-	private boolean useSmoothing;
-	
 	private double moveSpeed = Constants.MOTOR_FORWARD;
     
-    public GrapplerOut(boolean useSmoothing) {
+    public GrapplerOut() {
     	// Use requires() here to declare subsystem dependencies
     	requires(Robot.grappler);
-    	
-    	this.useSmoothing = useSmoothing;
     }
 
     // Called just before this Command runs the first time

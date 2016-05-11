@@ -13,19 +13,10 @@ public class ArmUp extends Command {
 	
 	private boolean isAtLimit;
 	
-	private boolean useSmoothing;
-	
 	private double moveSpeed = Constants.MOTOR_FORWARD;
 
     public ArmUp() {
-        this(false);
-    }
-    
-    public ArmUp(boolean useSmoothing) {
-    	// Use requires() here to declare subsystem dependencies
     	requires(Robot.arm);
-    	
-    	this.useSmoothing = useSmoothing;
     }
 
     // Called just before this Command runs the first time
@@ -51,8 +42,6 @@ public class ArmUp extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	if (Robot.arm.getUpperSwitch()) {
-    	}
     	Robot.arm.stop();
     }
 

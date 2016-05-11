@@ -24,9 +24,10 @@ public class Arm extends Subsystem {
 	
 	private DigitalInput upperSwitch, lowerSwitch;	// Limit switches for the top and bottom of the travel
 	
-	private static CANTalon pivotArmMotorMaster; //Motor to pivot the arm
+	private static CANTalon pivotArmMotor;
 	
-	private static CANTalon pivotArmMotorSlave;
+	private boolean upperLimit = false;
+	private boolean lowerLimit= false;
 	
 	
 	/**
@@ -41,10 +42,8 @@ public class Arm extends Subsystem {
 		lowerSwitch = new DigitalInput(RobotMap.pivotArmLowerSwitch);
 
 		// Initializes the motor
-		pivotArmMotorMaster = new CANTalon(RobotMap.pivotArmMotorMaster);
-		pivotArmMotorSlave	= new CANTalon(RobotMap.pivotArmMotorSlave);
+		pivotArmMotor = new CANTalon(RobotMap.pivotArmMotor);
 		
-		setupMasterSlave();
 	}
 
 	public void initDefaultCommand() {
@@ -57,33 +56,30 @@ public class Arm extends Subsystem {
 	 * @return At upper limit
 	 */
 	public boolean getUpperSwitch() {
-		return !upperSwitch.get();   // not because default is closed, stops if circuit is broken
+		//pivotArmMotor.enableLimitSwitch(upperLimit, lowerLimit);
+		return pivotArmMotor.isFwdLimitSwitchClosed();
 	}
+	
 	
 	/**
 	 * Returns true if the lower switch is pressed
 	 * @return At lower limit
+	 * 
 	 */
 	public boolean getLowerSwitch() {
-		return !lowerSwitch.get(); // not because default is closed, stops if circuit is broken
+		//pivotArmMotor.enableLimitSwitch(upperLimit, lowerLimit);
+		return pivotArmMotor.isRevLimitSwitchClosed();
 	}
 		
 	//Sets the motor speed to whatever the variable speed is
 	public void manualMove(double speed) {
-		pivotArmMotorMaster.set(speed);
+		pivotArmMotor.set(speed);
 	}
 	
 	public void stop(){
-		pivotArmMotorMaster.set(Constants.MOTOR_OFF);
-		pivotArmMotorSlave.set(Constants.MOTOR_OFF);
+		pivotArmMotor.set(Constants.MOTOR_OFF);
 	}
 	
-	//Makes slave motor follow master motor
-	public void setupMasterSlave(){
-		pivotArmMotorSlave.changeControlMode(CANTalon.TalonControlMode.Follower);
-		
-		pivotArmMotorSlave.set(pivotArmMotorMaster.getDeviceID());
-	}
 	
 	public double getPot(){
 		return pot.getAngle(); //gets arm angle hopefully
@@ -98,8 +94,11 @@ public class Arm extends Subsystem {
 		SmartDashboard.putBoolean("Arm Upper Switch", getUpperSwitch());
 
 		SmartDashboard.putNumber("Arm Angle", pot.getAngle());
-//		if (Constants.DEBUG) {
-//		}
+
+		
+		if (Constants.DEBUG) {
+			SmartDashboard.putNumber("Pot Voltage",  pot.getVoltage());
+		}
 	}
 }
 

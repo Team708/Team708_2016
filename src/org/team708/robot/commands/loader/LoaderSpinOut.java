@@ -15,9 +15,7 @@ public class LoaderSpinOut extends Command {
 
 
     public LoaderSpinOut() {
-    	
     	requires(Robot.loader);
-
     }
     
 
@@ -35,12 +33,6 @@ public class LoaderSpinOut extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	
-    	//if the loader spin out button is no longer pressed, stop loop
-    	if (!OI.loaderSpinOut.get()){
-    		return true;
-    	}
-    	
     	return(false);
     }
 

@@ -27,36 +27,39 @@ public class SpinShooter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-   
-//    	Lpressed = OI.operatorGamepad.getButton(OI.SPIN_LOADER_BUTTON);
+    	if (Robot.drivetrain.sonarOverride == 1){
+    		//Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_HIGH);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_HIGH);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_HIGH);
+    		Robot.shooter.motorIsHigh = true;
+    	} else if (Robot.drivetrain.sonarOverride == 2) {
+    		//Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_POWER_FORWARD_LOW);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_LOW);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_LOW);
+    		Robot.shooter.motorIsHigh = false;
+    	}
     	
-//    	double distance = Loader.irGetDistance();
-
-    	
-//    	if (distance < 3 && Lpressed == true) {
-//    		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);
-		Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_FORWARD);
-//    			
-//    	}
-//    	else {
-//    		Robot.shooter.manualSpeed(Constants.MOTOR_OFF);
-//    	}
-//    	
-    	
+    	if (Robot.drivetrain.getSonarDistance() < Constants.SONAR_CLOSE){
+    	//	Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_SPEED_HIGH);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_HIGH);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_HIGH);
+    		Robot.shooter.motorIsHigh = true;
+    	} else {
+    	//	Robot.shooter.manualSpeed(Constants.SHOOTER_MOTOR_SPEED_LOW);
+    		Robot.shooter.setFgain(Constants.SHOOTER_F_LOW);
+    		Robot.shooter.manualRPM(Constants.SHOOTER_MOTOR_SPEED_LOW);
+    		Robot.shooter.motorIsHigh = false;
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (OI.fire.get()) {
-    		return true;
-    	}
-    	else {
-    		return false;
-    	}
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.shooter.stop();
     }
 
     // Called when another command which requires one or more of the same

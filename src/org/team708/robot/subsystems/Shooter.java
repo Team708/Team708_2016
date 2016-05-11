@@ -6,6 +6,8 @@ import org.team708.robot.RobotMap;
 import org.team708.robot.commands.shooter.SpinShooter;
 
 import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.CANTalon.FeedbackDevice;
+import edu.wpi.first.wpilibj.CANTalon.TalonControlMode;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
@@ -22,21 +24,34 @@ public class Shooter extends Subsystem {
 	// from Commands.
 	
 	
-	private Encoder shooterEncoder;			// Encoder for intermediate travel
+//	private Encoder shooterEncoder;			// Encoder for intermediate travel
+	public boolean motorIsHigh = false;
 
-	public static Talon shooterMotor;
+	public static CANTalon shooterMotor;
+	
 	/**
 	 * Constructor
 	 */
 	public Shooter() {
 		// Initializes the encoder
-        shooterEncoder = new Encoder(RobotMap.shooterEncoderA, RobotMap.shooterEncoderB);
         
 		
 		// Initializes the motor
-        shooterMotor = new Talon(RobotMap.SHOOTER_PWM);
-
-		
+        shooterMotor = new CANTalon(RobotMap.shooterMotor);
+        shooterMotor.setFeedbackDevice(FeedbackDevice.QuadEncoder);
+        
+        shooterMotor.reverseSensor(false);
+        shooterMotor.configEncoderCodesPerRev(128);
+        
+        /* set the peak and nominal outputs, 12V means full */
+        shooterMotor.configNominalOutputVoltage(+0.0, -0.0);
+        shooterMotor.configPeakOutputVoltage(+12.0, 0.0);
+        /* set closed loop gains in slot1 */
+        shooterMotor.setProfile(1);
+        shooterMotor.setF(Constants.SHOOTER_F_LOW);
+        shooterMotor.setP(0.6);
+        shooterMotor.setI(0);
+        shooterMotor.setD(0);
 	}
 
 	public void initDefaultCommand() {
@@ -47,9 +62,9 @@ public class Shooter extends Subsystem {
 	/**
 	 * Resets the encoder
 	 */
-	public void resetEncoder() {
-		shooterEncoder.reset();
-	}
+//	public void resetEncoder() {
+//		shooterEncoder.reset();
+//	}
 	
 
 	
@@ -57,18 +72,27 @@ public class Shooter extends Subsystem {
 	 * Returns the raw encoder count
 	 * @return
 	 */
-	public double getEncoderCount() {
-		return shooterEncoder.get();
-	}
-	
-	public double getSpeedRPMs(){
-		return shooterEncoder.getRate() * 60;
-	}
+//	public double getEncoderCount() {
+//		return shooterEncoder.get();
+//	}
 	
 	
 	public void manualSpeed(double speed) {
-		
-			shooterMotor.set(speed);
+		shooterMotor.changeControlMode(TalonControlMode.PercentVbus);
+		shooterMotor.set(speed);
+	}
+	
+	public void manualRPM(double rpm){
+		shooterMotor.changeControlMode(TalonControlMode.Speed);
+		shooterMotor.set(rpm);
+	}
+	
+	public void setFgain(double F){
+		shooterMotor.setF(F);
+	}
+	
+	public void stop(){
+			shooterMotor.set(Constants.MOTOR_OFF);
 	}
 	
 
@@ -78,13 +102,15 @@ public class Shooter extends Subsystem {
 	 */
 	public void sendToDashboard() {
 		
-		SmartDashboard.putNumber("Encoder Count", getEncoderCount());
-		
-		SmartDashboard.putNumber("Encoder RPM", getSpeedRPMs());
 //		if (Constants.DEBUG) {
 //			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
-//
-//		}
+			SmartDashboard.putNumber("T error", shooterMotor.getClosedLoopError());
+			SmartDashboard.putNumber("F-value", shooterMotor.getF());
+//			}
+		SmartDashboard.putNumber("T Output", shooterMotor.getOutputVoltage()/shooterMotor.getBusVoltage());
+		SmartDashboard.putNumber("T Encoder Count", shooterMotor.get());
+		SmartDashboard.putNumber("T Speed", shooterMotor.getSpeed());
+		SmartDashboard.putBoolean("Shooter is High", motorIsHigh);
 	}
 }
 

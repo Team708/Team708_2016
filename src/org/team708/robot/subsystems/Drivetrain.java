@@ -1,8 +1,10 @@
 package org.team708.robot.subsystems;
 
 import org.team708.robot.Constants;
+import org.team708.robot.OI;
 import org.team708.robot.RobotMap;
 import org.team708.robot.commands.drivetrain.JoystickDrive;
+import org.team708.robot.commands.visionProcessor.SonarOverride;
 import org.team708.robot.util.HatterDrive;
 import org.team708.robot.util.IRSensor;
 import org.team708.robot.util.UltrasonicSensor;
@@ -38,6 +40,8 @@ public class Drivetrain extends PIDSubsystem {
 	private HatterDrive drivetrain;						// FRC provided drivetrain class
 	
 	private Encoder encoder;						// Encoder for the drivetrain
+	private Encoder encoder2;						// Encoder for the drivetrain
+
 	private double distancePerPulse;
 	private BuiltInAccelerometer accelerometer;				// Accelerometer that is built into the roboRIO
 	private ADXRS450_Gyro gyro;							// Gyro that is used for drift correction
@@ -46,6 +50,7 @@ public class Drivetrain extends PIDSubsystem {
 	private UltrasonicSensor drivetrainUltrasonicSensor;	// Sonar used for <=21feet
 	private DigitalInput opticalSensor;
 	
+	public int sonarOverride = 0;	//0 = default, 1 = high, 2 = low; Used for overriding sonar
 	private boolean brake = true;		// Whether the talons should be in coast or brake mode
 						// (this could be important if a jerky robot causes things to topple
 	
@@ -70,14 +75,17 @@ public class Drivetrain extends PIDSubsystem {
 	gyro 			= new ADXRS450_Gyro();			// Initializes the gyro
 	gyro.reset();									// Resets the gyro so that it starts with a 0.0 value
 	encoder = new Encoder(RobotMap.drivetrainEncoderARt, RobotMap.drivetrainEncoderBRt, Constants.DRIVETRAIN_USE_LEFT_ENCODER);
-														// Initializes the encoder
+	encoder2 = new Encoder(RobotMap.drivetrainEncoderALeft, RobotMap.drivetrainEncoderBLeft, !Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+													// Initializes the encoder
 	distancePerPulse = (Constants.DRIVETRAIN_WHEEL_DIAMETER * Math.PI) /
 					(Constants.DRIVETRAIN_ENCODER_PULSES_PER_REV);
 											// Sets the distance per pulse of the encoder to read distance properly
 	encoder.setDistancePerPulse(distancePerPulse);
 	encoder.reset();								// Resets the encoder so that it starts with a 0.0 value
-		
-	drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
+	encoder2.setDistancePerPulse(distancePerPulse);
+	encoder2.reset();								// Resets the encoder so that it starts with a 0.0 value
+
+//	drivetrainIRSensor 	= new IRSensor(RobotMap.DTIRSensor, IRSensor.GP2Y0A21YK0F);
 	drivetrainUltrasonicSensor = new UltrasonicSensor(RobotMap.DTSonar, UltrasonicSensor.MB1010);
 
 //	setInputRange(-25.0, 25.0);
@@ -222,7 +230,6 @@ public class Drivetrain extends PIDSubsystem {
     
     public double getSonarDistance() {
     	return drivetrainUltrasonicSensor.getClippedAverageDistance();
-//    	return drivetrainUltrasonicSensor.getAverageDistance();
     }
     
     /**
@@ -290,6 +297,10 @@ public class Drivetrain extends PIDSubsystem {
     	encoder.setReverseDirection(Constants.DRIVETRAIN_USE_LEFT_ENCODER);
     }
     
+    public void setEncoderReading2() {
+    	encoder.setReverseDirection(!Constants.DRIVETRAIN_USE_LEFT_ENCODER);
+    }
+    
     /**
      * 
      * @return Distance traveled since last encoder reset
@@ -297,14 +308,18 @@ public class Drivetrain extends PIDSubsystem {
     public double getEncoderDistance() {
     	return encoder.getDistance();
     }
-    
+    public double getEncoderDistance2() {
+    	return encoder2.getDistance();
+    }
     /**
      * Resets the encoder to 0.0
      */
     public void resetEncoder() {
     	encoder.reset();
     }
-    
+    public void resetEncoder2() {
+    	encoder2.reset();
+    }
     /**
      * Returns if the optical sensor detects the color white
      * @return
@@ -343,12 +358,20 @@ public class Drivetrain extends PIDSubsystem {
 	    	SmartDashboard.putNumber("Gyro Rate", gyro.getRate());			// Gyro rate
 	    	SmartDashboard.putNumber("PID Output", pidOutput);			// PID Info
 	    	SmartDashboard.putNumber("DT Encoder Raw", encoder.get());		// Encoder raw count
+	    	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
+//	    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
+	    	
+	    	SmartDashboard.putNumber("DT Rt Master", rightMaster.getTemperature());
+	    	SmartDashboard.putNumber("DT Rt Slave", rightSlave.getTemperature());
+	    	SmartDashboard.putNumber("DT Lft Master", leftMaster.getTemperature());
+	    	SmartDashboard.putNumber("DT Lft Slave", leftSlave.getTemperature());
     	}
     	
-    	SmartDashboard.putNumber("Gyro angle", gyro.getAngle());			// Gyro angle
-    	SmartDashboard.putBoolean("Brake", brake);					// Brake or Coast
-    	SmartDashboard.putNumber("DT IR Distance", getIRDistance());			// IR distance reading
-    	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());			// Sonar distance reading
-    	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());		// Encoder reading
+    	SmartDashboard.putNumber("Gyro angle", gyro.getAngle());				// Gyro angle
+    	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());		// Sonar distance reading
+    	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());	// Encoder reading
+    	SmartDashboard.putNumber("DT Encoder 2 Distance", encoder2.getDistance());		// Encoder reading
+    	SmartDashboard.putNumber("Sonar Mode", sonarOverride);
+
     }
 }

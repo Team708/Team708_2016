@@ -5,6 +5,7 @@ import org.team708.robot.RobotMap;
 import org.team708.robot.commands.arm.JoystickMoveArm;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.Relay.Value;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 /**
@@ -17,14 +18,14 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class Intake extends Subsystem {
 	
-	public Relay intakeMotor;
+	public Talon intakeMotor;
 	
 	
     /**
       * Constructor
       */
 	public Intake() {
-	intakeMotor = new Relay(RobotMap.INTAKE_MOTOR);
+	intakeMotor = new Talon(RobotMap.INTAKE_MOTOR);
 	}
 	
 	public void initDefaultCommand() {
@@ -32,14 +33,20 @@ public class Intake extends Subsystem {
     	
     }
 	
-	public void moveMotor(Value value) {
-		intakeMotor.set(value);
+	public void moveMotor(double speed) {
+		intakeMotor.set(speed);
+	}
+	
+	public void stop(){
+		intakeMotor.set(Constants.INTAKE_OFF);
 	}
     
     /**
      * Sends data about the subsystem to the Smart Dashboard
      */
     public void sendToDashboard() {
+//		if (Constants.DEBUG) {
+//		}
     }
     
     

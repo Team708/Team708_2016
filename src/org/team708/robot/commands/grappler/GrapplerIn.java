@@ -14,15 +14,12 @@ public class GrapplerIn extends Command {
 	
 	private boolean isAtLimit;
 	
-	private boolean useSmoothing;
 	
 	private double moveSpeed = Constants.MOTOR_REVERSE;
     
-    public GrapplerIn(boolean useSmoothing) {
+    public GrapplerIn() {
     	// Use requires() here to declare subsystem dependencies
     	requires(Robot.grappler);
-    	
-    	this.useSmoothing = useSmoothing;
     }
 
     // Called just before this Command runs the first time

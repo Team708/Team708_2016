@@ -15,9 +15,9 @@ public class Potentiometer {
     private AnalogInput potentiometer;
     
     // Stuff based on potentiometer for finding the scaling factor in getAngle()
-    private final int MIN_POTENTIOMETER_VOLTAGE = 0;
-    private final int MAX_POTENTIOMETER_VOLTAGE = 5;
-    private final int MIN_POTENTIOMETER_ANGLE = 0;
+    private final double MIN_POTENTIOMETER_VOLTAGE = 0.0;
+    private final double MAX_POTENTIOMETER_VOLTAGE = 5.0;
+    private final double MIN_POTENTIOMETER_ANGLE = 0.0;
     private 	  double maxPotentiometerAngle;
     
     public Potentiometer(int pwmPort, double numberOfRotations) {
@@ -33,5 +33,9 @@ public class Potentiometer {
         double offset 	= 0.0;
         
         return (scalingFactor * voltage) + offset;
+    }
+    
+    public double getVoltage() {
+    	return(potentiometer.getVoltage());
     }
 }

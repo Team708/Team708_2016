@@ -1,10 +1,12 @@
 package org.team708.robot.commands.arm;
 
+import org.team708.robot.AutoConstants;
 import org.team708.robot.Constants;
 import org.team708.robot.Robot;
 import org.team708.robot.util.Math708;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /*
  *
@@ -12,20 +14,11 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ArmDown extends Command {
 	
 	private boolean isAtLimit;
-	
-	private boolean useSmoothing;
-	
-	private double moveSpeed = Constants.MOTOR_REVERSE;
-
-    public ArmDown() {
-        this(false);
-    }
     
-    public ArmDown(boolean useSmoothing) {
+    public ArmDown() {
     	// Use requires() here to declare subsystem dependencies
     	requires(Robot.arm);
     	
-    	this.useSmoothing = useSmoothing;
     }
 
     // Called just before this Command runs the first time
@@ -35,28 +28,23 @@ public class ArmDown extends Command {
     	if(isAtLimit){
     		cancel();
     	}
-
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	
-    	Robot.arm.manualMove(moveSpeed);
-    
+    	Robot.arm.manualMove(AutoConstants.ARM_DOWN_SPEED);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    		return Robot.arm.getLowerSwitch();
+ 		return Robot.arm.getLowerSwitch();
+    	
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	if (Robot.arm.getLowerSwitch()) {
-    		
-    	}
     	Robot.arm.stop();
-
     }
 
     // Called when another command which requires one or more of the same

@@ -13,26 +13,35 @@ public final class Constants {
 	/*
 	 * Motor Controllers
 	 */
-	public static final Relay.Value INTAKE_FORWARD 		= Relay.Value.kForward;
-	public static final Relay.Value INTAKE_REVERSE 		= Relay.Value.kReverse;
-	public static final Relay.Value INTAKE_OFF 			= Relay.Value.kOff;
-	public static final Relay.Value LOADER_FORWARD 		= Relay.Value.kForward;
-	public static final Relay.Value LOADER_REVERSE 		= Relay.Value.kReverse;
-	public static final Relay.Value LOADER_OFF 			= Relay.Value.kOff;
-
-	public static final double MOTOR_FORWARD 		= 0.3;
-	public static final double MOTOR_REVERSE 		= -0.3;
+	public static final double INTAKE_FORWARD 		= -1.0;
+	public static final double INTAKE_REVERSE 		= 1.0;
+	public static final double INTAKE_OFF 			= 0.0;
+	
+	public static final double MOTOR_FORWARD 		= 1.0;
+	public static final double MOTOR_REVERSE 		= -1.0;
 	public static final double MOTOR_OFF 			= 0.0;
 
-	public static final double DRIVE_MOTOR_MAX_SPEED 		= 0.4;
-	public static final double ROTATE_MOTOR_MAX_SPEED 		= 0.4;
-	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 0.6;
-	public static final double VISION_ROTATE_MOTOR_SPEED	= 0.5;
+	public static final double DRIVE_MOTOR_MAX_SPEED 		= 1.0;
+	public static final double ROTATE_MOTOR_MAX_SPEED 		= 1.0;
+	public static final double ARMPIVOT_MOTOR_MAX_SPEED 	= 1.0;
+	public static final double VISION_ROTATE_MOTOR_SPEED	= 0.8;
 	
 	public static final double LOADER_MOTOR_FORWARD 		=  1.0;
 	public static final double LOADER_MOTOR_REVERSE 		=  -1.0;
-	public static final double SHOOTER_MOTOR_FORWARD 		=  1.0;
+	public static final double LOADER_OFF 					= 0.0;
+	
+	public static final double SHOOTER_MOTOR_SPEED_LOW 		=  5200;
+	public static final double SHOOTER_MOTOR_SPEED_HIGH 	=  5200;
+	public static final double SHOOTER_F_HIGH 		=  .17126;
+	public static final double SHOOTER_F_LOW 		=  .2398;
+	
+	public static final double SHOOTER_MOTOR_POWER_FORWARD_HIGH 	=  0.8;
+	public static final double SHOOTER_MOTOR_POWER_FORWARD_LOW 		=  0.8;
+	
+	public static final double SHOOTER_MOTOR_FORWARD 		=  	0.8;
+	public static final double SHOOTER_MOTOR_BACKWARD 		=  -1.0;
 
+	
 	/*
 	 * Smart Dashboard
 	 */
@@ -43,7 +52,9 @@ public final class Constants {
 	/*
 	 * Sensors
 	 */
-	public static final double IR_HAS_BALL_DISTANCE 					= 6.0;
+	public static final double SONAR_CLOSE 								= 30.0;
+	public static final double SONAR_FAR 								= 80.0;
+	public static final double IR_HAS_BALL_DISTANCE 					= 4.0;
 	public static final double ENCODER_BOTTOM_POSITION 					= 0.0;
 	public static final double GRAYHILL_ENCODER_PULSES_PER_REVOLUTION 	= 128.0;
 	
@@ -64,7 +75,7 @@ public final class Constants {
 	/*
 	 * GRAPPLER -- extends arm (telescoping)
 	 */
-	public static final double GRAPPLER_MOTOR_MINIMUM 		= 0.3;
+	public static final double GRAPPLER_MOTOR_MINIMUM 		= 1.0;
 	public static final double GRAPPLER_SPROCKET_DIAMETER 	= 1.4;
 
 	

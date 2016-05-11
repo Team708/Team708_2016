@@ -130,6 +130,44 @@ public class Math708 {
     	return makeWithin(getPercentError(currentValue, goalValue), minimumValue, maximumValue);
     }
     
+    public static double getSignClippedPercentError(double currentValue, double goalValue, double minimumValue, double maximumValue) {
+    	double sign = Math.signum(getPercentError(currentValue, goalValue));
+    	if (sign < 0) {
+    		return makeWithin(getPercentError(currentValue, goalValue), minimumValue * sign, maximumValue * sign);
+    	}
+    	else if (sign > 0) {
+    		return makeWithin(getPercentError(currentValue, goalValue), minimumValue * sign, maximumValue * sign);
+    	}
+    	else {
+    		return 0;
+    	}
+    }
+    
+    public double accelerateToSpeed(double maxSpeed, double accel){
+    	double speed = 0;
+    	
+    	speed += accel;
+    	
+    	if (speed >= maxSpeed){
+    		speed = maxSpeed;
+    	}
+    	
+    	return speed;
+    }
+    
+    public static double convergeOnSpeed(double speed){
+    	double converge = 0;
+    	int arbitraryNumber = 1000;
+    	
+    	for (int i = 0; i <= arbitraryNumber;){
+    		converge = speed * (i/arbitraryNumber);
+    		
+    		return converge;
+    	}
+    	
+    	return speed;
+    }
+    
     /**
      * Checks if a sensor reading is within a threshold of a desired value
      * @param currentValue
