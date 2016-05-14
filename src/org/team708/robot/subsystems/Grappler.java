@@ -89,10 +89,10 @@ public class Grappler extends Subsystem {
 	 * Sends data to the Smart Dashboard
 	 */
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Grappler Lower Switch", getLowerSwitch());
-		SmartDashboard.putBoolean("Grappler Upper Switch", getUpperSwitch());
-		
-//		if (Constants.DEBUG) {
-//		}
+//		SmartDashboard.putBoolean("Grappler Lower Switch", getLowerSwitch());
+//		SmartDashboard.putBoolean("Grappler Upper Switch", getUpperSwitch());
+//		
+		if (Constants.DEBUG) {
+		}
 	}
 }

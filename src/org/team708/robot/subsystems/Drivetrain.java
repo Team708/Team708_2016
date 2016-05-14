@@ -368,10 +368,10 @@ public class Drivetrain extends PIDSubsystem {
     	}
     	
     	SmartDashboard.putNumber("Gyro angle", gyro.getAngle());				// Gyro angle
-    	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());		// Sonar distance reading
+//    	SmartDashboard.putNumber("DT Sonar Distance", getSonarDistance());		// Sonar distance reading
     	SmartDashboard.putNumber("DT Encoder Distance", encoder.getDistance());	// Encoder reading
     	SmartDashboard.putNumber("DT Encoder 2 Distance", encoder2.getDistance());		// Encoder reading
-    	SmartDashboard.putNumber("Sonar Mode", sonarOverride);
+//    	SmartDashboard.putNumber("Sonar Mode", sonarOverride);
 
     }
 }

@@ -90,14 +90,14 @@ public class Arm extends Subsystem {
 	 * Sends data to the Smart Dashboard
 	 */
 	public void sendToDashboard() {
-		SmartDashboard.putBoolean("Arm Lower Switch", getLowerSwitch());
-		SmartDashboard.putBoolean("Arm Upper Switch", getUpperSwitch());
-
-		SmartDashboard.putNumber("Arm Angle", pot.getAngle());
+//		SmartDashboard.putBoolean("Arm Lower Switch", getLowerSwitch());
+//		SmartDashboard.putBoolean("Arm Upper Switch", getUpperSwitch());
+//
+//		SmartDashboard.putNumber("Arm Angle", pot.getAngle());
 
 		
 		if (Constants.DEBUG) {
-			SmartDashboard.putNumber("Pot Voltage",  pot.getVoltage());
+//			SmartDashboard.putNumber("Pot Voltage",  pot.getVoltage());
 		}
 	}
 }

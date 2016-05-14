@@ -102,15 +102,15 @@ public class Shooter extends Subsystem {
 	 */
 	public void sendToDashboard() {
 		
-//		if (Constants.DEBUG) {
+		if (Constants.DEBUG) {
 //			SmartDashboard.putNumber("Shooter Encoder Count", getEncoderCount());
 			SmartDashboard.putNumber("T error", shooterMotor.getClosedLoopError());
 			SmartDashboard.putNumber("F-value", shooterMotor.getF());
-//			}
-		SmartDashboard.putNumber("T Output", shooterMotor.getOutputVoltage()/shooterMotor.getBusVoltage());
-		SmartDashboard.putNumber("T Encoder Count", shooterMotor.get());
-		SmartDashboard.putNumber("T Speed", shooterMotor.getSpeed());
-		SmartDashboard.putBoolean("Shooter is High", motorIsHigh);
+			}
+//		SmartDashboard.putNumber("T Output", shooterMotor.getOutputVoltage()/shooterMotor.getBusVoltage());
+//		SmartDashboard.putNumber("T Encoder Count", shooterMotor.get());
+		SmartDashboard.putNumber("shooter Speed", shooterMotor.getSpeed());
+//		SmartDashboard.putBoolean("Shooter is High", motorIsHigh);
 	}
 }
 

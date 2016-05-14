@@ -45,8 +45,8 @@ public class Intake extends Subsystem {
      * Sends data about the subsystem to the Smart Dashboard
      */
     public void sendToDashboard() {
-//		if (Constants.DEBUG) {
-//		}
+		if (Constants.DEBUG) {
+		}
     }
     
     
