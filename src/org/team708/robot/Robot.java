@@ -215,9 +215,10 @@ public class Robot extends IterativeRobot {
 		
 		autonomousMode.addObject("DriveForwardShoot", new DriveForwardShoot());
 		
+		autonomousMode.addObject("Drive To Defense", new DriveToTarget());
 		autonomousMode.addObject("Do Nothing", new DoNothing());
-		autonomousMode.addObject("DriveToTarget", new DriveToTarget());
-		autonomousMode.addObject("Only Shoot", new OnlyShoot());
+		
+//		autonomousMode.addObject("Only Shoot", new OnlyShoot());
 		
 //		autonomousMode.addObject("Do Everything", new DoEverything(defenceNumber, turnDirection, driveThroughDefenceTime));
 //		autonomousMode.addObject("Do Everything", new DoEverything());//need to change
@@ -225,7 +226,6 @@ public class Robot extends IterativeRobot {
 //		autonomousMode.addObject("Drive2TurnLeftShoot", new Drive2TurnLeftShoot());
 //		autonomousMode.addObject("Drive1TurnRightShoot", new Drive1TurnRightShoot());
 //		autonomousMode.addObject("Drive2TurnRightShoot", new Drive2TurnRightShoot());
-
 		
     	SmartDashboard.putData("Autonomous Selection", autonomousMode);    	   	
     }
