@@ -25,17 +25,22 @@ public class DriveBackwardShootLow extends CommandGroup {
 	
 	public  DriveBackwardShootLow(boolean rightSide) {
 		
-		//Drive Forward
-		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
-		
-		//Arm Down Sequence
-		addSequential(new AutoArmDown()); //Can set manual speed if necessary
-		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
+		addSequential(new AutoArmDown());
+		addSequential(new WaitCommand(.2));
 		addSequential(new ArmStop());
 		
-		//Drive Forward Again (Hopefully over defense)
-		addParallel(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, AutoConstants.ROBOT_OVER_DEFENSE_TIME));
+		//Drive Forward
+		addSequential(new DriveStraightForTime(-(-.8), .75));
 		
+		//Arm Down Sequence
+		addSequential(new AutoArmDown());
+		addSequential(new WaitCommand(.5));
+		addSequential(new ArmStop());
+
+		//Drive Forward Again
+		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, 0.5));
+		
+			
 		//Once Over Defense, turn towards target (Depends on which side of field)
 		if (rightSide){
 			addSequential(new TurnToDegrees(AutoConstants.TURN_SPEED, -AutoConstants.TURN_AROUND_FACE_TARGET));

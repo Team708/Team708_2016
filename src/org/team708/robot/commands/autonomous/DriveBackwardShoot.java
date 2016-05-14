@@ -22,14 +22,18 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
 public class DriveBackwardShoot extends CommandGroup {
 	
 	public  DriveBackwardShoot(boolean rightSide) {
-		//Drive Forward
-		addSequential(new DriveStraightForTime(-(-.5), AutoConstants.ROBOT_OVER_DEFENSE_TIME));
-				
-		//Arm Down Sequence
 		addSequential(new AutoArmDown());
-		addSequential(new WaitCommand(AutoConstants.ARM_DOWN_TIME));
+		addSequential(new WaitCommand(.2));
 		addSequential(new ArmStop());
 		
+		//Drive Forward
+		addSequential(new DriveStraightForTime(-(-.8), .75));
+		
+		//Arm Down Sequence
+		addSequential(new AutoArmDown());
+		addSequential(new WaitCommand(.5));
+		addSequential(new ArmStop());
+
 		//Drive Forward Again
 		addSequential(new DriveStraightForTime(-AutoConstants.ROBOT_TIME_DRIVE_SPEED, 0.5));
 		
